@@ -2,13 +2,13 @@
 
 # SITE Capstone Project
 
-SITE Course Year: **20__**
+SITE Course Year: **2023**
 
-Cohort: **Add Company Sponsor Name**
+Cohort: **Salesforce**
 
-Team Member Names:**Insert Team Member Names**
+Team Member Names:**Bereket Birbo, David Troy, Vanessa Ibe**
 
-Mentors Names: **Insert Professional Mentor Names**
+Mentors Names: **Oleg Bivol, Vivek Prasad**
 
 Project Code Repository Links
 
