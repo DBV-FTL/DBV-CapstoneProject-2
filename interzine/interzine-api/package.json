@@ -4,6 +4,7 @@
   "description": "Express backend for the Interzine application",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon --ignore 'db/*' server.js",
     "test": "jest",
     "setup": "psql -f interzine.sql"
   },
