@@ -11,6 +11,8 @@ CREATE TABLE service_providers (
     name        VARCHAR(255) NOT NULL,
     cuisine     VARCHAR(255) NOT NULL,
     location    VARCHAR(1024) NOT NULL,
+    email       VARCHAR(255) NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
+    password    VARCHAR(255) NOT NULL,
     share_location BOOLEAN,
     profile_picture VARCHAR(255) NOT NULL);
 
