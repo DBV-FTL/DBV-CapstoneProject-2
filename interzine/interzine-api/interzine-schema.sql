@@ -20,6 +20,6 @@ CREATE TABLE menu_item (
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
     image_url   VARCHAR(255) NOT NULL,
-    cost        VARCHAR(255) NOT NULL,
-    rating      INTEGER NOT NULL,
+    cost        DECIMAL(10,2) NOT NULL,
+    rating      DECIMAL(3,2) NOT NULL,
     service_provider_id INTEGER NOT NULL);
