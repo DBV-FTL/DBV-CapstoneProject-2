@@ -31,14 +31,14 @@ class ServiceProvider {
   }
 
   static async register(creds) {
-    const { email, name, cuisine, location, password, profile_picture } = creds;
+    const { email, name, cuisine, password, profile_picture, zip_code } = creds;
     const requiredCreds = [
       "email",
       "cuisine",
-      "location",
       "name",
       "password",
       "profile_picture",
+      "zip_code"
     ];
 
     try {
@@ -65,13 +65,12 @@ class ServiceProvider {
 
     const result = await db.query(
       `
-            INSERT INTO service_providers (
-                email, name, cuisine, location, password, profile_picture
-            ) VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING 
-            id,email, name, cuisine, location, profile_picture
+            INSERT INTO service_providers 
+            (email, name, cuisine, password, profile_picture, zip_code) 
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id,email, name, cuisine, profile_picture, zip_code
             `,
-      [normalizedEmail, name, cuisine, location, hashedPassword, profile_picture]
+      [normalizedEmail, name, cuisine, hashedPassword, profile_picture, zip_code]
     );
 
     const provider = result.rows[0];
@@ -79,12 +78,19 @@ class ServiceProvider {
   }
 
   static async fetchProviderByEmail(email) {
-    const result = await db.query(`SELECT * FROM service_providers WHERE email = $1`, [
-      email.toLowerCase(),
-    ]);
+    const result = await db.query(`SELECT * FROM service_providers WHERE email = $1`, 
+    [email.toLowerCase()]);
 
     const provider = result.rows[0];
     return provider;
+  }
+
+  static async fetchProviderByCuisine({cuisine}){
+    const result = await db.query(`SELECT * FROM service_providers WHERE cuisine = $1`,
+    [cuisine])
+
+    const providers = result.rows;
+    return providers;
   }
 }
 
