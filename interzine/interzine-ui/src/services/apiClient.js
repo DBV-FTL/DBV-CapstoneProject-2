@@ -22,7 +22,8 @@ class ApiClient {
     }
     try {
       const result = await axios({ url, method, data, headers });
-      return { data: result.data, error: null };
+      console.log('res', result)
+      return { data: result.data, error: null, status: result.status };
     } catch (err) {
       console.error({ errorResponse: err.response });
       const message = err?.response?.data?.error?.message;
@@ -47,18 +48,27 @@ class ApiClient {
 //     return await this.request({ endpoint: "auth/me", method: "GET" });
 //   }
   async loginUser(creds) {
-    return await this.request({
-      endpoint: "auth/login",
+     return await this.request({
+      endpoint: "auth/user/login",
       method: "POST",
       data: creds,
     });
+    // console.log('data login', data)
+    // this.setToken(this.tokenName, data.token)
+
   }
   async signupUser(creds) {
+    console.log('signing up')
+    // await axios.post(`${this.remoteHostUrl}auth/user/register`, {data:creds})
     return await this.request({
-      endpoint: "auth/register",
-      method: "POST",
+      endpoint: "auth/user/register",
+      method: "post",
       data: creds,
     });
+    // if (response.status===200){
+
+    // }
+    // this.setToken(this.tokenName, data.token)
   }
   async logoutUser() {
     this.setToken(null);
