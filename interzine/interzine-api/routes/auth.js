@@ -8,7 +8,9 @@ const ServiceProvider = require('../models/service-provider')
 
 router.post('/user/register', async( req, res, next) => {
     try{
+        console.log('req',req.body)
         const user = await User.register(req.body)
+        console.log('user', user)
         const token = generateAuthToken(user)
         return res.status(201).json({user, token})
     } catch (err) {

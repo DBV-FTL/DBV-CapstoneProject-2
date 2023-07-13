@@ -21,11 +21,11 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
-      <Navbar/>
+      <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
       <Routes>
         <Route path='/' element={<Shop services={appState.services} />}/>
-        <Route path='/login' element={<Login logIn={setAppState} appState={appState}/>}/>
+        <Route path='/login' element={<Login login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register register={setAppState} appState={appState}/>}/>
       </Routes>
       </BrowserRouter>
