@@ -5,14 +5,17 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 const { NotFoundError } = require("./utils/errors")
+const security = require('./middleware/security')
 const authRoutes = require('./routes/auth')
+const menuRoutes = require('./routes/menu-item')
 
 
 app.use(express.json())
 app.use(cors())
 app.use(morgan('tiny'))
+app.use(security.extractUserFromJWT)
 app.use('/auth', authRoutes)
-
+app.use('/menu', menuRoutes)
 
 
 app.get('/', (req,res) => {
