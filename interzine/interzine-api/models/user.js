@@ -38,8 +38,7 @@ class User {
       "username",
       "firstName",
       "lastName",
-      "password",
-      "zip_code",
+      "password"
     ];
 
     try {
@@ -67,11 +66,11 @@ class User {
     const result = await db.query(
       `
         INSERT INTO users 
-        (first_name, last_name, username, email, password, zip_code) 
-        VALUES ($1, $2, $3, $4, $5, $6)
+        (first_name, last_name, username, email, password) 
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING id, username, email, first_name as "firstName", last_name as "lastName"
         `,
-      [firstName, lastName, username, normalizedEmail, hashedPassword, zip_code]
+      [firstName, lastName, username, normalizedEmail, hashedPassword]
     );
 
     const user = result.rows[0];
@@ -95,6 +94,16 @@ class User {
     );
     const providers = result.rows;
     return providers;
+  }
+
+  static async updateZipCode( {id}, {zip_code}) {
+    const result = await db.query(
+      `UPDATE users
+       SET zip_code = $1
+       WHERE users.id = $2
+       RETURNING id, email, zip_code`,[zip_code, id])
+    const updatedUser = result.rows;
+    return updatedUser;
   }
 }
 
