@@ -11,9 +11,9 @@ function Sidebar() {
             {/* <div className='m'>
             <i onClick= {setIsOpen} className="material-icons md-36">arrow_forward</i>
             </div> */}
-            <div >
+            {/* <div >
             <i onClick= {() => setIsOpen(true)} className="material-icons md-36">add_shopping_cart</i>
-            </div>
+            </div> */}
             {/* <div>
             <i onClick= {setIsOpen} className="material-icons md-36">monetization_on</i>
             </div>
