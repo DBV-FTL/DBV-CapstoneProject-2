@@ -33,7 +33,7 @@ nav {
 
 }
 
-.access-buttons button {
+.access-button1 {
     height: 35px;
     width: 72px;
     border-radius: 15px;
@@ -48,7 +48,7 @@ nav {
     font-weight: bold;
 }
 
-.access-buttons2 button {
+.access-button2  {
     height: 35px;
     width: 72px;
     border-radius: 15px;
