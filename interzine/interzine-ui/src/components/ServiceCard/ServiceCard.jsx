@@ -4,10 +4,10 @@ import './ServiceCard.css'
 function ServiceCard({service}) {
     return (
         <div className='service-card'>
-            <img src={service.url}/>
+            <img className='service-image' src={service.image_url}/>
             <div>
-                <h2> {service.name} </h2>
-                <span> {service.ratings} </span>
+                <h2> {service.name} || {service.cost} </h2>
+                <span> {service.rating} </span>
             </div>
         </div>
     )

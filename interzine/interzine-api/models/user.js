@@ -38,7 +38,8 @@ class User {
       "username",
       "firstName",
       "lastName",
-      "password"
+      "password",
+      'zip_code'
     ];
 
     try {
@@ -66,11 +67,11 @@ class User {
     const result = await db.query(
       `
         INSERT INTO users 
-        (first_name, last_name, username, email, password) 
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING id, username, email, first_name as "firstName", last_name as "lastName"
+        (first_name, last_name, username, email, password, zip_code) 
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id, username, email, first_name as "firstName", last_name as "lastName", zip_code
         `,
-      [firstName, lastName, username, normalizedEmail, hashedPassword]
+      [firstName, lastName, username, normalizedEmail, hashedPassword, zip_code]
     );
 
     const user = result.rows[0];
