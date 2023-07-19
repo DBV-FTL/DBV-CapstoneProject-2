@@ -9,6 +9,7 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
 
+
 function App() {
   const [appState, setAppState] = useState({
     user: {},
