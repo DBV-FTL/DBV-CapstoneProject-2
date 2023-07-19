@@ -18,6 +18,7 @@ class MenuItem {
       throw err;
     }
 
+
     const result = await db.query(`
     INSERT INTO menu_item 
     (name, image_url, cost, rating, service_provider_id)
@@ -26,12 +27,12 @@ class MenuItem {
     [name, image_url, cost, rating, provider.email])
     
     const newMenuItem = result.rows[0];
-    return newMenuItem
+    return newMenuItem;
   }
 
-  static async listMenuItems(id){
+  static async listMenuItems(id) {
     try {
-      console.log('not written to db yet', id)
+     console.log('not written to db yet', id)
         const result = await db.query(`
         SELECT *
         FROM menu_item
@@ -44,8 +45,9 @@ class MenuItem {
         return menuItems
     } catch(err) {
         throw new err
+
     }
   }
 }
 
-module.exports = MenuItem
+module.exports = MenuItem;

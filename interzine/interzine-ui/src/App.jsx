@@ -11,6 +11,7 @@ import Shop from './pages/Shop/Shop'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 
+
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
   const [userState, setUserState] = useState({
