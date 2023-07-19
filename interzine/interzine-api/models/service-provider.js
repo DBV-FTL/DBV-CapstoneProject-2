@@ -92,6 +92,12 @@ class ServiceProvider {
     const providers = result.rows;
     return providers;
   }
+
+  static async fetchAllProviders(){
+    const result = await db.query(`SELECT * FROM service_providers`)
+    const providers = result.rows;
+    return providers;
+  }
 }
 
 module.exports = ServiceProvider
