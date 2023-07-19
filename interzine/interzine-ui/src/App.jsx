@@ -8,7 +8,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
-import GoogleMaps from './components/GoogleMaps/GoogleMaps'
+
 
 function App() {
   const [appState, setAppState] = useState({
@@ -24,7 +24,6 @@ function App() {
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
-      <GoogleMaps/>
       <Routes>
         <Route path='/' element={<Shop services={appState.services} />}/>
         <Route path='/login' element={<Login login={setAppState} appState={appState}/>}/>

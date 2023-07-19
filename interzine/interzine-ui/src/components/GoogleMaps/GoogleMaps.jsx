@@ -1,17 +1,22 @@
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useRef } from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
 import "./GoogleMaps.css";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
 import {
   Combobox,
   ComboboxInput,
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
+  ComboboxButton,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
@@ -27,14 +32,23 @@ export default function GoogleMaps() {
 function Map() {
   const center = useMemo(() => ({ lat: 37.789744, lng: -122.397234 }), []);
   const [selected, setSelected] = useState(null);
+  const [directionsResponse, setDirectionsResponse] = useState();
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
+
   return (
     <>
       <div className="places-container">
-        <PlacesAutocomplete setSelected={setSelected} />
+        <PlacesAutocomplete
+          setSelected={setSelected}
+          setDirectionsResponse={setDirectionsResponse}
+          setDistance={setDistance}
+          setDuration={setDuration}
+        />
       </div>
       <GoogleMap
         zoom={17}
-        center={selected}
+        center={selected ? selected : center}
         mapContainerClassName="map-container"
         options={{
           zoomControl: false,
@@ -44,12 +58,22 @@ function Map() {
         }}
       >
         {selected && <Marker position={selected} />}
+        {directionsResponse && (
+          <DirectionsRenderer directions={directionsResponse} />
+        )}
       </GoogleMap>
     </>
   );
 }
 
-function PlacesAutocomplete({ setSelected }) {
+function PlacesAutocomplete({
+  setSelected,
+  setDirectionsResponse,
+  setDistance,
+  setDuration,
+}) {
+  const orgRef = useRef();
+
   const {
     ready,
     value,
@@ -76,6 +100,7 @@ function PlacesAutocomplete({ setSelected }) {
           disabled={!ready}
           className="combobox-input"
           placeholder="Search an Address"
+          ref={orgRef}
         />
         <ComboboxPopover>
           <ComboboxList>
@@ -85,8 +110,47 @@ function PlacesAutocomplete({ setSelected }) {
               ))}
           </ComboboxList>
         </ComboboxPopover>
+        <ComboboxButton
+          onClick={() =>
+            calculateRoute({
+              setDirectionsResponse,
+              setDuration,
+              setDistance,
+              orgRef,
+            })
+          }
+        >
+          Search
+        </ComboboxButton>
+        <ComboboxButton onClick={() => clearRoute({setDirectionsResponse, setDistance, setDuration, orgRef})}>Clear</ComboboxButton>
       </Combobox>
-      
     </div>
   );
+}
+
+async function calculateRoute({
+  setDirectionsResponse,
+  setDistance,
+  setDuration,
+  orgRef,
+}) {
+  console.log('o')
+  if (orgRef.current.value === '') return
+  const directionsService = new google.maps.DirectionsService();
+  const results = await directionsService.route({
+    origin: orgRef.current.value,
+    destination: { lat: 38.13741, lng: -120.463965 },
+    travelMode: google.maps.TravelMode.DRIVING,
+  });
+  setDirectionsResponse(results);
+  setDistance(results.routes[0].legs[0].distance.text);
+  setDuration(results.routes[0].legs[0].duration.text);
+}
+
+function clearRoute({setDirectionsResponse, setDistance, setDuration, orgRef}) {
+  console.log('clearing')
+  setDirectionsResponse(null)
+  setDistance('')
+  setDuration('')
+  orgRef.current.value = ''
 }
