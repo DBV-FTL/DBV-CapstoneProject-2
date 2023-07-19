@@ -4,7 +4,11 @@ import FoodCard from '../FoodCard/FoodCard'
 function Menu({menu}) {
     return (
         <div className='menu'>
-            {menu.map((food) => <FoodCard food={food}/>)}
+
+            
+            {
+                menu.map(food=> <FoodCard food={food}/>)
+            }
         </div>
     )
 }

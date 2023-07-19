@@ -31,9 +31,9 @@ function Navbar({appState, logout}) {
             <div className='logo-and-location'>
             <p className='header'>Inter<strong class='z'>Zine</strong></p>
 
-                <form>
+                {/* <form>
                     <input placeholder='Zip Code' />
-                </form>
+                </form> */}
             </div>
 
             {

@@ -9,6 +9,8 @@ const security = require('../middleware/security')
 
 router.post('/user/register', async( req, res, next) => {
     try{
+        console.log('.........')
+        console.log(req.body)
         const user = await User.register(req.body)
         const token = generateAuthToken(user)
         return res.status(201).json({user, token})
@@ -39,6 +41,7 @@ router.put("/user", security.extractUserFromJWT, async (req, res, next) => {
 
 router.post("/provider/register", async (req, res, next) => {
   try {
+    console.log('new prov',req.body)
     const provider = await ServiceProvider.register(req.body);
     const token = generateAuthToken(provider);
     return res.status(201).json({ provider, token });
