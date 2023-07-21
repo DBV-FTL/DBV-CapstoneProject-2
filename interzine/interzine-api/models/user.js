@@ -89,7 +89,7 @@ class User {
 
   static async fetchProviderByZipCode( {email} ) {
     const result = await db.query(
-      `SELECT id, name, cuisine, zip_code 
+      `SELECT id, name, cuisine, zip_code, profile_picture 
        FROM service_providers 
        WHERE zip_code = (SELECT zip_code FROM users WHERE email = $1)`, [email]
     );

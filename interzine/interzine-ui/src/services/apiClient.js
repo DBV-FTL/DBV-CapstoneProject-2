@@ -121,9 +121,21 @@ class ApiClient {
     return await this.request({endpoint: `menu/${id}`});
   }
 
-  async fetchServices(){
-    return await this.request({endpoint: ''})
+  async fetchServicesByZip(){
+    return await this.request({endpoint: `auth/user`});
   }
+
+
+  async fetchUserFromToken(){
+    return await this.request({
+      endpoint: "auth/verify",
+      method: "POST",
+      data: {},
+    });
+  }
+  // async fetchServices(){
+  //   return await this.request({endpoint: ''})
+  // }
     // if (response.status===200){
 
     // }

@@ -7,7 +7,7 @@ function Menu({menu}) {
 
             
             {
-                menu.map(food=> <FoodCard food={food}/>)
+                menu?.map(food=> <FoodCard food={food}/>)
             }
         </div>
     )
