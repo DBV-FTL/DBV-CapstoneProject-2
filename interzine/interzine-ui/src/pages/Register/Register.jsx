@@ -12,6 +12,7 @@ function Register({client, setClient, register, appState}) {
     function handleFormInput(e) {
         const name = e.target.name
         const value = e.target.value
+        console.log('input?', {...formInput, [name]:value})
         setFormInput({...formInput, [name]:value})
     }
 
@@ -22,11 +23,13 @@ function Register({client, setClient, register, appState}) {
 
         try {
             let response
-
+            let menu
             if (client==='user'){
                 response= await apiClient.signupUser(formInput)
+                services= await apiClient.fetchServicesByZip(formInput.zip_code)
             } else if (client==='provider'){
                 response= await apiClient.signupProvider(formInput)
+                console.log('reg provider', response.data)
             menu= await apiClient.fetchMenuItems(response.data.provider.id)
 
             }
@@ -39,11 +42,15 @@ function Register({client, setClient, register, appState}) {
               const decodedToken = jwtDecode(token); //a way to get username from token
 
               if (client==='user'){
-                register({...appState, user: decodedToken, isAuthenticated: true})
+                register({...appState, user: decodedToken, isAuthenticated: true, services: services.data.providers})
                } else if (client==='provider'){
-                register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: menu.data.menuItems})
-               }
-               
+                    if(menu){
+                    register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: menu.data.menuItems})
+                    } else{
+                    register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: []})
+                    }
+                }
+
               navigate('/')
             } else {
             //   //Login failed
@@ -102,7 +109,7 @@ function Register({client, setClient, register, appState}) {
 
 
                         <label> Share address to all users: </label>
-                        <select name='share_location'>
+                        <select onChange={(e) => handleFormInput(e)} name='share_location'>
                             
                             <option value=''> Select</option>
                             <option value={false}> No </option>

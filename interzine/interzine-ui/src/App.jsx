@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import viteLogo from '/vite.svg'
@@ -10,49 +10,66 @@ import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
+import apiClient from './services/apiClient'
+import Menu from './components/Menu/Menu'
 
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
-  const [userState, setUserState] = useState({
-    user: {},
-    isAuthenticated: false,
-    pastOrders: [],
-    services: [{
-      name: "Tsehay",
-      image_url: 'https://www.rumispice.com/cdn/shop/articles/your-guide-to-the-history-taste-of-ethiopian-food-869598.jpg?v=1663735781',
-      rating: 5
-      },
-      {
-      name: "Bersabe",
-      image_url: 'https://bloximages.newyork1.vip.townnews.com/sandiegomagazine.com/content/tncms/assets/v3/editorial/d/8c/d8c6d926-72fb-11eb-a628-efc4e9abab37/6030319469eb5.image.jpg?resize=1200%2C900',
-      rating: 5
-      },
-      {
-      name: 'kitfo',
-      image_url: 'https://vegnews.com/media/W1siZiIsIjMxODgxL1ZlZ05ld3MuQnVubmFDYWZlLmpwZyJdLFsicCIsInRodW1iIiwiMTYwMHg5NDYjIix7ImZvcm1hdCI6ImF2aWYifV1d/VegNews.BunnaCafe.avif?sha=2687c1e6efaf1c3d',
-      rating: 5
-      }]
-  }) //all app state set here 
+  const [userState, setUserState] = useState({}) //all app state set here 
 
-  const [providerState, setProviderState] = useState({
-    provider: {},
-    isAuthenticated: false,
-    menuItems: []
-  })
+
+  const [providerState, setProviderState] = useState({})
+  const [appState, setAppState] = useState({})
+
   
-  let appState
-  let setAppState
+  
+  // let appState
+  // let setAppState
 
-  if (client==='user'){
-    appState= userState
-    setAppState= setUserState
-  } else if (client==='provider'){
-    appState= providerState
-    setAppState= setProviderState
-  }
+  // if (client==='user'){
+  //   appState= userState
+  //   setAppState= setUserState
+  // } else if (client==='provider'){
+  //   appState= providerState
+  //   setAppState= setProviderState
+  // }
 
-  console.log('app state', appState)
+  
+  
+
+  useEffect(()=>{
+    //need to get token from local storage then decode token and fetch user 
+    const loadInitialData = async () => {
+      const token = localStorage.getItem('interzine_token')
+  
+      if (token) {
+        apiClient.setToken(token)
+        const fromToken= await apiClient.fetchUserFromToken()
+        const appUser= fromToken?.data?.user
+        console.log('loading initial data', appUser)
+        
+        if (appUser.client==='user'){
+          const services= await apiClient.fetchServicesByZip(appUser.zip_code)
+          setClient('user')
+          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true})
+        } else if (appUser.client==='provider'){
+          const menu= await apiClient.fetchMenuItems(appUser.id)
+          setClient('provider')
+          setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
+        }
+      }
+  
+      // current problem is when reloading it stays logged in but since default client is user and not
+      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
+      // only solution I can think of is adding that as a field in db/
+      }
+
+    loadInitialData()
+
+  }, [])
+
+  console.log('app state', appState, client)
 
   return (
     <div className='app'>
@@ -60,20 +77,24 @@ function App() {
       <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
       <Routes>
-        { client==='user'&&
-        <Route path='/' element={<Shop services={appState.services} />}/>
-        }
+        {
+          appState.isAuthenticated ?
+        (client==='user'&&
+        <Route path='/' element={<Shop services={appState?.services} />}/>)||
+        
 
-        { client==='provider'&&
-        <>
+        (client==='provider'&&
         <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-        {/* <Route path='/add-new' element={<AddNewItem  />}/> */}
-        </>
-
+        )
+          :
+          <> Log in or sign up to continue</>
+      
         }
+        
 
         <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
+        {/* <Route path= {`/menu:${id}`} element={<Menu menu={menu}/>} /> */}
       </Routes>
       </BrowserRouter>
       
