@@ -1,7 +1,8 @@
 .service-image {
     display: block;
     width: 180px;
-    height: 180px
+    height: 180px;
+    margin-left: 30%;
 }
 
 .service-card {
@@ -17,9 +18,16 @@
 
 .details{
     color: white;
+    margin-left:10%;
+    align-items: center;
+    align-self: center;
 }
 
 .service-card h2{
     color:white
 
+}
+
+.servicenm{
+    margin-left: 20%;
 }

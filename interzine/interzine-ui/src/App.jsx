@@ -4,20 +4,14 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
-import Hero from './components/Hero/Hero'
 import Sidebar from './components/Sidebar/Sidebar'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
-import Footer from './components/Footer/Footer'
-import Locations from'./components/Locations/Locations'
-import Forsellers from './components/Forsellers/Forsellers'
-import Aboutus from './components/Aboutus/Aboutus'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
-import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -43,7 +37,7 @@ function App() {
         if (appUser.client==='user'){
           const services= await apiClient.fetchServicesByZip(appUser.zip_code)
           setClient('user')
-          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart: {}})
+          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true})
         } else if (appUser.client==='provider'){
           const menu= await apiClient.fetchMenuItems(appUser.id)
           setClient('provider')
@@ -51,6 +45,9 @@ function App() {
         }
       }
   
+      // current problem is when reloading it stays logged in but since default client is user and not
+      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
+      // only solution I can think of is adding that as a field in db/
       }
 
     loadInitialData()
@@ -81,20 +78,19 @@ function App() {
 
         (client==='provider'&&
         <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-        ) 
+        )
           :
           <Route path='/' element={
-            <>
-            <Hero/>
-            <Aboutus/>
-            <Forsellers/>
-            <Locations/>
-            <Footer/>
-            
-            </>
-          }/>
+          <>
+          <Hero/>
+          <Aboutus/>
+          <Forsellers/>
+          <Locations/>
+          <Footer/>
           
-          // <> Log in or sign up to continue</>
+          </>
+        }/>
+          // {/* <> Log in or sign up to continue</> */}
       
         }
         
@@ -106,10 +102,8 @@ function App() {
         <Route path='/locations' element={<Locations/>}/>
 
       </Routes>
-      
       </BrowserRouter>
       
-
 
     </div>
   )

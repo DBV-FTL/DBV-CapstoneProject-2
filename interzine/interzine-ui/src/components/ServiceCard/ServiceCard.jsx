@@ -12,9 +12,9 @@ function ServiceCard({service}) {
             <Link to={`/menu/${service.id}`}>
                 <img className='service-image' src={'https://furtherafrica.com/content-files/uploads/2022/07/ethiopia_food.jpg'}/>
             </Link>
-            <div className='details'>
-                <h2> {service.name} || {service.cost} </h2>
-                <h2> {service.cuisine} || {service.rating} </h2>
+            <div>
+                <h2 className= "servicenm"> {service.name} || {service.cost} </h2>
+                <h2 className= "servicenm"> {service.cuisine} || {service.rating} </h2>
                 <img className='provider-image' src={service.profile_picture}/>
 
             </div>
