@@ -41,6 +41,18 @@
   color: #888;
 } */
 
-.app{
-  display: block
+body{
+margin: 0;
+padding: 0;
+background-color: black;
 }
+
+
+.app{
+  /* border-radius: 20px; */
+  /* background-color: black; */
+  /* padding-bottom: 2000px; */
+  margin-top: 20px;
+
+}
+

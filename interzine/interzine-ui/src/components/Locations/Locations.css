@@ -1,0 +1,14 @@
+.mheader{
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 100px;
+    font-weight: bold;
+    font-family: didot,serif;
+}
+
+.state{
+    text-align: center;
+    font-size: 50px;
+    color: darkorange;
+}
