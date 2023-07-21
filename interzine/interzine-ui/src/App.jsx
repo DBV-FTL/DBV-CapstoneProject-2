@@ -4,10 +4,15 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
+import Hero from './components/Hero/Hero'
 import Sidebar from './components/Sidebar/Sidebar'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
+import Footer from './components/Footer/Footer'
+import Locations from'./components/Locations/Locations'
+import Forsellers from './components/Forsellers/Forsellers'
+import Aboutus from './components/Aboutus/Aboutus'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
@@ -74,6 +79,7 @@ function App() {
     <div className='app'>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState}/>
+      <Hero/>
       <Sidebar/>
       <Routes>
         {
@@ -94,7 +100,12 @@ function App() {
         <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
         {/* <Route path= {`/menu:${id}`} element={<Menu menu={menu}/>} /> */}
+        <Route path='/contact' element={<Aboutus/>}/>
       </Routes>
+      <Aboutus/>
+      <Forsellers/>
+      <Locations/>
+      <Footer/>
       </BrowserRouter>
       
 
