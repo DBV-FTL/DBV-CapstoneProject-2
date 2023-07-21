@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import './Navbar.css'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import apiClient from '../../services/apiClient'
 import Profile from '../Profile/Profile'
 
-function Navbar({ appState, logout, setIsOpen, setViewProfile }) {
-    const navigate = useNavigate()
+function Navbar({appState, logout}) {
+    const [isOpen, setIsOpen, setViewProfile] = useState(false)
+    const navigate= useNavigate()
 
     function routeToLogin() {
         navigate('/login')
@@ -14,7 +14,7 @@ function Navbar({ appState, logout, setIsOpen, setViewProfile }) {
 
     async function routeToLogout() {
         await apiClient.logoutUser()
-        logout({ ...appState, isAuthenticated: false })
+        logout({...appState, isAuthenticated: false})
         navigate('/')
     }
 
@@ -34,23 +34,18 @@ function Navbar({ appState, logout, setIsOpen, setViewProfile }) {
     }
 
     return (
-        <>
-        <nav className='topnavbar'>
+        <nav>
             <div className="cart">
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-                <i onClick={() => setIsOpen((prev)=> !prev)} className="material-icons md-36">add_shopping_cart</i>
+                <i onClick={() => setIsOpen(true)} className="material-icons md-36">add_shopping_cart</i>
             </div>
-            <ul>
-                <li><Link to="/for-sellers">For Sellers</Link></li>
-                <li><Link to="/about">About us</Link></li>
-                <li><Link to="/locations">Locations</Link></li>
-            </ul>
 
             <div className='logo-and-location'>
-            <Link to='/'> <p className='header'>Inter<strong className='z'>Sínee</strong></p> </Link>
-            <h6> by DB & V </h6>
+            <p className='header'>Inter<strong class='z'>Zine</strong></p>
 
-               
+                {/* <form>
+                    <input placeholder='Zip Code' />
+                </form> */}
             </div>
 
             {
@@ -69,10 +64,9 @@ function Navbar({ appState, logout, setIsOpen, setViewProfile }) {
                         <button className="access-button2" onClick={routeToRegister}> Sign Up</button>
                     </div>
             }
-
+            
 
         </nav >
-        </>
     )
 }
 

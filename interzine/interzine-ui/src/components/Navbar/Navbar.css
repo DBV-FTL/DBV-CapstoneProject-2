@@ -10,7 +10,7 @@
     border: solid;
     border-color: rgb(255, 193, 78);
     color: whitesmoke;
-    position: fixed;
+    /* position: fixed; */
     top:0px;
 }
 
@@ -141,4 +141,19 @@ h6{
     -webkit-box-align: center;
     align-items: center;
   }
+
+.button-log{
+    height: 35px;
+    width: 180px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-right: 50px;
+    border: solid;
+    color: black;
+    border-color: orange;
+    background-color: orange;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Didot, serif;
+}  
   

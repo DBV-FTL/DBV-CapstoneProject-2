@@ -9,11 +9,6 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
 import Store from './pages/Store/Store'
-import Hero from './components/Hero/Hero'
-import Locations from'./components/Locations/Locations'
-import Forsellers from './components/Forsellers/Forsellers'
-import Aboutus from './components/Aboutus/Aboutus'
-import Footer from './components/Footer/Footer'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
@@ -23,13 +18,11 @@ import Orders from './components/Orders/Orders'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
-
   const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
   const [isOpen, setIsOpen]= useState(false)
   const [viewProfile, setViewProfile] = useState(false)
 
-  console.log('orders', appState.prevOrders)
   
   
 
@@ -56,17 +49,13 @@ function App() {
           setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
         }
       }
-  
-      // current problem is when reloading it stays logged in but since default client is user and not
-      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
-      // only solution I can think of is adding that as a field in db/
-      }
+    }
 
     loadInitialData()
 
   }, [])
 
-  console.log('app state', appState, client, menus)
+  console.log('app state', appState, client)
 
   return (
     <div className='app'>
@@ -93,18 +82,18 @@ function App() {
         (client==='provider'&&
         <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
         )
-          :
+          : 
           <Route path='/' element={
-          <>
-          <Hero/>
-          <Aboutus/>
-          <Forsellers/>
-          <Locations/>
-          <Footer/>
-          
-          </>
-        }/>
-          // {/* <> Log in or sign up to continue</> */}
+            <>
+            <Hero/>
+            <Aboutus/>
+            <Forsellers/>
+            <Locations/>
+            <Footer/>
+            
+            </>
+          }/>
+          // <> Log in or sign up to continue</>
       
         }
         
@@ -114,11 +103,12 @@ function App() {
         <Route path='/about' element={<Aboutus/>}/>
         <Route path='/for-sellers' element={<Forsellers/>}/>
         <Route path='/locations' element={<Locations/>}/>
-
       </Routes>
       </BrowserRouter>
       
 
+
+      {/* yoooooooo */}
     </div>
   )
 }
