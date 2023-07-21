@@ -4,10 +4,6 @@ const generateAuthToken = require("../utils/tokens");
 const User = require("../models/user");
 const ServiceProvider = require("../models/service-provider");
 const security = require('../middleware/security')
-const authorize = require('../middleware/authorize')
-
-// const { SECRET_KEY } = require('../config')
-
 
 
 
@@ -56,7 +52,6 @@ router.post("/provider/register", async (req, res, next) => {
 
 router.post("/provider/login", async (req, res, next) => {
   try {
-    console.log('new prov',req.body)
     const provider = await ServiceProvider.login(req.body);
     const token = generateAuthToken({...provider, client: 'provider'});
     return res.status(200).json({ provider, token });
@@ -67,9 +62,7 @@ router.post("/provider/login", async (req, res, next) => {
 
 router.get("/user", async (req, res, next) => {
   try {
-    console.log('in /user', req, res)
     const { user } = res.locals;
-    console.log('user from res', res.locals)
     const providers = await User.fetchProviderByZipCode(user);
     return res.status(200).json({ providers });
   } catch (err) {
