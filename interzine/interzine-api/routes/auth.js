@@ -9,8 +9,6 @@ const security = require('../middleware/security')
 
 router.post('/user/register', async( req, res, next) => {
     try{
-        console.log('.........')
-        console.log(req.body)
         const user = await User.register(req.body)
         const token = generateAuthToken(user)
         return res.status(201).json({user, token})
@@ -41,9 +39,8 @@ router.put("/user", security.extractUserFromJWT, async (req, res, next) => {
 
 router.post("/provider/register", async (req, res, next) => {
   try {
-    console.log('new prov',req.body)
     const provider = await ServiceProvider.register(req.body);
-    const token = generateAuthToken(provider);
+    const token = generateAuthToken({...provider, client: 'provider'});
     return res.status(201).json({ provider, token });
   } catch (err) {
     next(err);
@@ -53,7 +50,7 @@ router.post("/provider/register", async (req, res, next) => {
 router.post("/provider/login", async (req, res, next) => {
   try {
     const provider = await ServiceProvider.login(req.body);
-    const token = generateAuthToken(provider);
+    const token = generateAuthToken({...provider, client: 'provider'});
     return res.status(200).json({ provider, token });
   } catch (err) {
     next(err);
@@ -71,21 +68,33 @@ router.get("/user", async (req, res, next) => {
 });
 
 router.get("/provider/cuisine", async (req, res, next) => {
-  try {
-    const providers = await ServiceProvider.fetchProviderByCuisine(req.body);
-    return res.status(200).json({ providers });
-  } catch (err) {
-    next(err);
-  }
+    try {
+      const providers = await ServiceProvider.fetchProviderByCuisine(req.body);
+      return res.status(200).json({ providers });
+    } catch (err) {
+      next(err);
+    }
+  });
+  
+  router.get("/provider", async (req, res, next) => {
+    try {
+      const providers = await ServiceProvider.fetchAllProviders();
+      return res.status(200).json({ providers });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+
+router.post("/verify", security.extractUserFromJWT, (req, res) => {
+    try {
+        const {user}= res.locals
+        return res.status(200).json({user})
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
 });
 
-router.get("/provider", async (req, res, next) => {
-  try {
-    const providers = await ServiceProvider.fetchAllProviders();
-    return res.status(200).json({ providers });
-  } catch (err) {
-    next(err);
-  }
-});
 
 module.exports = router;

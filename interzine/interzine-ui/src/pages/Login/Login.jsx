@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 
 
-function Login({login, appState, client, setClient}) {
+function Login({login, client, setClient}) {
     const [formInput, setFormInput] = useState({})
     const navigate= useNavigate()
 
@@ -21,25 +21,32 @@ function Login({login, appState, client, setClient}) {
         try {
             let response
             let menu
+            let services
 
             if (client==='user'){
              response= await apiClient.loginUser(formInput)
+             services= await apiClient.fetchServicesByZip()
             } else if (client==='provider'){
               response= await apiClient.loginProvider(formInput)
+              // response.data.provider.id
               menu= await apiClient.fetchMenuItems(response.data.provider.id)
             }
-            
+
             const data = response.data;
             
             if (response.status === 200) {
               const { token } = data;
               localStorage.setItem("interzine_token", token);
-      
+              apiClient.setToken(token)
               const decodedToken = jwtDecode(token); //a way to get username from token
               if (client==='user'){
-                login({...appState, user: decodedToken, isAuthenticated: true})
+                login((prev) => ({...prev, user: decodedToken, isAuthenticated: true, services: services?.data?.providers}))
                } else if (client==='provider'){
-                login({...appState, provider: decodedToken, isAuthenticated: true, menuItems: menu.data.menuItems})
+                if (menu){
+                  login((prev) => ({...prev, provider: decodedToken, isAuthenticated: true, menuItems: menu?.data?.menuItems}))
+                }else{
+                  login((prev) => ({...prev, provider: decodedToken, isAuthenticated: true, menuItems: []}))
+                  }
                }
 
                apiClient.setToken(token)
