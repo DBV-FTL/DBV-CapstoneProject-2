@@ -36,4 +36,17 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.get("/food/:id", async (req, res, next) => {
+  // console.log('in router', req)
+  try {
+    const id = req.params.id;
+    console.log('food', id)
+    const menuItem = await MenuItem.fetchMenuItem(id);
+    console.log('getting food', menuItem)
+    return res.status(200).json({ menuItem });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

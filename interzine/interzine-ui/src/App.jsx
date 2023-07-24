@@ -17,6 +17,7 @@ import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
+import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -64,9 +65,6 @@ function App() {
         }
       }
   
-      // current problem is when reloading it stays logged in but since default client is user and not
-      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
-      // only solution I can think of is adding that as a field in db/
       }
 
     loadInitialData()
@@ -85,12 +83,20 @@ function App() {
         {
           appState.isAuthenticated ?
         (client==='user'&&
-        <Route path='/' element={<Shop services={appState?.services} />}/>)||
+        <>
+        <Route path='/shop' element={<Shop services={appState?.services} />}/>
+        <Route path='menu/:id' element={<Menu/>}/>
+        <Route path='food/:id' element={<FoodDetail order={setAppState}/>}/>
+
+
+        </>
+        
+        )||
         
 
         (client==='provider'&&
-        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-        )
+        <Route path='/store' element={<Store appState={appState} updateMenu={setAppState}/>}/>
+        ) 
           :
           <> Log in or sign up to continue</>
       
@@ -110,7 +116,6 @@ function App() {
       
 
 
-      {/* yoooooooo */}
     </div>
   )
 }

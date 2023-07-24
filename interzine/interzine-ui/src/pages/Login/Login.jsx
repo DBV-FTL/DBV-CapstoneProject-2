@@ -3,6 +3,7 @@ import axios from 'axios'
 import apiClient from "../../services/apiClient"
 import jwtDecode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
+import './Login.css'
 
 
 function Login({login, client, setClient}) {
@@ -41,16 +42,19 @@ function Login({login, client, setClient}) {
               const decodedToken = jwtDecode(token); //a way to get username from token
               if (client==='user'){
                 login((prev) => ({...prev, user: decodedToken, isAuthenticated: true, services: services?.data?.providers}))
+              navigate('/shop')
+
                } else if (client==='provider'){
                 if (menu){
                   login((prev) => ({...prev, provider: decodedToken, isAuthenticated: true, menuItems: menu?.data?.menuItems}))
                 }else{
                   login((prev) => ({...prev, provider: decodedToken, isAuthenticated: true, menuItems: []}))
                   }
+              navigate('/store')
+
                }
 
                apiClient.setToken(token)
-              navigate('/')
               
             } else {
             //   //Login failed
@@ -80,7 +84,7 @@ function Login({login, client, setClient}) {
 
     //set appstate from here
     return (
-        <div>
+        <div className='login'>
             <form>
             <input onChange= {(e) => handleFormInput(e)} name='email' placeholder='email' required/>
             <input onChange= {(e) => handleFormInput(e)} name='password' placeholder='password' required/>

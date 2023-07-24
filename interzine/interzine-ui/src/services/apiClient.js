@@ -102,6 +102,11 @@ async logoutProvider() {
     return await this.request({endpoint: `menu/${id}`});
   }
 
+  async fetchMenuItem(id){
+    console.log('hello?')
+    return await this.request({endpoint: `menu/food/${id}`});
+  }
+
   async fetchServicesByZip(){
     return await this.request({endpoint: `auth/provider`});
   }
