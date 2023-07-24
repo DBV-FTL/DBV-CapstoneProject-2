@@ -103,7 +103,7 @@ async logoutProvider() {
   }
 
   async fetchServicesByZip(){
-    return await this.request({endpoint: `auth/user`});
+    return await this.request({endpoint: `auth/provider`});
   }
 
 
