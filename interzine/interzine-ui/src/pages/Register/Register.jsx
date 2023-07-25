@@ -24,9 +24,10 @@ function Register({client, setClient, register, appState}) {
         try {
             let response
             let menu
+            let services
             if (client==='user'){
                 response= await apiClient.signupUser(formInput)
-                services= await apiClient.fetchServicesByZip(formInput.zip_code)
+                services= await apiClient.fetchServicesByZip()
             } else if (client==='provider'){
                 response= await apiClient.signupProvider(formInput)
                 console.log('reg provider', response.data)

@@ -3,22 +3,19 @@ import './ServiceCard.css'
 import { Link } from 'react-router-dom'
 
 function ServiceCard({service}) {
+    console.log('service', service, service.id)
 
-    async function handleClick(e){
-        e.preventDefault()
-    }
 
     return (
         <div className='service-card'>
-            <Link onClick={(e) => handleClick(e)} to={`${service.id}`}>
-                <img className='service-image' src={service.image}/>
+            <Link to={`/menu/${service.id}`}>
+                <img className='service-image' src={'https://furtherafrica.com/content-files/uploads/2022/07/ethiopia_food.jpg'}/>
             </Link>
             <div>
                 <h2> {service.name} || {service.cost} </h2>
                 <h2> {service.cuisine} || {service.rating} </h2>
                 <img className='provider-image' src={service.profile_picture}/>
 
-                {/* <span> {service.rating} </span> */}
             </div>
         </div>
     )
