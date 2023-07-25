@@ -100,6 +100,9 @@ function App() {
           <Route path='/' element={
             <>
             <Hero/>
+            <Aboutus/>
+            <Forsellers/>
+            <Locations/>
             <Footer/>
             
             </>
@@ -119,9 +122,7 @@ function App() {
         {/* <Route path='/contact' element={<Aboutus/>}/> */}
 
       </Routes>
-      {/* <Aboutus/> */}
-      {/* <Forsellers/>
-      <Locations/> */}
+      
       </BrowserRouter>
       
 
