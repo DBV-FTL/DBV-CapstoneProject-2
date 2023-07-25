@@ -3,8 +3,13 @@ import {useParams, useNavigate} from 'react-router-dom'
 import './FoodDetail.css'
 import apiClient from '../../services/apiClient'
 
-function FoodDetail({setAppState}) {
-    
+function FoodDetail({appState, setAppState}) {
+    //cart is an array of objects where food id is mapped to quantity
+    function handleIncrement(){
+        setAppState((prev) => {
+            // return {...prev, prev?.cart}
+        })
+    }
 
     const {id} = useParams()
     console.log('at food deets',id)
