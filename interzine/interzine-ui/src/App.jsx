@@ -77,7 +77,6 @@ function App() {
     <div className='app'>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState}/>
-      <Hero/>
       <Sidebar/>
       <Routes>
         {
@@ -98,7 +97,15 @@ function App() {
         <Route path='/store' element={<Store appState={appState} updateMenu={setAppState}/>}/>
         ) 
           :
-          <> Log in or sign up to continue</>
+          <Route path='/' element={
+            <>
+            <Hero/>
+            <Footer/>
+            
+            </>
+          }/>
+          
+          // <> Log in or sign up to continue</>
       
         }
         
@@ -106,12 +113,15 @@ function App() {
         <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
         {/* <Route path= {`/menu:${id}`} element={<Menu menu={menu}/>} /> */}
-        <Route path='/contact' element={<Aboutus/>}/>
+        <Route path='/about' element={<Aboutus/>}/>
+        <Route path='/for-sellers' element={<Forsellers/>}/>
+        <Route path='/locations' element={<Locations/>}/>
+        {/* <Route path='/contact' element={<Aboutus/>}/> */}
+
       </Routes>
-      <Aboutus/>
-      <Forsellers/>
-      <Locations/>
-      <Footer/>
+      {/* <Aboutus/> */}
+      {/* <Forsellers/>
+      <Locations/> */}
       </BrowserRouter>
       
 
