@@ -76,6 +76,7 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
+  
       <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
       <Routes>
