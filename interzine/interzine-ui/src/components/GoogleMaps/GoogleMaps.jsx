@@ -20,6 +20,9 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
+
+//**IMPORATANT** Call a request to get the addresses of the providers and place a marker for each address
+
 export default function GoogleMaps() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_KEY,
