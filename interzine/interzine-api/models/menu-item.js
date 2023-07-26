@@ -20,7 +20,7 @@ class MenuItem {
 
 
     const result = await db.query(`
-    INSERT INTO menu_item 
+    INSERT INTO menu_items 
     (name, image_url, cost, rating, service_provider_id)
     VALUES ($1, $2, $3, $4, (SELECT id FROM service_providers WHERE email = $5))
     RETURNING id, name, image_url, cost, rating, service_provider_id `,
@@ -35,7 +35,7 @@ class MenuItem {
      console.log('not written to db yet', id)
         const result = await db.query(`
         SELECT *
-        FROM menu_item
+        FROM menu_items
         WHERE service_provider_id = $1`,[id]);
         // SELECT m.id, m.name, m.image_url, m.cost, m.rating, m.service_provider_id
         // FROM menu_item AS m
@@ -54,7 +54,7 @@ class MenuItem {
      console.log('not written to db yet', id)
         const result = await db.query(`
         SELECT *
-        FROM menu_item
+        FROM menu_items
         WHERE id = $1`,[id]);
         // SELECT m.id, m.name, m.image_url, m.cost, m.rating, m.service_provider_id
         // FROM menu_item AS m

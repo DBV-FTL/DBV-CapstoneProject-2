@@ -76,6 +76,7 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
+  
       <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
       <Routes>
@@ -83,7 +84,7 @@ function App() {
           appState.isAuthenticated ?
         (client==='user'&&
         <>
-        <Route path='/shop' element={<Shop services={appState?.services} />}/>
+        <Route path='/' element={<Shop services={appState?.services} />}/>
         <Route path='menu/:id' element={<Menu/>}/>
         <Route path='food/:id' element={<FoodDetail order={setAppState}/>}/>
 
@@ -94,7 +95,7 @@ function App() {
         
 
         (client==='provider'&&
-        <Route path='/store' element={<Store appState={appState} updateMenu={setAppState}/>}/>
+        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
         ) 
           :
           <Route path='/' element={
