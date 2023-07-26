@@ -60,6 +60,7 @@ class User {
       console.log(existingUserWithEmail);
       throw new BadRequestError(`Duplicate email: ${email}`);
     }
+    console.log('in reg', password)
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();

@@ -1,5 +1,5 @@
 .mheader{
-    color: white;
+    color: black;
     font-size: 50px;
     text-align: center;
     margin-top: 100px;
@@ -10,5 +10,14 @@
 .state{
     text-align: center;
     font-size: 50px;
-    color: darkorange;
+    color: black;
+    font-family: didot,serif;
 }
+
+.statehd{
+    color: black;
+    margin-left: 36%;
+    font-size: 30px;
+    font-family: didot, serif;
+}
+

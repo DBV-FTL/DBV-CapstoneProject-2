@@ -43,10 +43,10 @@ function Register({client, setClient, register, appState}) {
               const decodedToken = jwtDecode(token); //a way to get username from token
 
               if (client==='user'){
-                register({...appState, user: decodedToken, isAuthenticated: true, services: services.data.providers})
+                register({...appState, user: decodedToken, isAuthenticated: true, services: services?.data?.providers})
                } else if (client==='provider'){
                     if(menu){
-                    register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: menu.data.menuItems})
+                    register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: menu?.data?.menuItems})
                     } else{
                     register({...appState, provider: decodedToken, isAuthenticated: true, menuItems: []})
                     }
@@ -75,9 +75,9 @@ function Register({client, setClient, register, appState}) {
   
     let optionMessage
     if (client==='user'){
-    optionMessage= 'Sign up to be a Ziner'
+    optionMessage= 'Sign up to be a Ziner here!'
     } else if (client==='provider'){
-    optionMessage= 'Sign up to order'
+    optionMessage= 'Sign up to order here!'
     }
     // console.log('u',formInput, appState)
   
@@ -87,42 +87,46 @@ function Register({client, setClient, register, appState}) {
             {
                 client==='user'?
                 <div className='register-user'>
-                    <form>
+                    <p className="register-hdr"> Sign in </p>
+                    <form className='register-btn'>
                         <input onChange={(e) => handleFormInput(e)} name='firstName' placeholder='First Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='lastName' placeholder='Last Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='username' placeholder=' Username' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
-                        <button onClick={async (e) => await handleRegister(e)}> Sign up </button>
+                        
                     </form>
-                    <p onClick={() => changeClient(client)}> {optionMessage} </p>
+                    <button onClick={async (e) => await handleRegister(e)}> Sign up! </button>
+                    <button className='optional' onClick={() => changeClient(client)}> {optionMessage} </button>
                 </div> :
-                <div className='register-provider'> 
-                    <form>
-                        <input onChange={(e) => handleFormInput(e)} name='name' placeholder='Name' required/>
+                <div className='register-provider'>
+                    <p className="register-hdr"> Sign in Síneer!  </p> 
+                    <form className='register-ziner'>
+                        <input onChange={(e) => handleFormInput(e)} name='name' placeholder='Full Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='cuisine' placeholder='Cuisine' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
-                        <form action="/action_page.php">
-                            <input name='profile-picture' type="file" id="myFile" />
-                            {/* <input type="submit"/> */}
-                        </form>
 
-
-                        <label> Share address to all users: </label>
-                        <select onChange={(e) => handleFormInput(e)} name='share_location'>
+                        <label className='labelhd' > Share address with users? </label>
+                        <select className='label1' onChange={(e) => handleFormInput(e)} name='share_location'>
                             
-                            <option value=''> Select</option>
+                            <option value=''> select</option>
                             <option value={false}> No </option>
                             <option value={true}> Yes </option>
 
                         </select>
                         <input onChange={(e) => handleFormInput(e)}  name='profile_picture' placeholder='img url' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
-                        <button onClick={async (e) => await handleRegister(e)}> Sign up </button>
+                        
                     </form>
-                    <p onClick={() => changeClient(client)}> {optionMessage} </p>
+                    <form className='files' action="/action_page.php">
+                            <input className='profile-picture' type="file" id="myFile" />
+                            {/* <input type="submit"/> */}
+                        </form>
+                    <button onClick={async (e) => await handleRegister(e)}> Sign up! </button>
+                    <button className='optional2' onClick={() => changeClient(client)}> {optionMessage} </button>
                 </div>
             }
             
