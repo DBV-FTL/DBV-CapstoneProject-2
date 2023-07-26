@@ -8,6 +8,7 @@ const { NotFoundError } = require("./utils/errors");
 const security = require("./middleware/security");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu-item");
+const orderRoutes = require("./routes/orders");
 
 app.use(express.json());
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(morgan("tiny"));
 app.use(security.extractUserFromJWT);
 app.use("/auth", authRoutes);
 app.use("/menu", menuRoutes);
+app.use("/orders", orderRoutes);
 
 app.get("/", (req, res) => {
   res.status(200).json({ ping: "pong" });
