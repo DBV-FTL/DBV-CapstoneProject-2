@@ -57,7 +57,7 @@ function App() {
         if (appUser.client==='user'){
           const services= await apiClient.fetchServicesByZip(appUser.zip_code)
           setClient('user')
-          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true})
+          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart: {}})
         } else if (appUser.client==='provider'){
           const menu= await apiClient.fetchMenuItems(appUser.id)
           setClient('provider')
@@ -83,9 +83,9 @@ function App() {
           appState.isAuthenticated ?
         (client==='user'&&
         <>
-        <Route path='/shop' element={<Shop services={appState?.services} />}/>
-        <Route path='menu/:id' element={<Menu/>}/>
-        <Route path='food/:id' element={<FoodDetail order={setAppState}/>}/>
+        <Route path='/' element={<Shop services={appState?.services} />}/>
+        <Route path='/menu/:id' element={<Menu/>}/>
+        <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState}/>}/>
 
 
         </>
@@ -94,7 +94,7 @@ function App() {
         
 
         (client==='provider'&&
-        <Route path='/store' element={<Store appState={appState} updateMenu={setAppState}/>}/>
+        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
         ) 
           :
           <Route path='/' element={
