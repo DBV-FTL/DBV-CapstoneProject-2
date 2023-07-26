@@ -16,8 +16,7 @@ import Aboutus from './components/Aboutus/Aboutus'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
-import Menu from './components/Menu/Menu'
-
+import Menu from './components/Menu/Menu' 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
   const [userState, setUserState] = useState({}) //all app state set here 
