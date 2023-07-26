@@ -5,7 +5,7 @@ import apiClient from '../../services/apiClient'
 
 function Menu(props) {
 //   const [showModal, setShowModal]= useState(false) //want food details to be a modal
-
+    console.log('hi')
     let menu
     
     if (props.menu){
@@ -32,7 +32,7 @@ function Menu(props) {
         <div className='menu'>
             
             {
-                menu?.map(food=> <FoodCard setShowModal= {setShowModal} food={food}/>)
+                menu?.map(food=> <FoodCard  food={food}/>) //setShowModal= {setShowModal}
             }
         </div>
     )

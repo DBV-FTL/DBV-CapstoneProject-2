@@ -1,5 +1,10 @@
 .service-grid{
     display: flex;
     flex-wrap: wrap;
-    flex-basis: 25%;
+    /* flex-basis: 25%; */
+    color: white
+}
+
+.card{
+    margin-bottom: 30;
 }

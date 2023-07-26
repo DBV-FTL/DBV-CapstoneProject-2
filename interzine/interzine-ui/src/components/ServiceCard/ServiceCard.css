@@ -1,16 +1,25 @@
 .service-image {
-    /* display: block; */
+    display: block;
     width: 180px;
     height: 180px
 }
 
 .service-card {
     width: 200px;
-    height: 200px
+    height: 200px;
 }
 
 .provider-image{
     width:40px;
     height:40px;
     border-radius: 20px;
+}
+
+.details{
+    color: white;
+}
+
+.service-card h2{
+    color:white
+
 }
