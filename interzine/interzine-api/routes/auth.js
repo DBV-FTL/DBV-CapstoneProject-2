@@ -10,7 +10,7 @@ const security = require('../middleware/security')
 router.post('/user/register', async( req, res, next) => {
     try{
         const user = await User.register(req.body)
-        const token = generateAuthToken(user)
+        const token = generateAuthToken({...user, client:'user'})
         return res.status(201).json({user, token})
     } catch (err) {
         next(err)
@@ -20,7 +20,7 @@ router.post('/user/register', async( req, res, next) => {
 router.post("/user/login", async (req, res, next) => {
   try {
     const user = await User.login(req.body);
-    const token = generateAuthToken(user);
+    const token = generateAuthToken({...user, client:'user'});
     return res.status(200).json({ user, token });
   } catch (err) {
     next(err);

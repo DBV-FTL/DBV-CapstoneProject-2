@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import './AddNewItem.css'
 import { useNavigate } from 'react-router-dom'
 import apiClient from "../../services/apiClient"
+import './AddNewItem.css'
 
 
 function AddNewItem({appState, updateMenu}) { 
@@ -25,7 +26,7 @@ function AddNewItem({appState, updateMenu}) {
     }
 
     return (
-        <div>
+        <div className='new'>
             <form>
                 <label> Name </label>
                 <input value={formInput.name} onChange={(e) => handleChange(e)} name='name' placeholder='name' required/>

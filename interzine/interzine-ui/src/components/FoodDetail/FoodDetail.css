@@ -1,0 +1,25 @@
+.food-detail{
+    height: 400px;
+    width: 400px
+}
+
+.details{
+    position: absolute;
+    color: white
+}
+
+.food-detail img{
+    height: 300px;
+    width: 300px
+}
+
+.modal-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  

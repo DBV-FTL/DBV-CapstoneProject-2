@@ -16,7 +16,9 @@ import Aboutus from './components/Aboutus/Aboutus'
 import Store from './pages/Store/Store'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
-import Menu from './components/Menu/Menu' 
+import Menu from './components/Menu/Menu'
+import FoodDetail from './components/FoodDetail/FoodDetail'
+
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
   const [userState, setUserState] = useState({}) //all app state set here 
@@ -63,9 +65,6 @@ function App() {
         }
       }
   
-      // current problem is when reloading it stays logged in but since default client is user and not
-      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
-      // only solution I can think of is adding that as a field in db/
       }
 
     loadInitialData()
@@ -78,20 +77,38 @@ function App() {
     <div className='app'>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState}/>
-      <Hero/>
       <Sidebar/>
       <Routes>
         {
           appState.isAuthenticated ?
         (client==='user'&&
-        <Route path='/' element={<Shop services={appState?.services} />}/>)||
+        <>
+        <Route path='/shop' element={<Shop services={appState?.services} />}/>
+        <Route path='menu/:id' element={<Menu/>}/>
+        <Route path='food/:id' element={<FoodDetail order={setAppState}/>}/>
+
+
+        </>
+        
+        )||
         
 
         (client==='provider'&&
-        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-        )
+        <Route path='/store' element={<Store appState={appState} updateMenu={setAppState}/>}/>
+        ) 
           :
-          <> Log in or sign up to continue</>
+          <Route path='/' element={
+            <>
+            <Hero/>
+            <Aboutus/>
+            <Forsellers/>
+            <Locations/>
+            <Footer/>
+            
+            </>
+          }/>
+          
+          // <> Log in or sign up to continue</>
       
         }
         
@@ -99,17 +116,17 @@ function App() {
         <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
         {/* <Route path= {`/menu:${id}`} element={<Menu menu={menu}/>} /> */}
-        <Route path='/contact' element={<Aboutus/>}/>
+        <Route path='/about' element={<Aboutus/>}/>
+        <Route path='/for-sellers' element={<Forsellers/>}/>
+        <Route path='/locations' element={<Locations/>}/>
+        {/* <Route path='/contact' element={<Aboutus/>}/> */}
+
       </Routes>
-      <Aboutus/>
-      <Forsellers/>
-      <Locations/>
-      <Footer/>
+      
       </BrowserRouter>
       
 
 
-      {/* yoooooooo */}
     </div>
   )
 }

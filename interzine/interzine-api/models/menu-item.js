@@ -54,6 +54,25 @@ class MenuItem {
 
     }
   }
+
+  static async fetchMenuItem(id) {
+    try {
+     console.log('not written to db yet', id)
+        const result = await db.query(`
+        SELECT *
+        FROM menu_item
+        WHERE id = $1`,[id]);
+        // SELECT m.id, m.name, m.image_url, m.cost, m.rating, m.service_provider_id
+        // FROM menu_item AS m
+        // WHERE m.service_provider_id = $1`,[id]);
+        console.log('in db', result.rows)
+        const menuItems = result.rows[0];
+        return menuItems
+    } catch(err) {
+        throw new err
+
+    }
+  }
 }
 
 module.exports = MenuItem;

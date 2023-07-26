@@ -30,13 +30,13 @@ function Navbar({ appState, logout }) {
                 <i onClick={() => setIsOpen(true)} className="material-icons md-36">add_shopping_cart</i>
             </div>
             <ul>
-                <li><a href="#about">For Sellers</a></li>
-                <li><a href="#contact">About us</a></li>
-                <li><a href="#Map">Locations</a></li>
+                <li><Link to="/for-sellers">For Sellers</Link></li>
+                <li><Link to="/about">About us</Link></li>
+                <li><Link to="/locations">Locations</Link></li>
             </ul>
 
             <div className='logo-and-location'>
-            <p className='header'>Inter<strong className='z'>Sínee</strong></p>
+            <Link to='/'> <p className='header'>Inter<strong className='z'>Sínee</strong></p> </Link>
             <h6> by DB & V </h6>
 
                 {/* <form>
