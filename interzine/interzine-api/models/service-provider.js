@@ -35,6 +35,7 @@ class ServiceProvider {
   }
 
   static async register(creds) {
+    console.log("register the damned user", creds)
     const { email, name, cuisine, password, profile_picture, zip_code } = creds;
     const requiredCreds = [
       "email",
@@ -65,14 +66,13 @@ class ServiceProvider {
       throw new BadRequestError(`Duplicate email: ${email}`);
     }
 
-    if (!alidatePassword(password))
-      throw new UnprocessableEntityError(
-        "Password does not satisfy requirements"
-      );
-
+    // if (!validatePassword(password))
+    //   throw new UnprocessableEntityError(
+    //     "Password does not satisfy requirements"
+    //   );
+      console.log("does it get here")
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();
-
     const result = await db.query(
       `
       INSERT INTO service_providers 
