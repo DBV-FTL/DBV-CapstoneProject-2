@@ -91,7 +91,7 @@ function App() {
 
         </>
         
-        )||
+        ) ||
         
 
         (client==='provider'&&

@@ -63,7 +63,7 @@ class User {
     }
     console.log('in reg', password)
 
-    if(!validatePassword(password)) throw new UnprocessableEntityError('Password does not satisfy requirements')
+    // if(!validatePassword(password)) throw new UnprocessableEntityError('Password does not satisfy requirements')
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();

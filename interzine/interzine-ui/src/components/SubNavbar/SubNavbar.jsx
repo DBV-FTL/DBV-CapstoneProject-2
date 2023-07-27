@@ -1,5 +1,133 @@
-import "./SubNavbar.css"
+import "./SubNavbar.css";
+import { useState } from "react";
+export default function SubNavbar({ appState }) {
+  const [value, setValue] = useState("");
+  const [cuisine, setCuisine] = useState("");
+  const [filter, setFilter] = useState();
 
-export default function SubNavbar() {
-    
+  function handleFilter(c) {
+    console.log("cuisine type", c);
+    setCuisine(c);
+    setFilter(
+      appState.services?.filter((provider) => {
+        if (c === "") return provider;
+        return provider.cuisine.toLowerCase() === c;
+      })
+    );
+
+    console.log("cuisine button", filter);
+  }
+
+  function handleOnChange(e) {
+    console.log(e.target.value);
+    setValue(e.target.value);
+    cuisine
+      ? setFilter(
+          appState.services
+            ?.filter((provider) => provider.cuisine === cuisine)
+            .filter((provider) =>
+              provider.name.toLowerCase().includes(e.target.value.toLowerCase())
+            )
+        )
+      : setFilter(
+          appState.services?.filter((provider) => {
+            if (e.target.value === "") return provider;
+            return (
+              provider.cuisine
+                .toLowerCase()
+                .includes(e.target.value.toLowerCase()) ||
+              provider.name.toLowerCase().includes(e.target.value.toLowerCase())
+            );
+          })
+        );
+    console.log("who am i searching for?", filter);
+  }
+  //10 random cuisines
+  return (
+    <nav className="subnavbar">
+      <div className="content">
+        <div className="search">
+          <input
+            name="search-bar"
+            type="text"
+            placeholder="Search for Cuisine"
+            value={value}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="category-buttons">
+          <button
+            onClick={() => {
+              handleFilter("");
+            }}
+          >
+            All Cuisines
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("ethiopian");
+            }}
+          >
+            Ethiopian
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("nigerian");
+            }}
+          >
+            Nigerian
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("jamaican");
+            }}
+          >
+            Jamaican
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("italian");
+            }}
+          >
+            Italian
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("indian");
+            }}
+          >
+            Indian
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("dominican");
+            }}
+          >
+            Dominican
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("japanese");
+            }}
+          >
+            Japanese
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("brazilian");
+            }}
+          >
+            Brazilian
+          </button>
+          <button
+            onClick={() => {
+              handleFilter("Greek");
+            }}
+          >
+            Greek
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
 }
