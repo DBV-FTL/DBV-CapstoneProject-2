@@ -1,12 +1,19 @@
 import React,{useState} from 'react'
 import './Sidebar.css'
+import ShoppingCart from '../ShoppingCart/ShoppingCart'
 
-function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false)
-
+function Sidebar( {menus, isOpen, cart, services, setIsOpen}) {
     return (
-        <div className="sidebar">
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <div className={isOpen? 'open-sidebar': 'closed-sidebar'}>
+                
+                {isOpen &&
+                <>
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+                <i onClick={() => setIsOpen((prev)=> !prev)} className="material-icons md-36 arrow_back">arrow_back_ios</i>
+                    <ShoppingCart menus= {menus} cart={cart} services={services}/>
+
+                </>
+                }
         </div>
     )
 }

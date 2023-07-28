@@ -29,7 +29,7 @@ class MenuItem {
     if (check.rows[0]) throw new BadRequestError("Menu item already exists")
 
     const result = await db.query(`
-    INSERT INTO menu_items 
+    INSERT INTO menu_items
     (name, image_url, cost, rating, service_provider_id)
     VALUES ($1, $2, $3, $4, (SELECT id FROM service_providers WHERE email = $5))
     RETURNING id, name, image_url, cost, rating, service_provider_id `,

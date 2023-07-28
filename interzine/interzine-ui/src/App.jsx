@@ -21,24 +21,10 @@ import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
-  const [userState, setUserState] = useState({}) //all app state set here 
 
-
-  const [providerState, setProviderState] = useState({})
+  const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
-
-  
-  
-  // let appState
-  // let setAppState
-
-  // if (client==='user'){
-  //   appState= userState
-  //   setAppState= setUserState
-  // } else if (client==='provider'){
-  //   appState= providerState
-  //   setAppState= setProviderState
-  // }
+  const [isOpen, setIsOpen]= useState(false)
 
   
   
@@ -71,20 +57,20 @@ function App() {
 
   }, [])
 
-  console.log('app state', appState, client)
+  console.log('app state', appState, client, menus)
 
   return (
     <div className='app'>
       <BrowserRouter>
-      <Navbar appState={appState} logout={setAppState}/>
-      <Sidebar/>
+      <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
+      <Sidebar setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
       <Routes>
         {
           appState.isAuthenticated ?
         (client==='user'&&
         <>
-        <Route path='/' element={<Shop services={appState?.services} />}/>
-        <Route path='/menu/:id' element={<Menu/>}/>
+        <Route path='/' element={<Shop services={appState?.services}  menus={menus}/>}/>
+        <Route path='menu/:id' element={<Menu setMenus={setMenus}/>}/>
         <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState}/>}/>
 
 
@@ -115,11 +101,9 @@ function App() {
 
         <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
         <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
-        {/* <Route path= {`/menu:${id}`} element={<Menu menu={menu}/>} /> */}
         <Route path='/about' element={<Aboutus/>}/>
         <Route path='/for-sellers' element={<Forsellers/>}/>
         <Route path='/locations' element={<Locations/>}/>
-        {/* <Route path='/contact' element={<Aboutus/>}/> */}
 
       </Routes>
       
