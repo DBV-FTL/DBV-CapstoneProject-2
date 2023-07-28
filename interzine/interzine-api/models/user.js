@@ -1,8 +1,9 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR } = require("../config");
-const { BadRequestError, UnauthorizedError } = require("../utils/errors");
+const { BadRequestError, UnauthorizedError, UnprocessableEntityError } = require("../utils/errors");
 const { validateFields } = require("../utils/validate");
+const validatePassword = require("../utils/validatePassword")
 
 class User {
   static async login(creds) {
@@ -61,6 +62,8 @@ class User {
       throw new BadRequestError(`Duplicate email: ${email}`);
     }
     console.log('in reg', password)
+
+    // if(!validatePassword(password)) throw new UnprocessableEntityError('Password does not satisfy requirements')
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();
