@@ -42,7 +42,7 @@ function Login({login, client, setClient}) {
               const decodedToken = jwtDecode(token); //a way to get username from token
               if (client==='user'){
                 login((prev) => ({...prev, user: decodedToken, isAuthenticated: true, services: services?.data?.providers}))
-              navigate('/shop')
+              navigate('/')
 
                } else if (client==='provider'){
                 if (menu){
@@ -50,7 +50,7 @@ function Login({login, client, setClient}) {
                 }else{
                   login((prev) => ({...prev, provider: decodedToken, isAuthenticated: true, menuItems: []}))
                   }
-              navigate('/store')
+              navigate('/')
 
                }
 
