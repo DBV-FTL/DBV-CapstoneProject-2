@@ -70,7 +70,7 @@ function FoodDetail({cart, addToCart}) {
             <p> {food?.rating} </p>
             <p> all about this food! </p>
             <button onClick={handleDecrement}> - </button>
-            <p> {id? cart[id] : 0} </p>
+            <p> {id in cart? cart[id] : 0} </p>
             <button onClick= {handleIncrement}> + </button>
             <button> Add to cart- $$</button>
             </div>

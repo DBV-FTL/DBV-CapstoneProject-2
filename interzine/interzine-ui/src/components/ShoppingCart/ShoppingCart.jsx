@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import apiClient from '../../services/apiClient'
 
-function ShoppingCart({cart, menus, services}) {
+function ShoppingCart({setAppState, appState, cart, menus, services}) {
     const total=0
     console.log(cart, menus)
     // const [itemsInCart, setItemsInCart] = useState([])
@@ -9,6 +9,7 @@ function ShoppingCart({cart, menus, services}) {
 
     async function order(){
         await apiClient.checkoutFoods(itemsInCart)
+        setAppState({...appState, cart:{} })
     }
 
     return (
@@ -42,7 +43,7 @@ function ShoppingCart({cart, menus, services}) {
                 
 
             }
-            
+
             <button onClick={() => order()}> Checkout {`$${total}`} </button>
 
             

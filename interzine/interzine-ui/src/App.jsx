@@ -9,9 +9,15 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
 import Store from './pages/Store/Store'
+import Hero from './components/Hero/Hero'
+import Locations from'./components/Locations/Locations'
+import Forsellers from './components/Forsellers/Forsellers'
+import Aboutus from './components/Aboutus/Aboutus'
+import Footer from './components/Footer/Footer'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
+import FoodDetail from './components/FoodDetail/FoodDetail'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -37,7 +43,7 @@ function App() {
         if (appUser.client==='user'){
           const services= await apiClient.fetchServicesByZip(appUser.zip_code)
           setClient('user')
-          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true})
+          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}})
         } else if (appUser.client==='provider'){
           const menu= await apiClient.fetchMenuItems(appUser.id)
           setClient('provider')
@@ -60,7 +66,7 @@ function App() {
     <div className='app'>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
-      <Sidebar setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
+      <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
       <Routes>
         {
           appState.isAuthenticated ?
