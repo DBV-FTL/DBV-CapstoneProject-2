@@ -10,7 +10,6 @@ function ServiceCard({service}) {
         <div className='service-card'>
 
             <Link to={`/menu/${service.id}`}>
-                {/* <p>{service?.name} </p> */}
                 <img className='service-image' src={'https://furtherafrica.com/content-files/uploads/2022/07/ethiopia_food.jpg'}/>
             </Link>
             <div>

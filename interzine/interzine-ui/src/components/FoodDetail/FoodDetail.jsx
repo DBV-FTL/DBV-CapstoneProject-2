@@ -5,7 +5,6 @@ import apiClient from '../../services/apiClient'
 
 function FoodDetail({cart, addToCart}) {
 
-    //cart is object where food id is mapped to quantity
     const navigate= useNavigate()
 
     
@@ -24,10 +23,7 @@ function FoodDetail({cart, addToCart}) {
             }
 
         }
-            
-            // (prev) => {
-            // return {...prev, cart: {...prev.cart, [id]: prev.cart[id] + 1}}
-        // }
+          
         )
     }
 
@@ -43,9 +39,7 @@ function FoodDetail({cart, addToCart}) {
 
         }
         )
-        // setAppState((prev) => {
-        //     return {...prev, cart: {...prev.cart, [id]: prev.cart[id] - 1}}
-        // })
+       
     }
 
     console.log('at food deets',id)
@@ -55,9 +49,7 @@ function FoodDetail({cart, addToCart}) {
 
 
     useEffect(() => {
-        // console.log('in useEffect')
         apiClient.fetchMenuItem(id).then((response) => {
-            // console.log('response fooddetail', id, response.data)
             setFood(response?.data.menuItem)
         })
     }, [])
@@ -78,13 +70,11 @@ function FoodDetail({cart, addToCart}) {
             <p> {food?.rating} </p>
             <p> all about this food! </p>
             <button onClick={handleDecrement}> - </button>
-            <p> {cart[id]} </p>
+            <p> {id in cart? cart[id] : 0} </p>
             <button onClick= {handleIncrement}> + </button>
             <button> Add to cart- $$</button>
             </div>
            
-            {/* need description also */}
-            {/* WORKING ON MAKING THIS A MODAL */}
         </div>
     )
 }
