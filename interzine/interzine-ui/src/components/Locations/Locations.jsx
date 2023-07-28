@@ -8,7 +8,7 @@ function Locations() {
   
       <p id="contact-header">Contact </p>
       
-      <div className="contact" >       
+      <div className="location" >       
       <p className='state'> Find International Cuisines near you! </p>
       <p className='statehd'> Your Síneer may be right next door!</p>
           <GoogleMaps />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
@@ -8,9 +8,8 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
-import Store from './pages/Store/Store'
-import Hero from './components/Hero/Hero'
-import Locations from'./components/Locations/Locations'
+import Footer from './components/Footer/Footer'
+import Locations from './components/Locations/Locations'
 import Forsellers from './components/Forsellers/Forsellers'
 import Aboutus from './components/Aboutus/Aboutus'
 import Footer from './components/Footer/Footer'
@@ -18,6 +17,7 @@ import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
+// import Bot from './components/Bot/Bot'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -33,28 +33,25 @@ function App() {
     //need to get token from local storage then decode token and fetch user 
     const loadInitialData = async () => {
       const token = localStorage.getItem('interzine_token')
-  
+
       if (token) {
         apiClient.setToken(token)
-        const fromToken= await apiClient.fetchUserFromToken()
-        const appUser= fromToken?.data?.user
+        const fromToken = await apiClient.fetchUserFromToken()
+        const appUser = fromToken?.data?.user
         console.log('loading initial data', appUser)
-        
-        if (appUser.client==='user'){
-          const services= await apiClient.fetchServicesByZip(appUser.zip_code)
+
+        if (appUser.client === 'user') {
+          const services = await apiClient.fetchServicesByZip(appUser.zip_code)
           setClient('user')
-          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}})
-        } else if (appUser.client==='provider'){
-          const menu= await apiClient.fetchMenuItems(appUser.id)
+          setAppState({ services: services?.data?.providers, user: appUser, isAuthenticated: true, cart: {} })
+        } else if (appUser.client === 'provider') {
+          const menu = await apiClient.fetchMenuItems(appUser.id)
           setClient('provider')
-          setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
+          setAppState({ menuItems: menu?.data?.menuItems, provider: appUser, isAuthenticated: true })
         }
       }
-  
-      // current problem is when reloading it stays logged in but since default client is user and not
-      // provider, even when a service provider logs in, the client state switches to user when website refreshed;
-      // only solution I can think of is adding that as a field in db/
-      }
+
+    }
 
     loadInitialData()
 
@@ -64,6 +61,7 @@ function App() {
 
   return (
     <div className='app'>
+      <div></div>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
       <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
@@ -89,9 +87,9 @@ function App() {
           <Route path='/' element={
           <>
           <Hero/>
-          <Aboutus/>
-          <Forsellers/>
           <Locations/>
+          <Forsellers/>
+          <Aboutus/>
           <Footer/>
           
           </>
@@ -107,12 +105,18 @@ function App() {
         <Route path='/for-sellers' element={<Forsellers/>}/>
         <Route path='/locations' element={<Locations/>}/>
 
-      </Routes>
-      </BrowserRouter>
-      
+        </Routes>
+
+      </BrowserRouter>   
+
 
     </div>
+
+
+
   )
 }
 
 export default App
+
+

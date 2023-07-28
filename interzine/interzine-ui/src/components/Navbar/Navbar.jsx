@@ -42,7 +42,7 @@ function Navbar({ appState, logout, setIsOpen }) {
             </div>
 
             {
-                appState.isAuthenticated ? <button onClick={routeToLogout} > Log Out</button> :
+                appState.isAuthenticated ? <button className='button-log'onClick={routeToLogout} > Log Out</button> :
                     <div className='access-buttons'>
                         <button className="access-button1" onClick={routeToLogin}> Log In</button>
                         <button className="access-button2" onClick={routeToRegister}> Sign Up</button>

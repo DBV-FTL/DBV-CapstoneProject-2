@@ -21,3 +21,13 @@
     font-family: didot, serif;
 }
 
+.location{
+    color: black;
+    border: solid;
+    border-color: orange;
+    background-color: rgb(251, 249, 234);
+    padding-bottom: 10%;
+    margin-bottom: 100px;
+    height: 790px;
+}
+
