@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
-import Hero from './components/Hero/Hero'
 import Sidebar from './components/Sidebar/Sidebar'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
@@ -13,7 +12,7 @@ import Footer from './components/Footer/Footer'
 import Locations from './components/Locations/Locations'
 import Forsellers from './components/Forsellers/Forsellers'
 import Aboutus from './components/Aboutus/Aboutus'
-import Store from './pages/Store/Store'
+import Footer from './components/Footer/Footer'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
@@ -21,16 +20,16 @@ import FoodDetail from './components/FoodDetail/FoodDetail'
 // import Bot from './components/Bot/Bot'
 
 function App() {
-  
-  const [client, setClient] = useState('user') //client is either 'user' or 'provider'
-  const [userState, setUserState] = useState({}) //all app state set here 
+  const [client, setClient]= useState('user') //client is either 'user' or 'provider'
 
-
-  const [providerState, setProviderState] = useState({})
+  const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
+  const [isOpen, setIsOpen]= useState(false)
 
+  
+  
 
-  useEffect(() => {
+  useEffect(()=>{
     //need to get token from local storage then decode token and fetch user 
     const loadInitialData = async () => {
       const token = localStorage.getItem('interzine_token')
@@ -58,51 +57,53 @@ function App() {
 
   }, [])
 
-  console.log('app state', appState, client)
+  console.log('app state', appState, client, menus)
 
   return (
     <div className='app'>
       <div></div>
       <BrowserRouter>
+      <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
+      <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
+      <Routes>
+        {
+          appState.isAuthenticated ?
+        (client==='user'&&
+        <>
+        <Route path='/' element={<Shop services={appState?.services}  menus={menus}/>}/>
+        <Route path='menu/:id' element={<Menu setMenus={setMenus}/>}/>
+        <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState}/>}/>
 
-        <Navbar appState={appState} logout={setAppState} />
-        <Sidebar />
-        <Routes>
-          {
-            appState.isAuthenticated ?
-              (client === 'user' &&
-                <>
-                  <Route path='/' element={<Shop services={appState?.services} />} />
-                  <Route path='/menu/:id' element={<Menu />} />
-                  <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState} />} />
-                </>
 
-              ) ||
+        </>
+        
+        )||
+        
 
-              (client === 'provider' &&
-                <Route path='/' element={<Store appState={appState} updateMenu={setAppState} />} />
-              )
-              :
-              <Route path='/' element={
-                <>
-                  <Hero />
-                  <Locations />
-                  <Forsellers />
-                  <Aboutus />
-                  <Footer />
+        (client==='provider'&&
+        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
+        )
+          :
+          <Route path='/' element={
+          <>
+          <Hero/>
+          <Locations/>
+          <Forsellers/>
+          <Aboutus/>
+          <Footer/>
+          
+          </>
+        }/>
+          // {/* <> Log in or sign up to continue</> */}
+      
+        }
+        
 
-                </>
-              } />
-
-            // <> Log in or sign up to continue</>
-
-          }
-
-          <Route path='/login' element={<Login client={client} setClient={setClient} login={setAppState} appState={appState} />} />
-          <Route path='/register' element={<Register client={client} setClient={setClient} register={setAppState} appState={appState} />} />
-          <Route path='/about' element={<Aboutus />} />
-          <Route path='/for-sellers' element={<Forsellers />} />
-          <Route path='/locations' element={<Locations />} />
+        <Route path='/login' element={<Login client= {client} setClient= {setClient} login={setAppState} appState={appState}/>}/>
+        <Route path='/register' element={<Register client= {client} setClient= {setClient} register={setAppState} appState={appState}/>}/>
+        <Route path='/about' element={<Aboutus/>}/>
+        <Route path='/for-sellers' element={<Forsellers/>}/>
+        <Route path='/locations' element={<Locations/>}/>
 
         </Routes>
 
