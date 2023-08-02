@@ -16,6 +16,7 @@ import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
+import Store from "./pages/Store/Store"
 import Hero from './components/Hero/Hero'
 import Bot from './components/Bot/Bot'
 

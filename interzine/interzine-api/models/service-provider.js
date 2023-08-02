@@ -36,7 +36,7 @@ class ServiceProvider {
 
   static async register(creds) {
     console.log("register the damned user", creds)
-    const { email, name, cuisine, password, profile_picture, zip_code } = creds;
+    const { email, name, cuisine, password, profile_picture, address, zip_code } = creds;
     const requiredCreds = [
       "email",
       "cuisine",
@@ -44,6 +44,7 @@ class ServiceProvider {
       "password",
       "profile_picture",
       "zip_code",
+      "address"
     ];
 
     try {
@@ -76,13 +77,13 @@ class ServiceProvider {
     const result = await db.query(
       `
       INSERT INTO service_providers 
-      (email, name, cuisine, password, profile_picture, zip_code) 
-      VALUES ($1, $2, $3, $4, $5, $6)
+      (email, name, cuisine, password, profile_picture, address, zip_code) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING id,email, name, cuisine, profile_picture, zip_code
       `,
-      [normalizedEmail, name, cuisine, hashedPassword, profile_picture, zip_code, ]
+      [normalizedEmail, name, cuisine, hashedPassword, profile_picture, address, zip_code ]
     );
-
+    console.log("it gets past maybe?")
     const provider = result.rows[0];
     return provider;
   }

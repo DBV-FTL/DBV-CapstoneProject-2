@@ -104,6 +104,10 @@ class ApiClient {
     });
   }
 
+  async fetchPaymentIntent(){
+    return await this.request({endpoint: "payment/create-payment-intent", method: "POST"})
+  }
+
   async checkoutFoods(item){
     return await this.request({
       endpoint: "orders/create",
