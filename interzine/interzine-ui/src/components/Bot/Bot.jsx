@@ -1,14 +1,17 @@
+import './Bot.css';
 import React from 'react'
 import {useState} from "react";
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react'
 
-const API_KEY = "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";
+
+
+const API_KEY = "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";
 
 function Bot() {
     const [messages, setMessages] = useState([
         {
-            message: "Hello, I'm ChatGPT!",
+            message: "Hi, I'm Sínee pal!🧑‍🍳",
             // sentTime: "just now",
             sender: "ChatGPT"
         }
@@ -29,20 +32,21 @@ function Bot() {
 
         try {
             await processMessageToChatGPT(newMessages);
+             setIsTyping(false);
         } catch (error) {
             console.error("Error processing the API response:", error);
             // Handle the error here, show an error message, or provide a default message
             setMessages([
                 ...newMessages,
                 {
-                    message: "Oops! Something went wrong. Please try again later.",
+                    message: "Oops! Sínee pal is down at the moment",
                     sender: "ChatGPT"
                 }
             ]);
-            setIsTyping(false);
+            // setIsTyping(false);
         }
 
-        await processMessageToChatGPT(newMessages);
+        
     };
 
     async function processMessageToChatGPT(chatMessages) {
@@ -59,7 +63,7 @@ function Bot() {
         });
 
         const systemMessage = {
-            "role": "system", "content": "explain things like i'm your bestfriend"
+            "role": "system", "content": "responde like i'm your close friend while providing one food recommendation in one very short sentence and if no ethnicity is given ask the user what ethnic cuisines they are looking for in a straightforward enthusiastic sentence",
         }
 
 
@@ -69,6 +73,7 @@ function Bot() {
                 systemMessage,
                 ...apiMessages,
             ],
+        
         }
 
         await fetch("https://api.openai.com/v1/chat/completions",
@@ -83,29 +88,48 @@ function Bot() {
                 return data.json();
             }).then((data) => {
                 console.log(data);
-
+                console.log(data.choices[0].message.content);
+                setMessages(
+                    [...chatMessages, {
+                        message: data.choices[0].message.content,
+                        sender:"ChatGPT"
+                    }]
+                );
+                 setIsTyping(false);
             });
     }
 
     return (
-        <div className="Bot">
-            <div style={{ position: "relative", height: "800px", width: "700px" }}>
-                <MainContainer>
-                    <ChatContainer>
-                        <MessageList
-                            scrollBehavior="smooth"
-                            typingIndicator={isTyping ? <TypingIndicator content="ChatGPT is typing" /> : null}
-                        >
-                            {messages.map((message, i) => {
-                                console.log(message)
-                                return <Message key={i} model={message} />
-                            })}
-                        </MessageList>
-                        <MessageInput placeholder="Type message here" onSend={handleSend} />
-                    </ChatContainer>
-                </MainContainer>
-            </div>
+        <div className="chatbox-container">
+      <div className="Bot">
+        <div style={{ position: "relative", height: "500px", width: "400px" }}>
+          <MainContainer>
+            <ChatContainer>
+              <MessageList
+                className="message-list" // Apply the CSS class for the message list
+                scrollBehavior="smooth"
+                typingIndicator={isTyping ? <TypingIndicator content="Sínee pal is cooking" /> : null}
+              >
+                {messages.map((message, i) => {
+                  return (
+                    <Message
+                      key={i}
+                      model={message}
+                      className={message.sender === "ChatGPT" ? "system" : "user"} // Apply the CSS class for the message content
+                    />
+                  );
+                })}
+              </MessageList>
+              <MessageInput
+                className="message-input" // Apply the CSS class for the message input
+                placeholder="Type message here"
+                onSend={handleSend}
+              />
+            </ChatContainer>
+          </MainContainer>
         </div>
+      </div>
+    </div>
     )
 }
 
