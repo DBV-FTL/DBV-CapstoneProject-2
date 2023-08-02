@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import FoodCard from '../FoodCard/FoodCard'
+import './Menu.css'
 import apiClient from '../../services/apiClient'
 
 function Menu(props) {

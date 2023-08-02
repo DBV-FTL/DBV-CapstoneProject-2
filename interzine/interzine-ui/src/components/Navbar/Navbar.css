@@ -10,7 +10,7 @@
     border: solid;
     border-color: rgb(255, 193, 78);
     color: whitesmoke;
-    position: fixed;
+    /* position: fixed; */
     top:0px;
 }
 

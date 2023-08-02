@@ -61,17 +61,21 @@ function FoodDetail({cart, addToCart}) {
     return (
         <div className='food-detail'>
             
-            
-            <button onClick={routeToMenu}> x </button>
+           
+            {/* <button onClick={routeToMenu}> x </button> */}
             <img src={food?.image_url}/>
             <div className='details'>
-            <h1> {food?.name} </h1>
-            <p> {food?.cost} </p>
-            <p> {food?.rating} </p>
-            <p> all about this food! </p>
-            <button onClick={handleDecrement}> - </button>
+                <div className='sub'>
+            {/* <h1> {food?.name} </h1> */}
+            <p> ${food?.cost} </p>
+            <p> ⭐{food?.rating} </p>
+            <p> Jollof Rice! </p>
+            </div>
+            <div className='pic-det'>
             <p> {id in cart? cart[id] : 0} </p>
-            <button onClick= {handleIncrement}> + </button>
+            <button onClick={handleDecrement}> - </button><button className='fdbtn' onClick= {handleIncrement}> + </button>
+            </div>
+            
             <button> Add to cart- $$</button>
             </div>
            

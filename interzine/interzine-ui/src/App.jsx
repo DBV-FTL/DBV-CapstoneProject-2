@@ -12,12 +12,12 @@ import Footer from './components/Footer/Footer'
 import Locations from './components/Locations/Locations'
 import Forsellers from './components/Forsellers/Forsellers'
 import Aboutus from './components/Aboutus/Aboutus'
-import Footer from './components/Footer/Footer'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
-// import Bot from './components/Bot/Bot'
+import Hero from './components/Hero/Hero'
+import Bot from './components/Bot/Bot'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -61,7 +61,6 @@ function App() {
 
   return (
     <div className='app'>
-      <div></div>
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
       <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
@@ -92,6 +91,7 @@ function App() {
           <Aboutus/>
           <Footer/>
           
+          
           </>
         }/>
           // {/* <> Log in or sign up to continue</> */}
@@ -108,9 +108,10 @@ function App() {
         </Routes>
 
       </BrowserRouter>   
-
+      <Bot/>
 
     </div>
+    
 
 
 
