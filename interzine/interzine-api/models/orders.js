@@ -9,7 +9,7 @@ const { validateFields } = require("../utils/validate");
 class Orders {
   static async addOrder({ item, user }) {
     const { product_name, service_provider_id, quantity } = item;
-    const requiredItems = ["product_name", "quantity"];
+    const requiredItems = ["product_name", "quantity", "service_provider_id"];
 
     //Checks to see if the item is an array, if an array, maps through the array of objects and validates each field
     if (Array.isArray(item)) {

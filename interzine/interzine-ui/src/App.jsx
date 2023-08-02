@@ -18,6 +18,8 @@ import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
+import SubNavbar from './components/SubNavbar/SubNavbar'
+import Payment from './components/Payment/Payment'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -79,6 +81,8 @@ function App() {
   
       <Navbar appState={appState} logout={setAppState}/>
       <Sidebar/>
+      <SubNavbar appState={appState}/>
+      <Payment/>
       <Routes>
         {
           appState.isAuthenticated ?

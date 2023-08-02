@@ -118,6 +118,7 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)}  name='profile_picture' placeholder='img url' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='address' placeholder='Address' type='text' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
                         
                     </form>

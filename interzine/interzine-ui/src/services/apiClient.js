@@ -134,5 +134,10 @@ async logoutProvider() {
 //       data: sleep,
 //     });
 //   }
+
+  async fetchPaymentIntent(){
+    return await this.request({endpoint: "payment/create-payment-intent", method: "POST"})
+  }
+
 }
 export default new ApiClient("http://localhost:3000");
