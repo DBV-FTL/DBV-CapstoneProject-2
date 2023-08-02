@@ -52,6 +52,7 @@ class Orders {
                 WHERE name = $1 AND service_provider_id = $2`,
               [item.product_name, item.service_provider_id]
             );
+            // console.log()
             const item_id = result.rows[0].id;
 
             const r = await db.query(

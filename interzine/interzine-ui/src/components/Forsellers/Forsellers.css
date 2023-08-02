@@ -9,6 +9,10 @@
     /* border-color: orange; */
 } 
 
+img.tile-img:hover {
+    transform: translateY(-10px);     /* Equal to scaleX(2) scaleY(2) */
+}
+
 .subhead{
     color: white;
     font-family: didot,serif;

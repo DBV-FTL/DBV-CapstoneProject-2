@@ -6,7 +6,8 @@ const Orders = require("../models/orders");
 router.post("/create", security.extractUserFromJWT, async (req, res, next) => {
   try {
     const { user } = res.locals;
-    const newOrder = await Orders.addOrder({item: req.body, user})
+    console.log('create order', user, req.body)
+    const newOrder = await Orders.addOrder({item: req.body.item, user})
     return res.status(200).json({newOrder})
   } catch (err) {
     next(err);

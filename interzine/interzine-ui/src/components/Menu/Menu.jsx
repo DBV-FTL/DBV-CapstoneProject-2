@@ -4,7 +4,6 @@ import FoodCard from '../FoodCard/FoodCard'
 import apiClient from '../../services/apiClient'
 
 function Menu(props) {
-//   const [showModal, setShowModal]= useState(false) //want food details to be a modal
     console.log('hi')
     let menu
     
@@ -22,6 +21,7 @@ function Menu(props) {
 
             apiClient.fetchMenuItems(id).then((response) => {
                 setUserMenu(response.data.menuItems)
+                props.setMenus((prev) => prev.concat(response.data.menuItems))
             })
         }, [])
         menu = userMenu
@@ -32,7 +32,7 @@ function Menu(props) {
         <div className='menu'>
             
             {
-                menu?.map(food=> <FoodCard  food={food}/>) //setShowModal= {setShowModal}
+                menu?.map(food=> <FoodCard  food={food}/>)
             }
         </div>
     )

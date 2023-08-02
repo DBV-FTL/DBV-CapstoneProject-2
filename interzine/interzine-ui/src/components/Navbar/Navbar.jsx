@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import apiClient from '../../services/apiClient'
 
-function Navbar({ appState, logout }) {
-    const [isOpen, setIsOpen] = useState(false)
+function Navbar({ appState, logout, setIsOpen }) {
     const navigate = useNavigate()
 
     function routeToLogin() {
@@ -27,7 +26,7 @@ function Navbar({ appState, logout }) {
         <nav className='topnavbar'>
             <div className="cart">
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-                <i onClick={() => setIsOpen(true)} className="material-icons md-36">add_shopping_cart</i>
+                <i onClick={() => setIsOpen((prev)=> !prev)} className="material-icons md-36">add_shopping_cart</i>
             </div>
             <ul>
                 <li><Link to="/for-sellers">For Sellers</Link></li>
@@ -39,13 +38,11 @@ function Navbar({ appState, logout }) {
             <Link to='/'> <p className='header'>Inter<strong className='z'>Sínee</strong></p> </Link>
             <h6> by DB & V </h6>
 
-                {/* <form>
-                    <input placeholder='Zip Code' />
-                </form> */}
+               
             </div>
 
             {
-                appState.isAuthenticated ? <button onClick={routeToLogout} > Log Out</button> :
+                appState.isAuthenticated ? <button className='button-log'onClick={routeToLogout} > Log Out</button> :
                     <div className='access-buttons'>
                         <button className="access-button1" onClick={routeToLogin}> Log In</button>
                         <button className="access-button2" onClick={routeToRegister}> Sign Up</button>

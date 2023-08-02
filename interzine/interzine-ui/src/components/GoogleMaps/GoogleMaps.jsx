@@ -158,7 +158,7 @@ function PlacesAutocomplete({
               ))}
           </ComboboxList>
         </ComboboxPopover>
-        {/* <ComboboxButton
+        {/*<ComboboxButton className="buttonmap"
           onClick={() =>
             calculateRoute({
               setDirectionsResponse,
@@ -171,6 +171,8 @@ function PlacesAutocomplete({
           }
         >
           Search
+
+          
         </ComboboxButton>
         <ComboboxButton
           onClick={() =>
