@@ -67,7 +67,8 @@ class User {
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();
-
+    console.log("we got this far")
+    
     const result = await db.query(
       `
         INSERT INTO users 
@@ -77,7 +78,7 @@ class User {
         `,
       [firstName, lastName, username, normalizedEmail, hashedPassword, zip_code]
     );
-
+    console.log("it inputted into database so now what")
     const user = result.rows[0];
     return user;
   }

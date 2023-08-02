@@ -12,11 +12,13 @@ import Footer from './components/Footer/Footer'
 import Locations from './components/Locations/Locations'
 import Forsellers from './components/Forsellers/Forsellers'
 import Aboutus from './components/Aboutus/Aboutus'
-import Footer from './components/Footer/Footer'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
+import Hero from "./components/Hero/Hero"
+import Store from "./pages/Store/Store"
+
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
