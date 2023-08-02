@@ -20,7 +20,8 @@
     "jsonwebtoken": "^9.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
-    "pg": "^8.11.1"
+    "pg": "^8.11.1",
+    "stripe": "^12.16.0"
   },
   "devDependencies": {
     "jest": "^29.6.1"

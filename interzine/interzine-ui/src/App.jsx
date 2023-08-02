@@ -17,7 +17,6 @@ import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
-// import Bot from './components/Bot/Bot'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
