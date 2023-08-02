@@ -1,12 +1,41 @@
 .food-detail{
     height: 400px;
-    width: 400px
+    width: 400px;
+    border: solid;
+    /* display: flex; */
+    border: solid;
+    width: 100vw;
+    height: 100vw;
+    margin-top: 10vh;
+    padding-top: 10vh;
+    border: solid;
+    /* border-radius: 20px; */
+    border-color: aliceblue;
+    
+}
+
+.sub{
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border: solid;
+    border-radius: 18px;
 }
 
 .details{
-    position: absolute;
-    color: white
+    /* position: absolute; */
+    color: white;
+    margin-left: 7vw;
+    /* display: grid; */
+    text-align: center;
+    border: solid;
+    border-radius: 20px;
+    width: 15vw;
+    height: 19vh;
+    /* background-color: aquamarine; */
 }
+
 
 .food-detail img{
     height: 300px;
@@ -22,4 +51,12 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
+
+
+  .food-detail img{
+    margin-left: 6.5vw;
+    border-radius: 10px;
+  }
+
+
   
