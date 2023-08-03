@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './Navbar.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import apiClient from '../../services/apiClient'
 import Profile from '../Profile/Profile'
 
-function Navbar({appState, logout}) {
-    const [isOpen, setIsOpen, setViewProfile] = useState(false)
+function Navbar({appState, logout, setViewProfile, setIsOpen}) {
+    // const [isOpen, setIsOpen] = useState(false)
     const navigate= useNavigate()
 
     function routeToLogin() {
@@ -34,18 +34,23 @@ function Navbar({appState, logout}) {
     }
 
     return (
-        <nav>
+        <nav className='topnavbar'>
             <div className="cart">
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
                 <i onClick={() => setIsOpen(true)} className="material-icons md-36">add_shopping_cart</i>
             </div>
 
-            <div className='logo-and-location'>
-            <p className='header'>Inter<strong class='z'>Zine</strong></p>
+            <ul>
+                <li><Link to="/for-sellers">For Sellers</Link></li>
+                <li><Link to="/about">About us</Link></li>
+                <li><Link to="/locations">Locations</Link></li>
+            </ul>
 
-                {/* <form>
-                    <input placeholder='Zip Code' />
-                </form> */}
+            <div className='logo-and-location'>
+            <Link to='/'> <p className='header'>Inter<strong className='z'>Sínee</strong></p> </Link>
+            <h6> by DB & V </h6>
+
+               
             </div>
 
             {

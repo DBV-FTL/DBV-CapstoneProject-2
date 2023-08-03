@@ -15,6 +15,11 @@ import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
 import Profile from './components/Profile/Profile'
 import Orders from './components/Orders/Orders'
+import Hero from './components/Hero/Hero'
+import Aboutus from './components/Aboutus/Aboutus'
+import Forsellers from './components/Forsellers/Forsellers'
+import Locations from './components/Locations/Locations'
+import Footer from './components/Footer/Footer'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
