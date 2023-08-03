@@ -23,7 +23,6 @@ export default function Payment({}) {
     fetchClientSecret()
   },[]);
 
-
   return (
     <div className="payment">
       <h4>Payment</h4>

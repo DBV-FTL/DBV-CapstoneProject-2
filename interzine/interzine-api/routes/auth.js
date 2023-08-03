@@ -4,8 +4,31 @@ const generateAuthToken = require("../utils/tokens");
 const User = require("../models/user");
 const ServiceProvider = require("../models/service-provider");
 const security = require('../middleware/security')
+const crypto = require('crypto')
+const sharp = require('sharp')
+require('dotenv').config()
 
 
+const multer = require("multer")
+const storage = multer.memoryStorage()
+const upload = multer({storage: storage})
+const { S3Client, PutObjectCommand,GetObjectCommand } = require('@aws-sdk/client-s3')
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner')
+
+const BUCKET_NAME = process.env.BUCKET_NAME
+const BUCKET_REGION = process.env.BUCKET_REGION
+const BUCKET_ACCESS_KEY = process.env.BUCKET_ACCESS_KEY
+const BUCKET_SECRET_ACCESS_KEY = process.env.BUCKET_SECRET_ACCESS_KEY
+
+const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: BUCKET_ACCESS_KEY,
+    secretAccessKey: BUCKET_SECRET_ACCESS_KEY
+    },
+  region: BUCKET_REGION
+})
 
 router.post('/user/register', async( req, res, next) => {
     try{
@@ -37,10 +60,27 @@ router.put("/user", security.extractUserFromJWT, async (req, res, next) => {
     }
 })
 
-router.post("/provider/register", async (req, res, next) => {
+router.post("/provider/register", upload.single("image"), async (req, res, next) => {
   try {
-    const provider = await ServiceProvider.register(req.body);
+    console.log("req.body", req.body)
+    console.log("req.file", req.file)
+    
+    // const buffer = await sharp(req.file.buffer).resize({height: 50, width:50, fit:"fill"}).toBuffer()
+    const imageName = randomImageName()
+    
+    const params =  {
+      Bucket: BUCKET_NAME,
+      Key: imageName,
+      Body: req.file.buffer,
+      ContentType: req.file.mimetype
+    } 
+
+    const putCommand = new PutObjectCommand(params)
+    await s3.send(putCommand)
+
+    const provider = await ServiceProvider.register({user_info: req.body, profile_picture: imageName});
     const token = generateAuthToken({...provider, client: 'provider'});
+
     return res.status(201).json({ provider, token });
   } catch (err) {
     next(err);
@@ -61,6 +101,7 @@ router.get("/user", async (req, res, next) => {
   try {
     const { user } = res.locals;
     const providers = await User.fetchProviderByZipCode(user);
+    console.log("providers", providers)
     return res.status(200).json({ providers });
   } catch (err) {
     next(err);
@@ -79,6 +120,16 @@ router.get("/provider/cuisine", async (req, res, next) => {
   router.get("/provider", async (req, res, next) => {
     try {
       const providers = await ServiceProvider.fetchAllProviders();
+      for (const provider of providers) {
+        const getObjectParams= {
+          Bucket: BUCKET_NAME,
+          Key: provider.profile_picture
+        }
+  
+        const command = new GetObjectCommand(getObjectParams);
+        const url = await getSignedUrl(s3, command, {expiresIn: 3600})
+        provider.profile_picture = url
+      }
       return res.status(200).json({ providers });
     } catch (err) {
       next(err);

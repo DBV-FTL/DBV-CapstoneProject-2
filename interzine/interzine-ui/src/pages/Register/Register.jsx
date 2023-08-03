@@ -80,7 +80,11 @@ function Register({client, setClient, register, appState}) {
     optionMessage= 'Sign up to order here!'
     }
     // console.log('u',formInput, appState)
-  
+
+    const handleFileChange = (e) => {
+        setFormInput({...formInput, [e.target.name]: e.target.files[0]})
+        console.log(formInput)
+      }
 
     return (
         <div className='register'>
@@ -106,26 +110,12 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)} name='name' placeholder='Full Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='cuisine' placeholder='Cuisine' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
-
-                        <label className='labelhd' > Share address with users? </label>
-                        <select className='label1' onChange={(e) => handleFormInput(e)} name='share_location'>
-                            
-                            <option value=''> select</option>
-                            <option value={false}> No </option>
-                            <option value={true}> Yes </option>
-
-                        </select>
-                        <input onChange={(e) => handleFormInput(e)}  name='profile_picture' placeholder='img url' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='address' placeholder='Address' type='text' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
-                        
+                        <input onChange={handleFileChange} name="image" className='profile-picture' type="file" id="myFile" />
                     </form>
-                    <form className='files' action="/action_page.php">
-                            <input className='profile-picture' type="file" id="myFile" />
-                            {/* <input type="submit"/> */}
-                        </form>
                     <button onClick={async (e) => await handleRegister(e)}> Sign up! </button>
                     <button className='optional2' onClick={() => changeClient(client)}> {optionMessage} </button>
                 </div>

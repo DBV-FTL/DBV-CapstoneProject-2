@@ -6,7 +6,7 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput, Typin
 
 
 
-const API_KEY = "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";
+const API_KEY = import.meta.env.VITE_SINEE_PAL_KEY;
 
 function Bot() {
     const [messages, setMessages] = useState([
