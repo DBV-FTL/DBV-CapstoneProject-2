@@ -12,17 +12,18 @@ class ApiClient {
     localStorage.setItem(this.tokenName, token);
   }
 
-  async request({ endpoint, method = "GET", data = {} }) {
+  async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type": "application/json"} }) {
     console.log("in request");
+
     const url = `${this.remoteHostUrl}/${endpoint}`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
+
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
+
     try {
       console.log("res incoming");
+      console.log("headers", headers)
       const result = await axios({ url, method, data, headers });
       return { data: result.data, error: null, status: result.status };
     } catch (err) {
@@ -61,6 +62,7 @@ class ApiClient {
       endpoint: "auth/provider/register",
       method: "post",
       data: creds,
+      headers: {"Content-Type": "multipart/form-data"}
     });
   }
 
@@ -80,6 +82,7 @@ class ApiClient {
       endpoint: "menu/create",
       method: "POST",
       data: creds,
+      headers: {"Content-Type": "multipart/form-data"}
     });
   }
 
@@ -113,6 +116,15 @@ class ApiClient {
       endpoint: "orders/create",
       method: "POST",
       data: {item},
+    })
+  }
+
+  async submitPhoto(form){
+    return await this.request({
+      endpoint: "auth/provider/photo",
+      method: "POST",
+      data: form,
+      headers: {"Content-Type": "multipart/form-data"}
     })
   }
 }

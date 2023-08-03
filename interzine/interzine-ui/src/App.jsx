@@ -19,6 +19,7 @@ import FoodDetail from './components/FoodDetail/FoodDetail'
 import Store from "./pages/Store/Store"
 import Hero from './components/Hero/Hero'
 import Bot from './components/Bot/Bot'
+import Payment from "./components/Payment/Payment"
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -26,9 +27,6 @@ function App() {
   const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
   const [isOpen, setIsOpen]= useState(false)
-
-  
-  
 
   useEffect(()=>{
     //need to get token from local storage then decode token and fetch user 

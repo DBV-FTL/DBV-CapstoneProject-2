@@ -34,15 +34,13 @@ class ServiceProvider {
     throw new UnauthorizedError("Invalid email/password combo");
   }
 
-  static async register(creds) {
-    console.log("register the damned user", creds)
-    const { email, name, cuisine, password, profile_picture, address, zip_code } = creds;
+  static async register({user_info, profile_picture}) {
+    const { email, name, cuisine, password, address, zip_code } = user_info
     const requiredCreds = [
       "email",
       "cuisine",
       "name",
       "password",
-      "profile_picture",
       "zip_code",
       "address"
     ];
@@ -50,7 +48,7 @@ class ServiceProvider {
     try {
       validateFields({
         required: requiredCreds,
-        obj: creds,
+        obj: user_info,
         location: "service provider registration",
       });
     } catch (err) {
@@ -83,7 +81,6 @@ class ServiceProvider {
       `,
       [normalizedEmail, name, cuisine, hashedPassword, profile_picture, address, zip_code ]
     );
-    console.log("it gets past maybe?")
     const provider = result.rows[0];
     return provider;
   }

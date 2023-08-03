@@ -6,7 +6,7 @@ import './AddNewItem.css'
 
 
 function AddNewItem({appState, updateMenu}) { 
-    const [formInput, setFormInput] = useState({name:'', image_url:'', cost:'', rating:''})
+    const [formInput, setFormInput] = useState({name:'', cost:'', rating:''})
     const navigate = useNavigate()
 
     function handleChange(e) {
@@ -14,6 +14,7 @@ function AddNewItem({appState, updateMenu}) {
         const value= e.target.value
 
         setFormInput({...formInput, [name]:value})
+        console.log(formInput)
     }
     
 
@@ -21,8 +22,13 @@ function AddNewItem({appState, updateMenu}) {
         e.preventDefault()
         await apiClient.addNewItem(formInput)
         updateMenu({...appState, menuItems:[...appState.menuItems, formInput]})
-        setFormInput({name:'', image_url:'', cost:'', rating:''})
+        setFormInput({name:'', cost:'', rating:''})
         navigate('/')
+    }
+
+    const handleFileChange = (e) => {
+        setFormInput({...formInput, [e.target.name]: e.target.files[0]})
+        console.log(formInput)
     }
 
     return (
@@ -31,7 +37,7 @@ function AddNewItem({appState, updateMenu}) {
                 <label> Name </label>
                 <input value={formInput.name} onChange={(e) => handleChange(e)} name='name' placeholder='name' required/>
                 <label> Image </label>
-                <input value={formInput.image_url} onChange={(e) => handleChange(e)} name='image_url' placeholder='image' required/>
+                <input name="image" type="file" onChange={handleFileChange}/>
                 <label> Cost </label>
                 <input  value={formInput.cost} type='number' onChange={(e) => handleChange(e)} name='cost' placeholder='cost' required/>
                 <label> Rating </label>
