@@ -3,8 +3,9 @@ import './Navbar.css'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import apiClient from '../../services/apiClient'
+import Profile from '../Profile/Profile'
 
-function Navbar({ appState, logout, setIsOpen }) {
+function Navbar({ appState, logout, setIsOpen, setViewProfile }) {
     const navigate = useNavigate()
 
     function routeToLogin() {
@@ -19,6 +20,17 @@ function Navbar({ appState, logout, setIsOpen }) {
 
     function routeToRegister() {
         navigate('/register')
+    }
+
+    function handleMouseOver() {
+        console.log('show')
+        setViewProfile(true)
+    }
+
+    function handleMouseOut() {
+        console.log('hide')
+        // setViewProfile(false)
+
     }
 
     return (
@@ -42,7 +54,16 @@ function Navbar({ appState, logout, setIsOpen }) {
             </div>
 
             {
-                appState.isAuthenticated ? <button onClick={routeToLogout} > Log Out</button> :
+                appState.isAuthenticated ?
+                <div>
+                    <button onClick={routeToLogout} > Log Out</button> 
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+                    <span onMouseOver={handleMouseOver} onMouseLeave={()=>console.log('left')} onMouseOut={handleMouseOut} class="material-symbols-outlined">
+                        account_circle
+                    </span>
+                </div> 
+                
+                :
                     <div className='access-buttons'>
                         <button className="access-button1" onClick={routeToLogin}> Log In</button>
                         <button className="access-button2" onClick={routeToRegister}> Sign Up</button>

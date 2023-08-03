@@ -104,6 +104,14 @@ class ApiClient {
     });
   }
 
+  async computeCart(cart, menus){
+    return await this.request({
+      endpoint: "cart/totalCost",
+      method: "POST",
+      data: {cart, menus},
+    })
+  }
+
   async checkoutFoods(item){
     return await this.request({
       endpoint: "orders/create",
@@ -111,5 +119,14 @@ class ApiClient {
       data: {item},
     })
   }
+
+  async fetchOrders(){
+    return await this.request({
+      endpoint: 'orders/previous'
+    })
+  }
+
+
+
 }
 export default new ApiClient("http://localhost:3000");

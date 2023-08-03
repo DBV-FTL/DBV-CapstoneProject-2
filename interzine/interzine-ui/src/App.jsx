@@ -18,6 +18,8 @@ import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
+import Profile from './components/Profile/Profile'
+import Orders from './components/Orders/Orders'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -25,7 +27,9 @@ function App() {
   const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
   const [isOpen, setIsOpen]= useState(false)
+  const [viewProfile, setViewProfile] = useState(false)
 
+  console.log('orders', appState.prevOrders)
   
   
 
@@ -42,8 +46,10 @@ function App() {
         
         if (appUser.client==='user'){
           const services= await apiClient.fetchServicesByZip(appUser.zip_code)
+          
+          const prevOrders= await apiClient.fetchOrders()
           setClient('user')
-          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}})
+          setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}, prevOrders: prevOrders? prevOrders?.data?.listOrders : []})
         } else if (appUser.client==='provider'){
           const menu= await apiClient.fetchMenuItems(appUser.id)
           setClient('provider')
@@ -65,8 +71,10 @@ function App() {
   return (
     <div className='app'>
       <BrowserRouter>
-      <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen}/>
+      <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen} setViewProfile={setViewProfile}/>
       <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
+      <Profile viewProfile={viewProfile} setViewProfile={setViewProfile}/>
+
       <Routes>
         {
           appState.isAuthenticated ?
@@ -75,7 +83,7 @@ function App() {
         <Route path='/' element={<Shop services={appState?.services}  menus={menus}/>}/>
         <Route path='menu/:id' element={<Menu setMenus={setMenus}/>}/>
         <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState}/>}/>
-
+        <Route path='/orders' element={<Orders services={appState?.services} orders={appState?.prevOrders}/>}/>
 
         </>
         

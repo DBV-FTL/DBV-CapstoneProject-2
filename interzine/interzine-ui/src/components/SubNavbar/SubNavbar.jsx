@@ -1,6 +1,7 @@
 import "./SubNavbar.css";
 import { useState } from "react";
-export default function SubNavbar({ appState }) {
+
+export default function SubNavbar({ services, setServices }) {
   const [value, setValue] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [filter, setFilter] = useState();
@@ -8,8 +9,8 @@ export default function SubNavbar({ appState }) {
   function handleFilter(c) {
     console.log("cuisine type", c);
     setCuisine(c);
-    setFilter(
-      appState.services?.filter((provider) => {
+    setServices(
+      services?.filter((provider) => {
         if (c === "") return provider;
         return provider.cuisine.toLowerCase() === c;
       })
@@ -22,15 +23,15 @@ export default function SubNavbar({ appState }) {
     console.log(e.target.value);
     setValue(e.target.value);
     cuisine
-      ? setFilter(
-          appState.services
+      ? setServices(
+          services
             ?.filter((provider) => provider.cuisine === cuisine)
             .filter((provider) =>
               provider.name.toLowerCase().includes(e.target.value.toLowerCase())
             )
         )
-      : setFilter(
-          appState.services?.filter((provider) => {
+      : setServices(
+          services?.filter((provider) => {
             if (e.target.value === "") return provider;
             return (
               provider.cuisine

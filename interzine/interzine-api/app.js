@@ -9,6 +9,8 @@ const security = require("./middleware/security");
 const authRoutes = require("./routes/auth");
 const menuRoutes = require("./routes/menu-item");
 const orderRoutes = require("./routes/orders");
+const cartRoutes = require("./routes/cart");
+
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +19,8 @@ app.use(security.extractUserFromJWT);
 app.use("/auth", authRoutes);
 app.use("/menu", menuRoutes);
 app.use("/orders", orderRoutes);
+app.use("/cart", cartRoutes);
+
 
 app.get("/", (req, res) => {
   res.status(200).json({ ping: "pong" });
