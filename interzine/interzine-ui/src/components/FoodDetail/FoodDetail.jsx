@@ -29,12 +29,12 @@ function FoodDetail({cart, addToCart}) {
 
     function handleDecrement(){
         addToCart((prev)=> {
-            if ((id in cart)){
+            if ((id in cart) && cart[id]>0){
                 console.log('food quantity', cart[id])
                 return {...prev, cart: {...cart, [id]: cart[id] - 1}}
                 
             } else{ 
-                return {...prev, cart: {...cart, [id]: 1}}
+                return {...prev, cart: {...cart, [id]: 0}}
             }
 
         }
@@ -61,22 +61,40 @@ function FoodDetail({cart, addToCart}) {
     return (
         <div className='food-detail'>
             
-           
-            {/* <button onClick={routeToMenu}> x </button> */}
+            <div className='exit-page' onClick={routeToMenu}>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+            <span class="material-symbols-outlined close">
+                close
+            </span>
+           </div>
+
+            {/* <button className='exit-page' onClick={routeToMenu}> X </button> */}
             <img src={food?.image_url}/>
             <div className='details'>
                 <div className='sub'>
-            {/* <h1> {food?.name} </h1> */}
-            <p> ${food?.cost} </p>
-            <p> ⭐{food?.rating} </p>
-            <p> Jollof Rice! </p>
+            <h1> {food?.name} </h1>
+            <h3> ${food?.cost} </h3>
+            <p> This food is yummy and scrumptious!</p>
+            <span className='rating'> 
+                <span> 
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+                    <span className="material-symbols-outlined star">
+                    star_rate
+                    </span>
+                </span>
+                {food?.rating} 
+            </span>
             </div>
-            <div className='pic-det'>
-            <p> {id in cart? cart[id] : 0} </p>
-            <button onClick={handleDecrement}> - </button><button className='fdbtn' onClick= {handleIncrement}> + </button>
+            <div className='larger-buttons-container'>
+                <div className='buttons-container'>
+                    <button className='button' onClick={handleDecrement}> - </button>
+                    <p> {id in cart? cart[id] : 0} </p>
+                    <button className='button' onClick= {handleIncrement}> + </button>
+                </div>
+                
+                <button className='add-to-cart' > Add to cart</button>
             </div>
             
-            <button> Add to cart- $$</button>
             </div>
            
         </div>

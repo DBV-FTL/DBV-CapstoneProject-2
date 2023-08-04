@@ -2,7 +2,7 @@ import React from 'react'
 import './Hero.css'
 import {useState, useEffect} from 'react'
 
-export default function Hero({ loggedin, user }) {
+export default function Hero() {
     const images = [
       'https://www.ulprospector.com/knowledge/wp-content/uploads/2019/11/ethnic-food-iStock-868408746-600x400.jpg',
       'https://blog.remitly.com/wp-content/uploads/2022/09/different-Nigerian-dishes.jpeg.webp',
@@ -22,7 +22,7 @@ export default function Hero({ loggedin, user }) {
       };
     }, [images.length]);
   
-    console.log(user);
+    // console.log(user);
   
     return (
       <div className="banner">

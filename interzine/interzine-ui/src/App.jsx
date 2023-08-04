@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
@@ -9,24 +9,26 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Shop from './pages/Shop/Shop'
 import Store from './pages/Store/Store'
-import AddNewItem from './pages/AddNewItem/AddNewItem'
+// import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
 import FoodDetail from './components/FoodDetail/FoodDetail'
-import Profile from './components/Profile/Profile'
-import Orders from './components/Orders/Orders'
 import Hero from './components/Hero/Hero'
+import Bot from './components/Bot/Bot'
 import Aboutus from './components/Aboutus/Aboutus'
 import Forsellers from './components/Forsellers/Forsellers'
 import Locations from './components/Locations/Locations'
 import Footer from './components/Footer/Footer'
+import Orders from './components/Orders/Orders'
+import Profile from './components/Profile/Profile'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
   const [menus, setMenus] = useState([])
   const [appState, setAppState] = useState({})
   const [isOpen, setIsOpen]= useState(false)
-  const [viewProfile, setViewProfile] = useState(false)
+  const [viewProfile, setViewProfile]= useState(false)
+  
 
   
   
@@ -41,11 +43,12 @@ function App() {
         const fromToken= await apiClient.fetchUserFromToken()
         const appUser= fromToken?.data?.user
         console.log('loading initial data', appUser)
-        
-        if (appUser.client==='user'){
-          const services= await apiClient.fetchServicesByZip(appUser.zip_code)
-          
+
+        if (appUser.client === 'user') {
+          console.log('oy')
+          const services = await apiClient.fetchServicesByZip(appUser.zip_code)
           const prevOrders= await apiClient.fetchOrders()
+          console.log('yo', services)
           setClient('user')
           setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}, prevOrders: prevOrders? prevOrders?.data?.listOrders : []})
         } else if (appUser.client==='provider'){
@@ -67,8 +70,7 @@ function App() {
       <BrowserRouter>
       <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen} setViewProfile={setViewProfile}/>
       <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
-      <Profile viewProfile={viewProfile} setViewProfile={setViewProfile}/>
-
+      <Profile setViewProfile={setViewProfile} viewProfile={viewProfile}/> 
       <Routes>
         {
           appState.isAuthenticated ?
@@ -90,7 +92,7 @@ function App() {
           : 
           <Route path='/' element={
             <>
-            <Hero/>
+            <Hero />
             <Aboutus/>
             <Forsellers/>
             <Locations/>

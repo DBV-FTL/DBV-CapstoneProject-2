@@ -3,19 +3,58 @@ const router = express.Router();
 const MenuItem = require("../models/menu-item");
 const ServiceProvider = require("../models/service-provider");
 const security = require("../middleware/security");
+const crypto = require('crypto')
+const sharp = require('sharp')
+require('dotenv').config()
 
-router.post("/create", security.extractUserFromJWT, async (req, res, next) => {
+
+const multer = require("multer")
+const storage = multer.memoryStorage()
+const upload = multer({storage: storage})
+const { S3Client, PutObjectCommand,GetObjectCommand } = require('@aws-sdk/client-s3')
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner')
+
+const BUCKET_NAME = process.env.BUCKET_NAME
+const BUCKET_REGION = process.env.BUCKET_REGION
+const BUCKET_ACCESS_KEY = process.env.BUCKET_ACCESS_KEY
+const BUCKET_SECRET_ACCESS_KEY = process.env.BUCKET_SECRET_ACCESS_KEY
+
+const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: BUCKET_ACCESS_KEY,
+    secretAccessKey: BUCKET_SECRET_ACCESS_KEY
+    },
+  region: BUCKET_REGION
+})
+
+router.post("/create", security.extractUserFromJWT, upload.single("image"), async (req, res, next) => {
   console.log('hi')
   try {
     // security.extractUserFromJWT
-    console.log('reqqq', req.body, res.locals.user)
+    console.log("req.body", req.body)
+    console.log("req.file", req.file)
+    
+    // const buffer = await sharp(req.file.buffer).resize({height: 50, width:50, fit:"fill"}).toBuffer()
+    const imageName = randomImageName()
+    
+    const params =  {
+      Bucket: BUCKET_NAME,
+      Key: imageName,
+      Body: req.file.buffer,
+      ContentType: req.file.mimetype
+    } 
+
+    const putCommand = new PutObjectCommand(params)
+    await s3.send(putCommand)
+
     const { user } = res.locals;
-    console.log(user)
     const provider = user;
-    console.log('prov', provider)
     const newMenuItem = await MenuItem.addMenuItem({
       provider,
       item: req.body,
+      image_name: imageName
     });
     console.log('done waiting')
     return res.status(201).json({ newMenuItem });
@@ -29,6 +68,17 @@ router.get("/:id", async (req, res, next) => {
     const id = req.params.id;
     console.log('?????', id)
     const menuItems = await MenuItem.listMenuItems(id);
+    console.log("before the for", menuItems)
+    for (const menuItem of menuItems) {
+      const getObjectParams= {
+        Bucket: BUCKET_NAME,
+        Key: menuItem.image_url
+      }
+
+      const command = new GetObjectCommand(getObjectParams);
+      const url = await getSignedUrl(s3, command, {expiresIn: 3600})
+      menuItem.image_url = url
+    }
     console.log('mi', menuItems)
     return res.status(200).json({ menuItems });
   } catch (err) {

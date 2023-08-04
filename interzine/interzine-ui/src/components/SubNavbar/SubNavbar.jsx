@@ -51,10 +51,16 @@ export default function SubNavbar({ services, setServices }) {
           <input
             name="search-bar"
             type="text"
-            placeholder="Search for Cuisine"
+            placeholder=" Search for Cuisine"
             value={value}
             onChange={handleOnChange}
           />
+          <div className="search-icon">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+            <span class="material-symbols-outlined search">
+              search
+            </span>
+          </div>
         </div>
         <div className="category-buttons">
           <button
