@@ -15,9 +15,10 @@ import Aboutus from './components/Aboutus/Aboutus'
 import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
+import Store from './pages/Store/Store'
 import FoodDetail from './components/FoodDetail/FoodDetail'
 import Hero from './components/Hero/Hero'
-import Bot from './components/Bot/Bot'
+// import Bot from './components/Bot/Bot'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -108,7 +109,7 @@ function App() {
         </Routes>
 
       </BrowserRouter>   
-      <Bot/>
+      {/* <Bot/> */}
 
     </div>
     

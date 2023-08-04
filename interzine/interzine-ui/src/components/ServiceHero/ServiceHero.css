@@ -2,11 +2,17 @@
     background-image: url('https://cms-b-assets.familysearch.org/dims4/default/bf2d93e/2147483647/strip/true/crop/800x500+0+0/resize/2480x1550!/format/webp/quality/90/?url=https%3A%2F%2Ffamilysearch-brightspot.s3.amazonaws.com%2F89%2F3f%2F1a23c4a6fe52a96d2a6d2586cb90%2Fworld-cuisine.jpg');
     background-size: cover;
     background-position: center;
-    height: 400px;
+    /* height: 400px; */
     display: flex;
     align-items: center;
     justify-content: center;
   }
+
+div.hero-section{
+   height: 50px;
+   width: 90vw;
+   margin-top: 10px;
+}  
   
   .hero-content {
     text-align: center;
