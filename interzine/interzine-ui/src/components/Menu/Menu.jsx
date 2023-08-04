@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import FoodCard from '../FoodCard/FoodCard'
 import './Menu.css'
+import ServiceHero from '../ServiceHero/ServiceHero'
 import apiClient from '../../services/apiClient'
 
 function Menu(props) {
@@ -30,12 +31,16 @@ function Menu(props) {
     }
 
     return (
+        <>
+        <ServiceHero /> 
+        
         <div className='menu'>
-            
+           
             {
                 menu?.map(food=> <FoodCard  food={food}/>)
             }
         </div>
+        </>
     )
     
 }

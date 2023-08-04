@@ -63,7 +63,7 @@ function Bot() {
         });
 
         const systemMessage = {
-            "role": "system", "content": "responde like i'm your close friend while providing one food recommendation in one very short sentence and if no ethnicity is given ask the user what ethnic cuisines they are looking for in a straightforward enthusiastic sentence",
+            "role": "system", "content":"responde like i'm your close friend while providing one food recommendation in one very short sentence and if no ethnicity is given ask the user what ethnic cuisines they are looking for in a straightforward enthusiastic sentence",
         }
 
 
@@ -102,7 +102,7 @@ function Bot() {
     return (
         <div className="chatbox-container">
       <div className="Bot">
-        <div style={{ position: "relative", height: "500px", width: "400px" }}>
+        <div style={{ position: "relative", height: "400px", width: "300px" }}>
           <MainContainer>
             <ChatContainer>
               <MessageList
