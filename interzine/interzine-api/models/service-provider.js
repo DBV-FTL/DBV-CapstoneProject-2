@@ -69,7 +69,7 @@ class ServiceProvider {
     //   throw new UnprocessableEntityError(
     //     "Password does not satisfy requirements"
     //   );
-      console.log("does it get here")
+      console.log("does it get here", address)
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
     const normalizedEmail = email.toLowerCase();
     const result = await db.query(
