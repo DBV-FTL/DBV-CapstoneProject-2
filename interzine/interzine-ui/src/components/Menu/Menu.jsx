@@ -21,8 +21,8 @@ function Menu(props) {
         useEffect(()=>{
 
             apiClient.fetchMenuItems(id).then((response) => {
-                setUserMenu(response.data.menuItems)
-                props.setMenus((prev) => prev.concat(response.data.menuItems))
+                setUserMenu(response?.data?.menuItems)
+                props.setMenus((prev) => prev.concat(response?.data?.menuItems))
             })
         }, [])
         menu = userMenu
