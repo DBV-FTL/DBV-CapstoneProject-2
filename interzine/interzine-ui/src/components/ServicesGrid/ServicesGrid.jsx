@@ -7,18 +7,14 @@ import Bot from '../Bot/Bot'
 import ServiceHero from '../ServiceHero/ServiceHero'
 
 
-function ServicesGrid({ services }) {
+    
+function ServicesGrid({services}) {
     const [showChatBot, setShowChatBot] = useState(false);
+    const [servicesShown, setServicesShown] = useState(services)
 
     const handleToggleChatBot = () => {
         setShowChatBot((prevShowChatBot) => !prevShowChatBot);
-
     }
-    
-    
-function ServicesGrid({services}) {
-    const [servicesShown, setServicesShown] = useState(services)
-       
 
 
     return (
@@ -44,9 +40,9 @@ function ServicesGrid({services}) {
           
           
           </div>
-              </div>
               
         </>
+    )
 }
 
 export default ServicesGrid
