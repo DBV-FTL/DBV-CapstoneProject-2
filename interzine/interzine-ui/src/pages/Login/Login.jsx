@@ -90,7 +90,7 @@ function Login({login, client, setClient}) {
             <input onChange= {(e) => handleFormInput(e)} name='email' placeholder='Input E-mail' required/>
             <input onChange= {(e) => handleFormInput(e)} name='password' placeholder='Input Password' required/>
             </form> 
-            <button onClick={async (e) => await handleLogin(e)} > Login! </button>
+            <button className='submit-login' onClick={async (e) => await handleLogin(e)} > Login! </button>
             <p onClick={() => changeClient(client)}> {optionMessage} </p>
 
         </div>

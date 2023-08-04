@@ -3,10 +3,10 @@ const { BadRequestError, NotFoundError, UnauthorizedError } = require("../utils/
 const { validateFields } = require("../utils/validate");
 
 class MenuItem {
-  static async addMenuItem({ item, provider }) {
-    console.log('in menu item', {item, provider})
-    const { name, image_url, cost, rating} = item;
-    const requiredItems = ["name", "image_url", "cost", "rating"];
+  static async addMenuItem({ item, provider, image_name }) {
+    console.log('in menu item', {item, provider, image_name})
+    const { name, cost, rating} = item;
+    const requiredItems = ["name", "cost", "rating"];
 
     try {
       validateFields({
@@ -33,7 +33,7 @@ class MenuItem {
     (name, image_url, cost, rating, service_provider_id)
     VALUES ($1, $2, $3, $4, (SELECT id FROM service_providers WHERE email = $5))
     RETURNING id, name, image_url, cost, rating, service_provider_id `,
-    [name, image_url, cost, rating, provider.email])
+    [name, image_name, cost, rating, provider.email])
     
     const newMenuItem = result.rows[0];
     return newMenuItem;

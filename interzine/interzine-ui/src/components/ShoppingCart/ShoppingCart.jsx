@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import apiClient from '../../services/apiClient'
 
 function ShoppingCart({setAppState, appState, cart, menus, services}) {
-    const total=0
+    let total=0
     console.log(cart, menus)
     // const [itemsInCart, setItemsInCart] = useState([])
     let itemsInCart= []
 
     async function order(){
-        await apiClient.checkoutFoods(itemsInCart)
+        const ordered= await apiClient.checkoutFoods(itemsInCart)
+        console.log(ordered, 'in order')
         setAppState({...appState, cart:{} })
     }
 
@@ -19,8 +20,10 @@ function ShoppingCart({setAppState, appState, cart, menus, services}) {
             {Object.entries(cart)?.map(([id, quantity]) => {
                 const foodInCart= menus.find((food) => food.id===parseInt(id))
                 const provider= services.find((service) => service.id=== foodInCart.service_provider_id)
+                const orderDate= new Date()
                 console.log('in cart',foodInCart)
-                itemsInCart= [...itemsInCart, {product_name: foodInCart.name, service_provider_id: foodInCart.service_provider_id, quantity}]
+                itemsInCart= [...itemsInCart, {product_name: foodInCart.name, service_provider_id: foodInCart.service_provider_id, quantity, date: `${orderDate.toLocaleString('default',{month:'long'})} ${orderDate.getDate()}, ${orderDate.getFullYear()}` }]
+                total+= foodInCart.cost * quantity
                 // setItemsInCart([...itemsInCart, {product_name: foodInCart.name, service_provider_id: foodInCart.service_provider_id, quantity}])
                 return (
                     <div>
@@ -33,8 +36,9 @@ function ShoppingCart({setAppState, appState, cart, menus, services}) {
                             <span class="material-symbols-outlined">
                                 delete
                             </span>
+                           <span> - </span>
                             {quantity}
-                            +
+                            <span> + </span>
 
                         </button>
                     </div>
@@ -44,7 +48,7 @@ function ShoppingCart({setAppState, appState, cart, menus, services}) {
 
             }
 
-            <button onClick={() => order()}> Checkout {`$${total}`} </button>
+            <button onClick={() => order()}> Checkout {`$${total.toFixed(2)}`} </button>
 
             
         </div>
