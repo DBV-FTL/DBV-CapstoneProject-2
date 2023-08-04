@@ -3,9 +3,19 @@ import ServiceCard from '../ServiceCard/ServiceCard'
 import {Link} from 'react-router-dom'
 import './ServicesGrid.css'
 import SubNavbar from '../SubNavbar/SubNavbar'
-import ServiceHero from '../ServiceHero/ServiceHero'
 import Bot from '../Bot/Bot'
+import ServiceHero from '../ServiceHero/ServiceHero'
 
+
+function ServicesGrid({ services }) {
+    const [showChatBot, setShowChatBot] = useState(false);
+
+    const handleToggleChatBot = () => {
+        setShowChatBot((prevShowChatBot) => !prevShowChatBot);
+
+    }
+    
+    
 function ServicesGrid({services}) {
     const [servicesShown, setServicesShown] = useState(services)
     const [showChatBot, setShowChatBot] = useState(false);
@@ -31,7 +41,6 @@ function ServicesGrid({services}) {
                 {servicesShown?.map(service => <div className='card'> <ServiceCard id= {service.id} service={service}/> </div>)}
             </div>
 
-
            <div className='chat'>
              <div className='image-container'>
              {showChatBot ? <Bot /> : null} 
@@ -45,11 +54,9 @@ function ServicesGrid({services}) {
           
           
           </div>
-              {/* </div> */}
-
+              </div>
+              
         </>
-       
-    )
 }
 
 export default ServicesGrid

@@ -1,3 +1,15 @@
+div.cs-main-container{
+    width: 22vw;
+    margin-bottom: 40%;
+    border-radius: 10px;
+    height: 37vh;
+    border: solid;
+    border-color: orange;
+    border-width: 3px;
+    /* position:fixed; */
+    
+}
+
 .cs-message-list__scroll-wrapper {
     /* background-color: aqua; */
     box-sizing: border-box;
