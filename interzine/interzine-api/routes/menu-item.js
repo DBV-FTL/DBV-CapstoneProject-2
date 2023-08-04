@@ -68,6 +68,7 @@ router.get("/:id", async (req, res, next) => {
     const id = req.params.id;
     console.log('?????', id)
     const menuItems = await MenuItem.listMenuItems(id);
+    console.log("before the for", menuItems)
     for (const menuItem of menuItems) {
       const getObjectParams= {
         Bucket: BUCKET_NAME,

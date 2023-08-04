@@ -6,7 +6,7 @@ import './Shop.css'
 function Shop({services, menus, setMenus}) {
     return (
         <div className='shop'>
-            <CuisineCategory/>
+            
             <ServicesGrid services={services} setMenus={setMenus} />
         </div>
     )

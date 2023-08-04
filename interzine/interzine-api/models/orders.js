@@ -8,8 +8,8 @@ const { validateFields } = require("../utils/validate");
 
 class Orders {
   static async addOrder({ item, user }) {
-    const { product_name, service_provider_id, quantity } = item;
-    const requiredItems = ["product_name", "quantity", "service_provider_id"];
+    const { product_name, service_provider_id, quantity, date } = item;
+    const requiredItems = ["product_name", "quantity", "date"];
 
     //Checks to see if the item is an array, if an array, maps through the array of objects and validates each field
     if (Array.isArray(item)) {
@@ -38,7 +38,7 @@ class Orders {
 
     if (user?.client && user?.client === "provider")
       throw new UnauthorizedError("User is a Provider");
-    const order_id = await this.createOrderNumber({ user });
+    const order_id = await this.createOrderNumber({ user, item});
     const sp_id = await this.getServiceProviderId({ item });
 
     let orderDetails = [];
@@ -48,19 +48,21 @@ class Orders {
           item?.map(async (item) => {
             const result = await db.query(
               `
-                SELECT id FROM menu_items
+                SELECT id, cost, image_url FROM menu_items
                 WHERE name = $1 AND service_provider_id = $2`,
               [item.product_name, item.service_provider_id]
             );
             // console.log()
             const item_id = result.rows[0].id;
+            const item_cost= result.rows[0].cost;
+            const item_image_url= result.rows[0].image_url
 
             const r = await db.query(
               `
-                INSERT INTO order_details (product_name, quantity, menu_item_id, order_id)
-                VALUES ($1, $2, $3, $4)
+                INSERT INTO order_details (product_name, quantity, menu_item_id, order_id, cost, image_url)
+                VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING *`,
-              [item.product_name, item.quantity, item_id, order_id]
+              [item.product_name, item.quantity, item_id, order_id, item_cost, item_image_url]
             );
 
             orderDetails = [...orderDetails, r.rows[0]];
@@ -96,6 +98,7 @@ class Orders {
   }
 
   static async getServiceProviderId({ item }) {
+    console.log('getting prov id....')
     const result = await db.query(
       `
     SELECT service_provider_id FROM menu_items
@@ -104,18 +107,20 @@ class Orders {
     );
     console.log("how many", result.rows);
   }
-  static async createOrderNumber({ user }) {
+  static async createOrderNumber({ user, item}) {
+    console.log('creating....',user.id)
     const result = await db.query(
       `
-        INSERT INTO orders (user_id)
-        VALUES ($1)
+        INSERT INTO orders (user_id, provider_id, date)
+        VALUES ($1, $2, $3)
         RETURNING *`,
-      [user.id]
+      [user.id, item[0].service_provider_id, item[0].date]
     );
     return result.rows[0].id;
   }
 
   static async listOrders({ user }) {
+    console.log('listing')
     if (user?.client && user?.client === "provider")
       throw new UnauthorizedError("User is a Provider");
     const result = await db.query(
@@ -127,6 +132,7 @@ class Orders {
         ORDER BY o.id DESC`,
       [user.id]
     );
+    console.log('in models', result.rows)
     return result.rows;
   }
 }

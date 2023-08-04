@@ -41,7 +41,7 @@
     font-family: didot,serif;
 }
 
-button{
+.submit-login {
     border: solid;
     border-color: orange;
     color: orange;
