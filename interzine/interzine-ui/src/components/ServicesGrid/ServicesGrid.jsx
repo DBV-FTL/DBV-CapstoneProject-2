@@ -5,16 +5,6 @@ import './ServicesGrid.css'
 import SubNavbar from '../SubNavbar/SubNavbar'
 import Bot from '../Bot/Bot'
 import ServiceHero from '../ServiceHero/ServiceHero'
-
-
-function ServicesGrid({ services }) {
-    const [showChatBot, setShowChatBot] = useState(false);
-
-    const handleToggleChatBot = () => {
-        setShowChatBot((prevShowChatBot) => !prevShowChatBot);
-
-    }
-    
     
 function ServicesGrid({services}) {
     const [servicesShown, setServicesShown] = useState(services)
@@ -54,9 +44,9 @@ function ServicesGrid({services}) {
           
           
           </div>
-              </div>
               
         </>
+    )
 }
 
 export default ServicesGrid

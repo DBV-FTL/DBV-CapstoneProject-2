@@ -12,7 +12,6 @@ import Store from './pages/Store/Store'
 // import AddNewItem from './pages/AddNewItem/AddNewItem'
 import apiClient from './services/apiClient'
 import Menu from './components/Menu/Menu'
-import Store from './pages/Store/Store'
 import FoodDetail from './components/FoodDetail/FoodDetail'
 import Hero from './components/Hero/Hero'
 import Bot from './components/Bot/Bot'
@@ -113,10 +112,9 @@ function App() {
         <Route path='/locations' element={<Locations/>}/>
       </Routes>
       </BrowserRouter>
-      
-        </Routes>
+        {/* </Routes>
 
-      </BrowserRouter>   
+      </BrowserRouter>    */}
       {/* <Bot/> */}
 
       {/* yoooooooo */}
