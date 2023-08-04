@@ -18,18 +18,28 @@ function ServicesGrid({ services }) {
     
 function ServicesGrid({services}) {
     const [servicesShown, setServicesShown] = useState(services)
-       
+    const [showChatBot, setShowChatBot] = useState(false);
+    const handleToggleChatBot = () => {
+        setShowChatBot((prevShowChatBot) => !prevShowChatBot);
+
+    }
 
 
     return (
-            <>
-      
+        // <div>
+        //     <SubNavbar services={servicesShown} setServices={setServicesShown}/>
+        //     <div className='service-grid'>
+        //         {servicesShown?.map(service => <div className='card'> <ServiceCard id= {service.id} service={service}/> </div>)}
+        //     </div>
+
+        // </div>
+        <>
+
               <ServiceHero />
-            <SubNavbar services={servicesShown} setServices={setServicesShown}/>
+        <SubNavbar services={servicesShown} setServices={setServicesShown}/>
             <div className='service-grid'>
                 {servicesShown?.map(service => <div className='card'> <ServiceCard id= {service.id} service={service}/> </div>)}
             </div>
-              
 
            <div className='chat'>
              <div className='image-container'>
