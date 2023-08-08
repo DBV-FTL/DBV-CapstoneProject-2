@@ -29,6 +29,11 @@ function App() {
   const [isOpen, setIsOpen]= useState(false)
   const [viewProfile, setViewProfile]= useState(false)
   
+  const [showChatBot, setShowChatBot] = useState(false);
+  const handleToggleChatBot = () => {
+      setShowChatBot((prevShowChatBot) => !prevShowChatBot);
+
+  }
 
   
   
@@ -115,6 +120,19 @@ function App() {
         {/* </Routes>
 
       </BrowserRouter>    */}
+      <div className='chat'>
+             <div className='image-container'>
+             {showChatBot ? <Bot /> : null} 
+              <img
+                  src='bot.png'
+                  alt=''
+                  className='bot-img'
+                  onClick={handleToggleChatBot}
+                />
+          </div>
+          
+          
+          </div>
       {/* <Bot/> */}
 
       {/* yoooooooo */}

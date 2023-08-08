@@ -88,7 +88,7 @@ function Login({login, client, setClient}) {
           <p className="login-hdr"> Login </p>
             <form className='logbtn'>
             <input onChange= {(e) => handleFormInput(e)} name='email' placeholder='Input E-mail' required/>
-            <input onChange= {(e) => handleFormInput(e)} name='password' placeholder='Input Password' required/>
+            <input onChange= {(e) => handleFormInput(e)} name='password' placeholder='Input Password' type ='password' required/>
             </form> 
             <button className='submit-login' onClick={async (e) => await handleLogin(e)} > Login! </button>
             <p onClick={() => changeClient(client)}> {optionMessage} </p>

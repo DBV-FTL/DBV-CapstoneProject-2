@@ -66,9 +66,9 @@ router.post("/create", security.extractUserFromJWT, upload.single("image"), asyn
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    console.log('?????', id)
+    // console.log('?????', id)
     const menuItems = await MenuItem.listMenuItems(id);
-    console.log("before the for", menuItems)
+    // console.log("before the for", menuItems)
     for (const menuItem of menuItems) {
       const getObjectParams= {
         Bucket: BUCKET_NAME,
@@ -93,6 +93,13 @@ router.get("/food/:id", async (req, res, next) => {
     console.log('food', id)
     const menuItem = await MenuItem.fetchMenuItem(id);
     console.log('getting food', menuItem)
+    const getObjectParams = {
+      Bucket: BUCKET_NAME,
+      Key: menuItem.image_url
+    }
+    const command = new GetObjectCommand(getObjectParams)
+    const url = await getSignedUrl(s3, command, {expiresIn: 3600})
+    menuItem.image_url = url
     return res.status(200).json({ menuItem });
   } catch (err) {
     next(err);
