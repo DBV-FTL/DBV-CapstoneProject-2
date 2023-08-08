@@ -12,12 +12,11 @@ class ApiClient {
     localStorage.setItem(this.tokenName, token);
   }
 
-  async request({ endpoint, method = "GET", data = {} }) {
+  async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type":"application/json"}}) {
     console.log('in request')
+    console.log('headers', headers)
+    console.log('data', data)
     const url = `${this.remoteHostUrl}/${endpoint}`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
@@ -51,6 +50,7 @@ class ApiClient {
  }
   async signupUser(creds) {
     console.log('signing up')
+    console.log("user creds", creds)
     return await this.request({
       endpoint: "auth/user/register",
       method: "POST",
@@ -65,6 +65,7 @@ class ApiClient {
       endpoint: "auth/provider/register",
       method: "post",
       data: creds,
+      headers: {"Content-Type": "multipart/form-data"}
     });
   }
 
@@ -84,6 +85,7 @@ class ApiClient {
       endpoint: "menu/create",
       method: "POST",
       data: creds,
+      headers: {"Content-Type": "multipart/form-data"}
     });
   }
 
