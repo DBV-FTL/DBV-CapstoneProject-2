@@ -146,4 +146,4 @@ class ApiClient {
 
   
 }
-export default new ApiClient("https://intersine-backend.onrender.com");
+export default new ApiClient("http://localhost:3000");

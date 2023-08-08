@@ -1,0 +1,43 @@
+.mediatiles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    /* border: solid; */
+    /* border-color: orange; */
+} 
+
+img.tile-img:hover {
+    transform: translateY(-10px);     /* Equal to scaleX(2) scaleY(2) */
+}
+
+.subhead{
+    color: white;
+    font-family: didot,serif;
+    text-align: center;
+    font-size:20px;
+    margin-top:0;
+
+}
+
+
+img{
+    border: solid;
+    border-color: orange;
+}
+
+.head{
+    color: white;
+    font-size: 50px;
+    font-family: didot,serif;
+    text-align: center;
+
+}
+
+.img-sub{
+    color: white;
+    font-size: 20px;
+    font-family: didot, serif;
+}
