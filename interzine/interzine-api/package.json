@@ -25,7 +25,8 @@
     "nodemon": "^2.0.22",
     "pg": "^8.11.1",
     "sharp": "^0.32.4",
-    "stripe": "^12.16.0"
+    "stripe": "^12.16.0",
+    "supertest": "^6.3.3"
   },
   "devDependencies": {
     "jest": "^29.6.1"
