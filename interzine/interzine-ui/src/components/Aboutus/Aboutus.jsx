@@ -3,7 +3,9 @@ import "./Aboutus.css"
 import { useState, useEffect } from "react";
 import ScrollTrigger from 'react-scroll-trigger'
 // import Bot from "../Bot/Bot";
-
+import David from "../../assets/David.jpg"
+import Vanessa from "../../assets/Vanessa.jpg"
+import Bereket from "../../assets/Bereket.jpg"
 export default function ContactUs() {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -28,10 +30,9 @@ export default function ContactUs() {
             <br />
             Meet our flavor fusion artists, blending global cuisines and code algorithms to craft a tantalizing online dining experience;
           </p>
-          <div className={`about-image ${isMounted ? "slide-in" : ""}`}>
-            
+          <div className={`about-image ${isMounted ? "slide-in" : ""}`}>   
             <div className="about-creator">
-              <img src="Bereket.jpg" alt="" className="about-imsg" width="400" height="400" />
+              <img src={Bereket} alt="" className="about-imsg" width="400" height="400" />
               <h5 className="img-sub1"> Bereket! </h5>
               <p className="about-description">
                 Tech guru by day, culinary mastermind by night. Bereket brings flavors to life through lines of code and taste explosions.
@@ -39,7 +40,7 @@ export default function ContactUs() {
               </div>
            
             <div className="about-creator">
-              <img src="Vanessa.JPG" alt="" className="about-imsg" width="400" height="400" />
+              <img src={Vanessa} alt="" className="about-imsg" width="400" height="400" />
               <h5 className="img-sub1"> Vanessa! </h5>
               <p className="about-description">
                 Code composer by day, taste architect by night. Vanessa orchestrates symphonies of flavor and algorithms, creating a harmonious dining experience.
@@ -47,7 +48,7 @@ export default function ContactUs() {
               </div>
             
             <div className="about-creator">
-              <img src="David.jpg" alt="" className="about-imsg" width="400" height="400" />
+              <img src={David} alt="" className="about-imsg" width="400" height="400" />
               <h5 className="img-sub1"> David! </h5>
               <p className="about-description">
                 Technology enthusiast during daylight, culinary virtuoso after hours. David merges coding prowess with culinary finesse, crafting digital and edible delights.

@@ -1,0 +1,56 @@
+.login p{
+    color: white;
+    
+}
+
+.login{
+    margin-top: 22%;
+    margin-left: 38%;
+    margin-right: 35%;
+    border:solid;
+    border-color: orange;
+    text-align: center;
+    color: orange;
+    box-shadow: 10px 5px 5px orange;
+}
+
+.logbtn{
+    margin-top: 20px;
+    margin-left: 37px;
+    margin-right: 20px;
+    display:grid;
+    width:400px;
+    gap:20px;
+    padding-bottom: 25px;
+    
+}
+
+.login-hdr{
+    color: yellow;
+    font-size: 30px;
+    font-family: didot,serif;
+
+}
+
+.login input{
+    border: solid;
+    color: orange;
+    background-color: whitesmoke;
+    height: 30px;
+    border-radius: 10px;
+    font-family: didot,serif;
+}
+
+.submit-login {
+    border: solid;
+    border-color: orange;
+    color: orange;
+    background-color: black;
+    font-family: didot,serif;
+    font-weight: bold;
+    border-width: 2px;
+}
+
+.logbtn input{
+    color: orange;
+}

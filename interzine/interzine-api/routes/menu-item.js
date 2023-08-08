@@ -21,6 +21,16 @@ const BUCKET_SECRET_ACCESS_KEY = process.env.BUCKET_SECRET_ACCESS_KEY
 
 const randomImageName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
 
+async function  getImageUrl(item){
+  const getObjectParams= {
+    Bucket: BUCKET_NAME,
+    Key: item.image_url
+  }
+  const command = new GetObjectCommand(getObjectParams);
+  const url = await getSignedUrl(s3, command, {expiresIn: 3600})
+  return url
+}
+
 const s3 = new S3Client({
   credentials: {
     accessKeyId: BUCKET_ACCESS_KEY,
@@ -66,20 +76,10 @@ router.post("/create", security.extractUserFromJWT, upload.single("image"), asyn
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    // console.log('?????', id)
     const menuItems = await MenuItem.listMenuItems(id);
-    // console.log("before the for", menuItems)
     for (const menuItem of menuItems) {
-      const getObjectParams= {
-        Bucket: BUCKET_NAME,
-        Key: menuItem.image_url
-      }
-
-      const command = new GetObjectCommand(getObjectParams);
-      const url = await getSignedUrl(s3, command, {expiresIn: 3600})
-      menuItem.image_url = url
+      menuItem.image_url = await getImageUrl(menuItem)
     }
-    console.log('mi', menuItems)
     return res.status(200).json({ menuItems });
   } catch (err) {
     next(err);
@@ -90,16 +90,8 @@ router.get("/food/:id", async (req, res, next) => {
   // console.log('in router', req)
   try {
     const id = req.params.id;
-    console.log('food', id)
     const menuItem = await MenuItem.fetchMenuItem(id);
-    console.log('getting food', menuItem)
-    const getObjectParams = {
-      Bucket: BUCKET_NAME,
-      Key: menuItem.image_url
-    }
-    const command = new GetObjectCommand(getObjectParams)
-    const url = await getSignedUrl(s3, command, {expiresIn: 3600})
-    menuItem.image_url = url
+    menuItem.image_url = await getImageUrl(menuItem)
     return res.status(200).json({ menuItem });
   } catch (err) {
     next(err);
