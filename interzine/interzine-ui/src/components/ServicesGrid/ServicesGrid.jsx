@@ -8,11 +8,11 @@ import ServiceHero from '../ServiceHero/ServiceHero'
     
 function ServicesGrid({services}) {
     const [servicesShown, setServicesShown] = useState(services)
-    const [showChatBot, setShowChatBot] = useState(false);
-    const handleToggleChatBot = () => {
-        setShowChatBot((prevShowChatBot) => !prevShowChatBot);
+    // const [showChatBot, setShowChatBot] = useState(false);
+    // const handleToggleChatBot = () => {
+    //     setShowChatBot((prevShowChatBot) => !prevShowChatBot);
 
-    }
+    // }
 
 
     return (
@@ -31,7 +31,7 @@ function ServicesGrid({services}) {
                 {servicesShown?.map(service => <div className='card'> <ServiceCard id= {service.id} service={service}/> </div>)}
             </div>
 
-           <div className='chat'>
+           {/* <div className='chat'>
              <div className='image-container'>
              {showChatBot ? <Bot /> : null} 
               <img
@@ -43,7 +43,7 @@ function ServicesGrid({services}) {
           </div>
           
           
-          </div>
+          </div> */}
               
         </>
     )

@@ -1,9 +1,13 @@
 .service-grid{
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* flex-direction: row; */
+    /* flex-wrap: wrap; */
     /* flex-basis: 25%; */
     color: white;
     gap:200px;
+
 }
 
 

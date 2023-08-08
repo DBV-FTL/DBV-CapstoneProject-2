@@ -8,13 +8,9 @@ function Footer() {
 
             <p>
                 <span className="bold">Explore</span> <br />  <br />
-                About Us <br />
+                <a href="/aboutus">About us</a> <br />
                 <br />
                 Cities <br />
-                <br />
-                Sitemap <br />
-                <br />
-                Slay <br />
                 <br />
             </p>
             
@@ -36,26 +32,14 @@ function Footer() {
                 <span className="bold">Account</span> <br />
                 {/* About Us <br /> */}
                 <br />
-                Login <br />
+                <a href="/login">Login</a><br />
                 <br />
-                Register <br />
-                <br />
-                Account Setting<br />
+                <a href="/register">Register</a><br />
                 <br />
                 My Orders <br />
                 <br />
             </p>
-            <p>
-                <span className="bold">Socials</span> <br />
-                {/* About Us <br /> */}
-                <br />
-                Facebook <br />
-                <br />
-                Twitter <br />
-                <br />
-                LinkedIn<br />
-                <br />
-            </p>
+           
             
             
         </div>

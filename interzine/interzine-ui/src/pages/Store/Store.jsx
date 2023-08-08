@@ -6,7 +6,7 @@ import Menu from '../../components/Menu/Menu'
 function Store({appState, updateMenu}) {
     return (
         <div>
-            <ServiceHero/>
+            {/* <ServiceHero/> */}
             <AddNewItem appState={appState} updateMenu={updateMenu}/>
             <Menu menu={appState.menuItems}/>
         </div>
