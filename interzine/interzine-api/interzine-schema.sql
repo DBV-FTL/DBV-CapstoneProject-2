@@ -14,6 +14,8 @@ CREATE TABLE service_providers (
     email       VARCHAR(255) NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
     password    VARCHAR(255) NOT NULL,
     profile_picture VARCHAR(8000) NOT NULL,
+    service_provider_hero VARCHAR(8000) NOT NULL,
+    service_provider_blurb TEXT NOT NULL,
     zip_code    INTEGER NOT NULL CHECK (zip_code between 99 and 99999),
     address     VARCHAR(255) NOT NULL);
 
@@ -22,7 +24,7 @@ CREATE TABLE menu_items (
     name        VARCHAR(255) NOT NULL,
     image_url   VARCHAR(8000) NOT NULL,
     cost        DECIMAL(10,2) NOT NULL,
-    rating      DECIMAL(3,2) NOT NULL,
+    rating      DECIMAL(3,2),
     service_provider_id INTEGER, 
     FOREIGN KEY (service_provider_id) REFERENCES service_providers(id));
 

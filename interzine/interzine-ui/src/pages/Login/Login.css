@@ -1,12 +1,14 @@
-.login p{
-    color: white;
+.option-message{
+    color: beige;
+    cursor: pointer;
+    text-decoration: underline;
     
 }
 
 .login{
     margin-top: 22%;
     margin-left: 38%;
-    margin-right: 35%;
+    margin-right: 33%;
     border:solid;
     border-color: orange;
     text-align: center;
@@ -26,7 +28,7 @@
 }
 
 .login-hdr{
-    color: yellow;
+    color: beige;
     font-size: 30px;
     font-family: didot,serif;
 

@@ -137,9 +137,10 @@ router.get("/provider/cuisine", async (req, res, next) => {
   });
 
 
-router.post("/verify", security.extractUserFromJWT, (req, res) => {
+router.post("/verify", security.extractUserFromJWT, (req, res, next) => {
     try {
         const {user}= res.locals
+        console.log('user', user)
         return res.status(200).json({user})
     } catch (err) {
         console.error(err.message);
