@@ -138,3 +138,8 @@ label{
     color: white;
 }
 
+
+.register-ziner label{
+    margin-bottom: 0;
+    margin-top: 0;
+}

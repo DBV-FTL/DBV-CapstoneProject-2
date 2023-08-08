@@ -2,12 +2,14 @@ import React, {useEffect} from 'react'
 import apiClient from '../../services/apiClient'
 import OrderCard from '../OrderCard/OrderCard'
 import './Orders.css'
+import {useNavigate} from 'react-router-dom'
 
 function Orders({orders, services}) {
     const groupedById= {}
     console.log('orders', orders)
     const sortedOrders= orders?.toSorted()?.reverse()
     console.log('sorted orders', sortedOrders)
+    const navigate= useNavigate()
 
     useEffect(()=>{
 
@@ -30,11 +32,18 @@ const reversed= Object.entries(groupedById)?.sort((a, b) => {
 
     return (
         <div className='orders'>
-            {reversed?.map(([order_id, items])=> {
+            { orders.length>0 ?
+            reversed?.map(([order_id, items])=> {
                 const provider= services?.find((service)=> items[0].provider_id===service.id)
                 return <OrderCard provider={provider} order_id={order_id} items={items}/>
              }
-             )}
+             )
+            :
+            <div className='empty-orders'>
+                <h1> No orders yet.</h1>
+                <p onClick={()=> {navigate('/')}}> Head to Intersinee shop to order</p>
+            </div>
+            }
         </div>
     )
 }
