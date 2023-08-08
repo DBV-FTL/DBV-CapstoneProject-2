@@ -31,7 +31,7 @@ function Register({client, setClient, register, appState}) {
             } else if (client==='provider'){
                 response= await apiClient.signupProvider(formInput)
                 console.log('reg provider', response.data)
-            menu= await apiClient.fetchMenuItems(response.data.provider.id)
+            menu= await apiClient.fetchMenuItems(response?.data?.provider?.id)
 
             }
             const data = response.data;
@@ -75,7 +75,7 @@ function Register({client, setClient, register, appState}) {
   
     let optionMessage
     if (client==='user'){
-    optionMessage= 'Sign up to be a Ziner here!'
+    optionMessage= 'Sign up to be a Sineer here!'
     } else if (client==='provider'){
     optionMessage= 'Sign up to order here!'
     }

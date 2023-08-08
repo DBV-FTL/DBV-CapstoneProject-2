@@ -12,7 +12,7 @@ class ApiClient {
     localStorage.setItem(this.tokenName, token);
   }
 
-  async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type":"application/json"}}) {
+ async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type":"application/json"}}) {
     console.log('in request')
     console.log('headers', headers)
     console.log('data', data)
@@ -21,6 +21,7 @@ class ApiClient {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
     try {
+      console.log("headers", )
       console.log('res incoming')
       const result = await axios({ url, method, data, headers });
       console.log('res', result)

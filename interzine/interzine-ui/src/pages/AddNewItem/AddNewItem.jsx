@@ -2,10 +2,9 @@ import React,{useState} from 'react'
 import './AddNewItem.css'
 import { useNavigate } from 'react-router-dom'
 import apiClient from "../../services/apiClient"
-import './AddNewItem.css'
 
 
-function AddNewItem({appState, updateMenu}) { 
+function AddNewItem({appState, updateMenu, setAddNewItem}) { 
     const [formInput, setFormInput] = useState({name:'', cost:'', rating:''})
     const navigate = useNavigate()
 
@@ -23,6 +22,7 @@ function AddNewItem({appState, updateMenu}) {
         await apiClient.addNewItem(formInput)
         updateMenu({...appState, menuItems:[...appState.menuItems, formInput]})
         setFormInput({name:'', cost:'', rating:''})
+        setAddNewItem(false)
         navigate('/')
     }
 
@@ -31,19 +31,37 @@ function AddNewItem({appState, updateMenu}) {
         console.log(formInput)
     }
 
+    const buttonStyling= {
+        width: '29rem', 
+        backgroundColor: 'orange', 
+        fontWeight: 'bold',
+    borderWidth: '2px',
+    cursor: 'pointer',
+    height:' 2rem',
+    fontFamily: 'didot,serif',
+    fontSize: '14pt',
+    borderRadius: '10px',
+    marginTop: '1%'
+    // padding: '0 2rem'
+
+
+    }
+
     return (
         <div className='new'>
+            <h1> New Menu Item</h1>
             <form>
                 <label> Name </label>
-                <input value={formInput.name} onChange={(e) => handleChange(e)} name='name' placeholder='name' required/>
+                <input className= 'new-input' value={formInput.name} onChange={(e) => handleChange(e)} name='name' placeholder='name' required/>
                 <label> Image </label>
-                <input name="image" type="file" onChange={handleFileChange}/>
+                <input className='file-selector' name="image" type="file" onChange={handleFileChange}/>
                 <label> Cost </label>
-                <input  value={formInput.cost} type='number' onChange={(e) => handleChange(e)} name='cost' placeholder='cost' required/>
-                <label> Rating </label>
-                <input  value={formInput.rating} type='number' onChange={(e) => handleChange(e)} name='rating' placeholder='rating' required/>
-                <button onClick={(e) => handleSubmit(e)} className='submit-form'> Submit </button>
+                <input  className= 'new-input' value={formInput.cost} type='number' onChange={(e) => handleChange(e)} min='0' name='cost' placeholder='cost' required/>
+                
+                {/* <input className='add-new' name='submit-form' type='button' value='Submit'/> */}
             </form>
+            <button style={buttonStyling} className='add-new' onClick={(e) => handleSubmit(e)} > Submit </button>
+
         </div>
     )
 }
