@@ -4,6 +4,7 @@
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@stripe/react-stripe-js": "^2.1.1",
     "bcrypt": "^5.1.0",
+    "firebase": "^10.1.0",
     "jsonwebtoken": "^9.0.1",
     "jwt-decode": "^3.1.2"
   }

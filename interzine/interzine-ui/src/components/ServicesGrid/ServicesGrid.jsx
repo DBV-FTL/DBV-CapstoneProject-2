@@ -15,39 +15,6 @@ function ServicesGrid({ services }) {
       <SubNavbar services={servicesShown} setServices={setServicesShown} />
       <div className="services-container">
         <div className="service-grid">
-          {/* <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div>
-          <div className="card">
-            <ServiceCard id={service?.id} service={service} />
-          </div> */}
 
           {servicesShown?.map(service => <div className='card'> <ServiceCard id= {service.id} service={service}/>
             </div>)}
@@ -55,6 +22,7 @@ function ServicesGrid({ services }) {
       </div>
     </div>
   );
+
 }
 
 export default ServicesGrid;

@@ -20,8 +20,10 @@ function FoodCard({food, setShowModal}) {
         <div className='food-card'>
             <Link to={`/food/${food.id}`}> <img className='food-image' src={food.image_url} /> </Link>
             <div>
+                <div className='FCname'>
                 <h3> {food.name} </h3>
-                <h3> ${parseInt(food.cost).toFixed(2)} </h3>
+                </div>
+                <h4> ${parseInt(food.cost).toFixed(2)} </h4>
             </div>
             {/* <FoodDetail food={food} setShowModal={setShowModal}/> */}
             

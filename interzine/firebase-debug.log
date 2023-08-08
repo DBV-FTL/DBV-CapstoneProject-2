@@ -1,0 +1,44 @@
+[debug] [2023-08-08T07:41:00.321Z] ----------------------------------------------------------------------
+[debug] [2023-08-08T07:41:00.323Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init hosting
+[debug] [2023-08-08T07:41:00.324Z] CLI Version:   12.4.7
+[debug] [2023-08-08T07:41:00.324Z] Platform:      darwin
+[debug] [2023-08-08T07:41:00.325Z] Node Version:  v18.16.0
+[debug] [2023-08-08T07:41:00.327Z] Time:          Tue Aug 08 2023 00:41:00 GMT-0700 (Pacific Daylight Time)
+[debug] [2023-08-08T07:41:00.327Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-08T07:41:00.413Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-08T07:41:00.413Z] > authorizing via signed-in user (dtroy620@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/dtroy/Downloads/CodePath/Capstone Project/DBV-CapstoneProject
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-08-08T07:41:00.421Z] Using project from CLI flag: intersinee
+[debug] [2023-08-08T07:41:00.425Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/intersinee [none]
+[debug] [2023-08-08T07:41:00.898Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/intersinee 200
+[debug] [2023-08-08T07:41:00.899Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/intersinee {"projectId":"intersinee","projectNumber":"31453578951","displayName":"InterSinee","name":"projects/intersinee","resources":{"hostingSite":"intersinee"},"state":"ACTIVE","etag":"1_55e8c357-a3b9-486f-b0b7-8749d2d9d18b"}
+[info] i  Using project intersinee (InterSinee) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

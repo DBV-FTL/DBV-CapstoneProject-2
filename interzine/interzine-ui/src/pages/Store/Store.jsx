@@ -20,6 +20,7 @@ function Store({appState, updateMenu}) {
 
             </div>
             }
+
         </div>
     )
 }

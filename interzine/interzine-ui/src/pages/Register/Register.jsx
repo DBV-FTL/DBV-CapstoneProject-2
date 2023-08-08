@@ -97,7 +97,7 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)} name='lastName' placeholder='Last Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='username' placeholder=' Username' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
-                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' type='password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
                         
                     </form>
@@ -110,8 +110,8 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)} name='name' placeholder='Full Name' required/>
                         <input onChange={(e) => handleFormInput(e)} name='cuisine' placeholder='Cuisine' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
-                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' required/>
-                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' type='password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' type='password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='address' placeholder='Address' type='text' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
                         <input onChange={handleFileChange} name="image" className='profile-picture' type="file" id="myFile" />

@@ -1,0 +1,19 @@
+.shopping-cart img{
+    height: 50px;
+    width: 50px
+}
+
+
+.shopping-cart{
+    width: 30vw;
+    height: auto;
+    color: aliceblue;
+
+}
+
+.food-image{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    color: black;
+}

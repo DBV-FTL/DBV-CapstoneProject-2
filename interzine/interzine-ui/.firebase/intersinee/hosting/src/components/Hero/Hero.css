@@ -1,0 +1,196 @@
+.media {
+    z-index: -2;
+    left: 0;
+    top: 0;
+    margin-top: 5px;
+    content: '';
+    /* overflow: hidden; */
+    /* display: block; */
+    width: 99.5%;
+    height: 90vh;
+    /* object-fit: cover; */
+    animation: fade 2s infinite;
+    background: rgba(0, 0, 0, 0.65);
+    opacity: .6;
+    position: relative;
+    /* transition: opacity 900s ease-in-out; */
+}
+
+.styles.header {
+    font-size: 800px;
+}
+
+.banner {
+    margin-top: 15px;
+}
+
+
+
+
+/* span {
+    position: relative;
+    text-align: center;
+    padding-top: 25px;
+    font-style: italic;
+    font-family: Didot, serif;
+    color: white;
+    font-size: 50px;
+
+} */
+
+
+/* .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+
+} */
+
+.banner h2 {
+    position: absolute;
+    top: 40%;
+    /* margin-right: 38%; */
+    /* left: 4%; */
+    transform: translate(-50%, -50%);
+    font-size: 170px;
+    color: transparent;
+    font-style: italic;
+    font-family: Didot, serif;
+    
+    text-transform: uppercase;
+
+    @media only screen and (max-width: 1100px) {
+        font-size: 4rem;
+    }
+
+    @media only screen and (max-width: 900px) {
+        font-size: 3rem;
+    }
+
+    @media only screen and (max-width: 700px) {
+        font-size: 2.2rem;
+    }
+
+    @media only screen and (max-width: 480px) {
+        font-size: 1.6rem;
+    }
+
+    &:hover span:nth-child(1) {
+        transform: translateY(-1rem);
+
+        @media only screen and (max-width: 1100px) {
+            transform: translateY(-0.7rem);
+        }
+
+        @media only screen and (max-width: 900px) {
+            transform: translateY(-0.55rem);
+        }
+
+        @media only screen and (max-width: 700px) {
+            transform: translateY(-0.47rem);
+        }
+
+        @media only screen and (max-width: 480px) {
+            transform: translateY(-0.4rem);
+        }
+    }
+
+    &:hover span:nth-child(2) {
+        transform: translateY(1rem);
+
+        @media only screen and (max-width: 1100px) {
+            transform: translateY(0.7rem);
+        }
+
+        @media only screen and (max-width: 900px) {
+            transform: translateY(0.55rem);
+        }
+
+        @media only screen and (max-width: 700px) {
+            transform: translateY(0.47rem);
+        }
+
+        @media only screen and (max-width: 480px) {
+            transform: translateY(0.4rem);
+        }
+    }
+
+    &:hover span:nth-child(3) {
+        opacity: 1;
+        transition: opacity 700ms ease;
+    }
+
+    & span:nth-child(1),
+    & span:nth-child(2) {
+        position: absolute;
+        /* background-color: yellow; */
+        /* position: relative; */
+        text-align: center;
+        top: 0;
+        left: 89%;
+        color: white;
+        transition: 0.8s;
+        overflow: hidden;
+        text-shadow: 3px 0px 7px rgba(208, 164, 17, 0.8), 
+	  -3px 0px 7px rgba(81,67,21,0.8), 
+	  0px 4px 7px rgba(81,67,21,0.8);
+    }
+
+    & span:nth-child(1) {
+        clip-path: polygon(0 0, 100% 0%, 100% 50%, 0 50%);
+    }
+
+    & span:nth-child(2) {
+        clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+    }
+
+    & span:nth-child(3) {
+        position: absolute;
+        top: 50%;
+        left: 138%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 350ms ease;
+        font-size: 40px;
+        color: #fff;
+        background: black;
+        fill-opacity: 30%;
+        background: rgba(0, 0, 0, 0.5) ;
+        /* background-blend-mode: hue; */
+        width: 92%;
+        /* padding-left: 5px; */
+        text-align: center;
+        letter-spacing: 0.5rem;
+        /* word-spacing: 1rem; */
+        line-height: 100%;
+        /* text-shadow: 3px 0px 7px rgba(81,67,21,0.8), 
+	  -3px 0px 7px rgba(81,67,21,0.8), 
+	  0px 4px 7px rgba(81,67,21,0.8); */
+
+
+        @media only screen and (max-width: 1100px) {
+            font-size: 1.2rem;
+        }
+
+        @media only screen and (max-width: 900px) {
+            font-size: 1rem;
+            width: 97%;
+            letter-spacing: 4px;
+        }
+
+        @media only screen and (max-width: 700px) {
+            font-size: 0.85rem;
+            width: 96%;
+            letter-spacing: 3px;
+            word-spacing: 0.5rem;
+        }
+
+        @media only screen and (max-width: 480px) {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            word-spacing: 0.2rem;
+        }
+    }
+}

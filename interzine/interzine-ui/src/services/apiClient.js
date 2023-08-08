@@ -12,8 +12,10 @@ class ApiClient {
     localStorage.setItem(this.tokenName, token);
   }
 
-  async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type": "application/json"} }) {
+ async request({ endpoint, method = "GET", data = {}, headers = {"Content-Type":"application/json"}}) {
     console.log('in request')
+    console.log('headers', headers)
+    console.log('data', data)
     const url = `${this.remoteHostUrl}/${endpoint}`;
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
@@ -49,6 +51,7 @@ class ApiClient {
  }
   async signupUser(creds) {
     console.log('signing up')
+    console.log("user creds", creds)
     return await this.request({
       endpoint: "auth/user/register",
       method: "POST",
@@ -63,6 +66,7 @@ class ApiClient {
       endpoint: "auth/provider/register",
       method: "post",
       data: creds,
+      headers: {"Content-Type": "multipart/form-data"}
     });
   }
 
@@ -145,4 +149,4 @@ class ApiClient {
 
   
 }
-export default new ApiClient("http://localhost:3000");
+export default new ApiClient("https://intersine-backend.onrender.com");

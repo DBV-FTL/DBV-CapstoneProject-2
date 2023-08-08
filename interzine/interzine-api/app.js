@@ -22,6 +22,9 @@ app.use("/orders", orderRoutes);
 app.use("/cart", cartRoutes);
 
 
+app.get('/', (req,res) => {
+  res.status(200).json({ping:'pong'})
+})
 
 app.use((req, res, next) => {
   return next(new NotFoundError())
@@ -41,7 +44,5 @@ app.use( (err, req, res, next) => {
     error: { message, status },
   })
 })
-
-
 
 module.exports = app;

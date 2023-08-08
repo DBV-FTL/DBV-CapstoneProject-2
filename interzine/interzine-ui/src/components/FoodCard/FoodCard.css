@@ -1,11 +1,23 @@
 .food-card{
     /* flex: 1 1 30%; */
     display: grid;
+    border: solid;
+    border-color: white;
     grid-template-columns: auto auto auto;
     color:white;
     width: 200px;
-    height: 200px
+    height: 200px;
+    background-color:#fff;
+    border-radius: 4px;
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    box-shadow: 5px 5px 10px rgba(253, 183, 97, 0.859);
 }
+
+.food-card:hover {
+    transform: translateY(-5px); 
+  }
 
 .food-image{
     width: 200px;
@@ -13,6 +25,12 @@
     margin-bottom: 20px;
 }
 
-.food-card div{
-    position: absolute;
+div.FCname{
+    font-size: 30px;
+    color: black;
+    margin-top: 300px;
+}
+
+.food-card h4{
+    margin-top: 390px;
 }

@@ -6,13 +6,13 @@
 }
 
 .login{
-    margin-top: 22%;
+    margin-top: 19%;
     margin-left: 38%;
     margin-right: 33%;
     border:solid;
     border-color: orange;
     text-align: center;
-    color: orange;
+    /* color: orange; */
     box-shadow: 10px 5px 5px orange;
 }
 
@@ -36,7 +36,7 @@
 
 .login input{
     border: solid;
-    color: orange;
+    /* color: orange; */
     background-color: whitesmoke;
     height: 30px;
     border-radius: 10px;
@@ -53,6 +53,3 @@
     border-width: 2px;
 }
 
-.logbtn input{
-    color: orange;
-}

@@ -1,7 +1,7 @@
 .register-user input{
     display: block;
     border: solid;
-    color: orange;
+    border-color: orange;
     background-color: whitesmoke;
     height: 30px;
     border-radius: 10px;
@@ -99,7 +99,9 @@ label{
 }
 
 .optional{
-    color: whitesmoke;
+    color: orange;
+    background-color: black;
+    font-family: didot,serif;
     border: solid;
     display: grid;
     margin-left: 170px;
