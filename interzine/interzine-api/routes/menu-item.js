@@ -30,6 +30,7 @@ async function  getImageUrl(item){
   const url = await getSignedUrl(s3, command, {expiresIn: 3600})
   return url
 }
+
 const s3 = new S3Client({
   credentials: {
     accessKeyId: BUCKET_ACCESS_KEY,
@@ -76,7 +77,6 @@ router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
     const menuItems = await MenuItem.listMenuItems(id);
-    console.log("before the for", menuItems)
     for (const menuItem of menuItems) {
       menuItem.image_url = await getImageUrl(menuItem)
     }

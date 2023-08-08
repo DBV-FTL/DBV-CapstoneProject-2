@@ -1,0 +1,26 @@
+.main-foot {
+    color: black;
+    position: relative;
+    display: flex;
+    /* margin: 0 auto; */
+    background-color: rgb(255, 185, 55);
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 0 auto;
+    font-family: deridot, serif;
+    border: solid;
+
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.row{
+    color: white;
+    margin-left: 38%;
+}
+
+.col-sm{
+    margin: 0;
+}
