@@ -42,8 +42,10 @@ ul{
 
 .access-buttons {
     display: grid;
+    margin-bottom: 10px;
+    cursor: pointer;
     grid-template-columns: auto auto;
-    /* gap: 5px; */
+    /* gap: 1px; */
     align-items: center;
     margin-right:1% ;
     /* background-color: aqua; */
@@ -147,7 +149,7 @@ h6{
     width: 80px;
     border-radius: 5px;
     margin-top: 10px;
-    margin-right: 50px;
+    margin-right: 10px;
     border: solid;
     color: black;
     border-color: orange;

@@ -9,6 +9,7 @@
     margin: 0 auto;
     font-family: deridot, serif;
     border: solid;
+    border-color: aliceblue;
 
 }
 
@@ -23,4 +24,10 @@
 
 .col-sm{
     margin: 0;
+}
+
+a{
+    text-decoration: none;
+    font-family: didot,serif;
+    color: black;
 }

@@ -41,7 +41,8 @@ async function  getImageUrl(item){
 }
 
 router.post('/user/register', async( req, res, next) => {
-    try{
+  console.log("req.body", req.body)  
+  try{
         const user = await User.register(req.body)
         const token = generateAuthToken({...user, client:'user'})
         return res.status(201).json({user, token})
