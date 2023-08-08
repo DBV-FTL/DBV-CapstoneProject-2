@@ -1,16 +1,14 @@
 .topnavbar {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-    /* justify-content: space-evenly; */
-    /* background-color: rgb(53, 53, 53); */
-    width: 99.5%;
+    position: fixed;
+    background-color: black;
+    height: auto;
+    width: 99.8%;
     text-decoration: none;
-    /* border-radius: 10px; */
     border: solid;
     border-color: rgb(255, 193, 78);
     color: whitesmoke;
-    /* position: fixed; */
     top:0px;
 }
 
@@ -18,26 +16,15 @@
     width: 90%;
 }
 
-/* .topnavbar a {
-    padding-top: 20px;
-    width: 100px;
-    text-decoration: none;
-    color:white;
-    font-weight: bold;
-    text-shadow:2px 2px 8px 10px 10px 5px lightblue;
-    font-family: var(--chakra-fonts-body)
-} */
 
 ul{
     display: flex;
     flex-direction: row;
     gap: 50px;
     font-family: Didot, serif;
-    /* justify-content: space-evenly; */
     width: 90%;
     margin-top:20px
-    /* margin-left: -100px; */
-    /* margin-bottom: 90px; */
+    
 }
 
 .access-buttons {
@@ -48,7 +35,6 @@ ul{
     /* gap: 1px; */
     align-items: center;
     margin-right:1% ;
-    /* background-color: aqua; */
 
 }
 
@@ -60,11 +46,7 @@ ul{
     background: white;   
   }
 
-/* .access-buttons2 {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-} */
+
 
 .access-button1 {
     height: 35px;
@@ -96,7 +78,6 @@ ul{
 
 .cart {
     padding-top: 15px;
-    /* padding-bottom: 10px; */
     margin-right: 100px;
     padding-left: 20px;
     cursor: pointer;
@@ -133,7 +114,6 @@ h6{
     width: 100px;
     text-decoration: none;
     color:white;
-    /* font-weight: bold; */
     text-shadow:orange;
     font-family: var(--chakra-fonts-body)
   }
@@ -149,7 +129,8 @@ h6{
     width: 80px;
     border-radius: 5px;
     margin-top: 10px;
-    margin-right: 10px;
+
+    margin-right: 20px;
     border: solid;
     color: black;
     border-color: orange;
@@ -159,6 +140,21 @@ h6{
     font-family: Didot, serif;
 }  
   
-.material-symbols-outlined.profile{
-    color:white
+.material-symbols-outlined.account{
+    color:orange;
+    font-size: 38px;
+    margin-top: 10%;
+    margin-bottom: auto;
+    align-self: center;
+    margin-right: 2%;
 }
+
+.authenticated-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    align-items: center;
+    margin: 0 5px;
+
+}
+

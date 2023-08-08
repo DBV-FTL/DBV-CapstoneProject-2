@@ -44,7 +44,8 @@ class Orders {
     let orderDetails = [];
     try {
       if (Array.isArray(item)) {
-        Promise.all(
+        // const orderDetail  s = [] 
+        await Promise.all(
           item?.map(async (item) => {
             const result = await db.query(
               `
@@ -67,10 +68,14 @@ class Orders {
 
             orderDetails = [...orderDetails, r.rows[0]];
         })
-        ).then(() => {
-            console.log("ordered", orderDetails)
+        ) //.then(() => {
+        //     console.log("ordered", orderDetails, new Date())
+        //   return orderDetails;
+        // });
+            console.log("ordered", orderDetails, new Date())
+
           return orderDetails;
-        });
+
       } 
       else {
         const result = await db.query(
