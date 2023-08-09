@@ -31,3 +31,17 @@ a{
     font-family: didot,serif;
     color: black;
 }
+
+@media (max-width: 700px) {
+    .col-sm {
+      font-size: 13px;
+      margin-left: -100px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .col-sm {
+      font-size: 13px;
+      margin-left: -90px;
+    }
+  }
