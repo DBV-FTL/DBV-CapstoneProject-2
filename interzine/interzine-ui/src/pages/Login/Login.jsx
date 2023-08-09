@@ -77,7 +77,7 @@ function Login({login, client, setClient}) {
 
     let optionMessage
     if (client==='user'){
-      optionMessage= 'Login as Ziner'
+      optionMessage= 'Login as Sineer'
     } else if (client==='provider'){
       optionMessage= 'Login to order'
     }
@@ -88,10 +88,10 @@ function Login({login, client, setClient}) {
           <p className="login-hdr"> Login </p>
             <form className='logbtn'>
             <input onChange= {(e) => handleFormInput(e)} name='email' placeholder='Input E-mail' required/>
-            <input onChange= {(e) => handleFormInput(e)} name='password' placeholder='Input Password' type ='password' required/>
+            <input onChange= {(e) => handleFormInput(e)} type= 'password' name='password' placeholder='Input Password' required/>
             </form> 
             <button className='submit-login' onClick={async (e) => await handleLogin(e)} > Login! </button>
-            <p onClick={() => changeClient(client)}> {optionMessage} </p>
+            <p onClick={() => changeClient(client)} className='option-message'> {optionMessage} </p>
 
         </div>
     )

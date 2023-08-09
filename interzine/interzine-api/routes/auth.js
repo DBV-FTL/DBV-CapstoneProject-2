@@ -30,6 +30,16 @@ const s3 = new S3Client({
   region: BUCKET_REGION
 })
 
+async function  getImageUrl(item){
+  const getObjectParams= {
+    Bucket: BUCKET_NAME,
+    Key: item.profile_picture
+  }
+  const command = new GetObjectCommand(getObjectParams);
+  const url = await getSignedUrl(s3, command, {expiresIn: 3600})
+  return url
+}
+
 router.post('/user/register', async( req, res, next) => {
   console.log("req.body", req.body)  
   try{
@@ -102,7 +112,9 @@ router.get("/user", async (req, res, next) => {
   try {
     const { user } = res.locals;
     const providers = await User.fetchProviderByZipCode(user);
-    console.log("providers", providers)
+    for (const provider of providers) {
+      provider.profile_picture = await getImageUrl(provider)
+    }
     return res.status(200).json({ providers });
   } catch (err) {
     next(err);
@@ -122,14 +134,7 @@ router.get("/provider/cuisine", async (req, res, next) => {
     try {
       const providers = await ServiceProvider.fetchAllProviders();
       for (const provider of providers) {
-        const getObjectParams= {
-          Bucket: BUCKET_NAME,
-          Key: provider.profile_picture
-        }
-  
-        const command = new GetObjectCommand(getObjectParams);
-        const url = await getSignedUrl(s3, command, {expiresIn: 3600})
-        provider.profile_picture = url
+        provider.profile_picture = await getImageUrl(provider)
       }
       return res.status(200).json({ providers });
     } catch (err) {
@@ -138,9 +143,10 @@ router.get("/provider/cuisine", async (req, res, next) => {
   });
 
 
-router.post("/verify", security.extractUserFromJWT, (req, res) => {
+router.post("/verify", security.extractUserFromJWT, (req, res, next) => {
     try {
         const {user}= res.locals
+        console.log('user', user)
         return res.status(200).json({user})
     } catch (err) {
         console.error(err.message);

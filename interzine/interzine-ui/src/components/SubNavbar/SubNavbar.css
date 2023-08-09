@@ -5,7 +5,6 @@
 .category-buttons {
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1%;
@@ -24,9 +23,7 @@
     color: black;
     font-family: Didot, serif;
     text-shadow:orange;
-    /* font-weight: bold; */
-
-    /* color:aliceblue */
+    
     
 }
 
@@ -34,7 +31,7 @@
     margin-bottom: 1%;
     /* border-color: orange; */
     border: solid 1px orange;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     width: 25rem;
     height: 1rem;
     padding: 12px 14px;
@@ -48,10 +45,19 @@
 }
 
 .search-icon{
-    position:fixed;
-    margin-left: 23%;
-    margin-top: 0.5%;
+    background-color: orange;
+    height: 1rem;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    width: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+   
 }
+
 
 .search {
     display: flex;

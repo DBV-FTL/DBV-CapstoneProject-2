@@ -31,7 +31,7 @@ function Register({client, setClient, register, appState}) {
             } else if (client==='provider'){
                 response= await apiClient.signupProvider(formInput)
                 console.log('reg provider', response.data)
-            menu= await apiClient.fetchMenuItems(response.data.provider.id)
+            menu= await apiClient.fetchMenuItems(response?.data?.provider?.id)
 
             }
             const data = response.data;
@@ -75,7 +75,7 @@ function Register({client, setClient, register, appState}) {
   
     let optionMessage
     if (client==='user'){
-    optionMessage= 'Sign up to be a Ziner here!'
+    optionMessage= 'Sign up to be a Sineer here!'
     } else if (client==='provider'){
     optionMessage= 'Sign up to order here!'
     }
@@ -98,6 +98,7 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)} name='username' placeholder=' Username' required/>
                         <input onChange={(e) => handleFormInput(e)} name='email' placeholder='Email' required/>
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Password' type='password' required/>
+                        <input onChange={(e) => handleFormInput(e)} name='address' placeholder='Address' type='text' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
                         
                     </form>
@@ -114,7 +115,12 @@ function Register({client, setClient, register, appState}) {
                         <input onChange={(e) => handleFormInput(e)} name='password' placeholder='Confirm Password' type='password' required/>
                         <input onChange={(e) => handleFormInput(e)} name='address' placeholder='Address' type='text' required/>
                         <input onChange={(e) => handleFormInput(e)} name='zip_code' placeholder='Zip Code' type='number' required/>
+                        <label> Profile Picture </label>
                         <input onChange={handleFileChange} name="image" className='profile-picture' type="file" id="myFile" />
+                        <label> Provider Hero </label>
+                        <input onChange={handleFileChange} name="image" className='provider-hero' type="file" id="myFile" />
+                        <input onChange={(e) => handleFormInput(e)} name='provider_blurb' placeholder='Description' required/>
+
                     </form>
                     <button onClick={async (e) => await handleRegister(e)}> Sign up! </button>
                     <button className='optional2' onClick={() => changeClient(client)}> {optionMessage} </button>

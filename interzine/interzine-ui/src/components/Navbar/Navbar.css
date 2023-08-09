@@ -6,12 +6,13 @@
     /* background-color: rgb(53, 53, 53); */
     max-width: 100vw;
     /* background-color: red; */
+    background-color: black;
+    height: auto;
+    width: 99.8%;
     text-decoration: none;
-    /* border-radius: 10px; */
     border: solid;
     border-color: rgb(255, 193, 78);
     color: whitesmoke;
-    /* position: fixed; */
     top:0px;
 }
 .logo-and-location{
@@ -28,11 +29,9 @@ ul{
     flex-direction: row;
     gap: 50px;
     font-family: Didot, serif;
-    /* justify-content: space-evenly; */
     width: 90%;
     margin-top:20px
-    /* margin-left: -100px; */
-    /* margin-bottom: 90px; */
+    
 }
 
 .access-buttons {
@@ -43,7 +42,6 @@ ul{
     /* gap: 1px; */
     align-items: center;
     margin-right:1% ;
-    /* background-color: aqua; */
 
 }
 
@@ -85,7 +83,6 @@ ul{
 
 .cart {
     padding-top: 15px;
-    /* padding-bottom: 10px; */
     margin-right: 100px;
     padding-left: 20px;
     cursor: pointer;
@@ -122,7 +119,6 @@ h6{
     width: 100px;
     text-decoration: none;
     color:white;
-    /* font-weight: bold; */
     text-shadow:orange;
     font-family: var(--chakra-fonts-body)
   }
@@ -138,7 +134,8 @@ h6{
     width: 80px;
     border-radius: 5px;
     margin-top: 10px;
-    margin-right: 10px;
+
+    margin-right: 20px;
     border: solid;
     color: black;
     border-color: orange;
@@ -147,7 +144,7 @@ h6{
     cursor: pointer;
     font-family: Didot, serif;
 }  
-  
+
 .material-symbols-outlined.profile{
     color:white
 }
@@ -336,3 +333,21 @@ h6{
         height: 10px;
     }
   }
+
+.material-symbols-outlined.account{
+    color:orange;
+    font-size: 38px;
+    margin-top: 10%;
+    margin-bottom: auto;
+    align-self: center;
+    margin-right: 2%;
+}
+
+.authenticated-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    align-items: center;
+    margin: 0 5px;
+
+}

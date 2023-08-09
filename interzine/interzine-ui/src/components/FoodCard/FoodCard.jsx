@@ -10,6 +10,7 @@ function FoodCard({food, setShowModal}) {
     function openModal(e){
         e.preventDefault()
         console.log('open')
+        // setShowModal(true)
         // navigate(`/shop/food/${food.id}`)
         // return <FoodDetail food={food}/>
     }

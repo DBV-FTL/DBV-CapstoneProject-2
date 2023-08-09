@@ -170,4 +170,8 @@ label{
     button{
         margin: 0;
     }
+
+.register-ziner label{
+    margin-bottom: 0;
+    margin-top: 0;
 }

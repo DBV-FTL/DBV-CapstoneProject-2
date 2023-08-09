@@ -21,6 +21,7 @@ import Locations from './components/Locations/Locations'
 import Footer from './components/Footer/Footer'
 import Orders from './components/Orders/Orders'
 import Profile from './components/Profile/Profile'
+import CheckoutForm from './components/CheckoutForm/CheckoutForm'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -40,33 +41,47 @@ function App() {
 
   useEffect(()=>{
     //need to get token from local storage then decode token and fetch user 
+    let appUser
     const loadInitialData = async () => {
-      const token = localStorage.getItem('interzine_token')
   
-      if (token) {
-        apiClient.setToken(token)
+      // if (token) {
         const fromToken= await apiClient.fetchUserFromToken()
-        const appUser= fromToken?.data?.user
+        appUser= fromToken?.data?.user
+        
         console.log('loading initial data', appUser)
 
-        if (appUser.client === 'user') {
+        if (appUser?.client === 'user' && (appUser.exp * 1000 > Date.now())) {
           console.log('oy')
           const services = await apiClient.fetchServicesByZip(appUser.zip_code)
           const prevOrders= await apiClient.fetchOrders()
           console.log('yo', services)
           setClient('user')
           setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}, prevOrders: prevOrders? prevOrders?.data?.listOrders : []})
-        } else if (appUser.client==='provider'){
-          const menu= await apiClient.fetchMenuItems(appUser.id)
-          setClient('provider')
-          setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
+        } else if (appUser?.client==='provider' && (appUser.exp * 1000 > Date.now()) ){
+            const menu= await apiClient.fetchMenuItems(appUser.id)
+            setClient('provider')
+            setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
+          
+          
+        } else{
+          await apiClient.logoutUser()
+          setAppState({...appState, isAuthenticated:false})
+
         }
-      }
     }
 
-    loadInitialData()
+    const token = localStorage.getItem('interzine_token')
+    if (token) {
+        apiClient.setToken(token)
+        loadInitialData()
+        console.log('fetch finished')
+    } 
 
-  }, [])
+    
+
+    
+
+  }, [appState.isAuthenticated])
 
   console.log('app state', appState, client)
 
@@ -76,6 +91,7 @@ function App() {
       <Navbar appState={appState} logout={setAppState} setIsOpen={setIsOpen} setViewProfile={setViewProfile}/>
       <Sidebar setAppState={setAppState} setIsOpen= {setIsOpen} cart={appState?.cart} menus={menus} appState={appState} isOpen={isOpen} services={appState?.services}/>
       <Profile setViewProfile={setViewProfile} viewProfile={viewProfile}/> 
+
       <Routes>
         {
           appState.isAuthenticated ?
@@ -102,6 +118,7 @@ function App() {
             <Forsellers/>
             <Locations/>
             <Footer/>
+
             
             </>
           }/>
@@ -117,8 +134,9 @@ function App() {
         <Route path='/locations' element={<Locations/>}/>
       </Routes>
       </BrowserRouter>
-        {/* </Routes>
 
+        {/* </Routes>
+        
       </BrowserRouter>    */}
       {/* <div className='chat'>
              <div className='image-container'>
