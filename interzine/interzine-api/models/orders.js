@@ -124,6 +124,21 @@ class Orders {
     return result.rows[0].id;
   }
 
+  static async listProviderOrders({ provider }) {
+    if (user?.client && user?.client === "user")
+      throw new UnauthorizedError("User is unauthorized");
+    const result = await db.query(
+    `
+      SELECT * from orders as o
+      RIGHT JOIN order_details as od
+      ON o.id = od.order_id
+      WHERE o.provider_id = $1
+      ORDER BY o.id DESC`,
+    [provider.id]
+    );
+
+    return result.rows;
+  }
   static async listOrders({ user }) {
     console.log('listing')
     if (user?.client && user?.client === "provider")
@@ -137,7 +152,6 @@ class Orders {
         ORDER BY o.id DESC`,
       [user.id]
     );
-    console.log('in models', result.rows)
     return result.rows;
   }
 }

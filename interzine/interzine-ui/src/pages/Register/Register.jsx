@@ -118,7 +118,7 @@ function Register({client, setClient, register, appState}) {
                         <label> Profile Picture </label>
                         <input onChange={handleFileChange} name="profilePic" className='profile-picture' type="file" accept="image/png, image/jpg, image/jpeg" id="myFile" />
                         <label> Provider Hero </label>
-                        <input onChange={handleFileChange} name="heroPic" className='provider-hero' type="file" accept="image/png, image/jpg, image/jpeg" id="myFile" />
+                        {/* <input onChange={handleFileChange} name="image" className='provider-hero' type="file" id="myFile" /> */}
                         <input onChange={(e) => handleFormInput(e)} name='provider_blurb' placeholder='Description' required/>
 
                     </form>
