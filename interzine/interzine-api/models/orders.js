@@ -120,7 +120,7 @@ class Orders {
     return result.rows[0].id;
   }
 
-  static async listProviderOrders({ provider }) {
+  static async listProviderOrders({ user }) {
     if (user?.client && user?.client === "user")
       throw new UnauthorizedError("User is unauthorized");
     const result = await db.query(
@@ -130,7 +130,7 @@ class Orders {
       ON o.id = od.order_id
       WHERE o.provider_id = $1
       ORDER BY o.id DESC`,
-    [provider.id]
+    [user.id]
     );
 
     return result.rows;

@@ -139,7 +139,7 @@ class ApiClient {
 
   async fetchOrdersReceived(){
     return await this.request({
-      endpoint: 'orders/providers-previous'
+      endpoint: 'orders/provider-previous'
     })
   }
 
@@ -158,6 +158,15 @@ class ApiClient {
     })
   }
 
+  async updateProviderProfile(data){
+    return await this.request({
+      endpoint: "auth/provider/update",
+      method: "PUT",
+      data: data,
+      headers: {"Content-Type":"multipart/form-data"}
+    })
+  }
+ 
   async submitPhoto(form){
     return await this.request({
       endpoint: "auth/provider/photo",
