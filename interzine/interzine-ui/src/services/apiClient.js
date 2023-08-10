@@ -95,7 +95,6 @@ class ApiClient {
   }
 
   async fetchMenuItem(id) {
-    // console.log("hello?");
     return await this.request({ endpoint: `menu/food/${id}` });
   }
 
@@ -135,6 +134,27 @@ class ApiClient {
   async fetchOrders(){
     return await this.request({
       endpoint: 'orders/previous'
+    })
+  }
+
+  async fetchOrdersReceived(){
+    return await this.request({
+      endpoint: 'orders/providers-previous'
+    })
+  }
+
+  
+  async fetchUserById(id){
+    return await this.request({
+      endpoint: `auth/user/${id}`
+    })
+  }
+
+  async fetchProviderByEmail(email){
+    return await this.request({
+      endpoint: "auth/provider/email",
+      method: "POST",
+      data: {email},
     })
   }
 

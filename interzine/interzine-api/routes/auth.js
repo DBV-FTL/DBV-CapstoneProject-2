@@ -44,15 +44,15 @@ async function getImageUrl(item) {
   return url;
 }
 
-router.post("/user/register", async (req, res, next) => {
-  console.log("req.body", req.body);
-  try {
-    const user = await User.register(req.body);
-    const token = generateAuthToken({ ...user, client: "user" });
-    return res.status(201).json({ user, token });
-  } catch (err) {
-    next(err);
-  }
+
+router.post('/user/register', async( req, res, next) => {
+  try{
+        const user = await User.register(req.body)
+        const token = generateAuthToken({...user, client:'user'})
+        return res.status(201).json({user, token})
+    } catch (err) {
+        next(err)
+    }
 });
 
 router.post("/user/login", async (req, res, next) => {
@@ -123,6 +123,7 @@ router.get("/user", async (req, res, next) => {
   try {
     const { user } = res.locals;
     const providers = await User.fetchProviderByZipCode(user);
+    console.log("providers", providers)
     for (const provider of providers) {
       provider.profile_picture = await getImageUrl(provider);
     }
@@ -198,7 +199,29 @@ router.put(
     } catch (err) {
       next(err);
     }
+    
+});
+
+router.get('/user/:id', async (req,res, next)=> {
+  try {
+    const userId= req.params.id
+    const user= await User.fetchUserById(id)
+    res.status(200).json({user})
+  } catch (err){
+    next(err)
+  }
+})
+
+router.post('/provider/email', async (req,res, next)=> {
+  try {
+    const email= req.body?.email
+    const provider= await ServiceProvider.fetchProviderByEmail(email)
+    provider.profile_picture = await getImageUrl(provider)
+    res.status(200).json({provider})
+  } catch (err){
+    next(err)
   }
 );
+
 
 module.exports = router;

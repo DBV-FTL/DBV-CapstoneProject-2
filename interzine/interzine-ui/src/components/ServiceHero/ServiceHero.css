@@ -1,41 +1,89 @@
-.hero-section {
-    background-image: url('https://cms-b-assets.familysearch.org/dims4/default/bf2d93e/2147483647/strip/true/crop/800x500+0+0/resize/2480x1550!/format/webp/quality/90/?url=https%3A%2F%2Ffamilysearch-brightspot.s3.amazonaws.com%2F89%2F3f%2F1a23c4a6fe52a96d2a6d2586cb90%2Fworld-cuisine.jpg');
-    background-size: cover;
-    background-position: center;
-    /* height: 400px; */
+.service-hero-section{
+  width: 90vw;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5%;
+
+
+}
+
+  .hero-image{
+    object-fit: cover;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30vh;
+    width: 100%;
+    margin-bottom: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 20px;
   }
 
-div.hero-section{
-   height: 50px;
-   width: 90vw;
-   margin-top: 10px;
-}  
+  .provider_profile_picture{
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+  }
   
-  .hero-content {
-    text-align: center;
-    color: #fff;
-    /* mix-blend-mode:exclusion; */
-    color:rgb(0, 0, 0);
-    font-size: 80px;
+  .provider-details{
+    color: beige;
+  }
+
+  .cuisine-name{
+    margin-top: 0;
+
+  }
+
+  .blurb{
+    font-size: 18px;
+  }
+
+  .provider-details h1{
+    margin-bottom:1%
+  }
+
+  .img-details{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%
+  }
+
+  .material-symbols-outlined.pen {
+    color: orange;
+    font-size: 35px;
+
+
+  }
+
+  .edit{
+    display: flex;
+    flex-direction: row;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6%;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .edit:hover {
+    border: 1.5px solid orange
+  }
+
+  
+
+  .details-edit{
+    display: flex;
+    flex-direction: row;
+    gap:30%;
+    align-items:flex-end;
     
   }
-  
-  .hero-content h1 {
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-size: 70px;
-    font-family: didot,serif;
-    text-align: center;
-  }
-  
-  .hero-content p {
-    font-size: 28px;
-    margin-bottom: 150px;
-    font-family: didot,serif;
 
-  }
-  
   

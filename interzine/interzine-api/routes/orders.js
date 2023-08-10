@@ -36,19 +36,12 @@ router.post("/create", security.extractUserFromJWT, async (req, res, next) => {
   try {
     const { user } = res.locals;
     console.log("create order", user, req.body);
-    // Orders.addOrder({item: req.body.item, user}).then((response)=>{
-    //   setTimeout(() => {
-    //     console.log('new order', response, new Date())
-    //   }, 2000);
-
-    // return res.status(200).json({response})
-
-    // })
     const newOrder = await Orders.addOrder({ item: req.body.item, user });
     setTimeout(() => {
       console.log("new order", newOrder, new Date());
     }, 5000);
     return res.status(200).json({ newOrder });
+
   } catch (err) {
     next(err);
   }
