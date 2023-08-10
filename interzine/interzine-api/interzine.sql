@@ -1,9 +1,9 @@
 \echo 'Delete and recreate interzine db?'
 \prompt 'Return yes or control-C to cancel > ' foo
 
-DROP DATABASE de2nsksj9jjcbk;
-CREATE DATABASE de2nsksj9jjcbk;
-\connect de2nsksj9jjcbk
+DROP DATABASE interzine;
+CREATE DATABASE interzine;
+\connect interzine;
 
 \i interzine-schema.sql
 
