@@ -22,7 +22,6 @@ import Footer from './components/Footer/Footer'
 import Orders from './components/Orders/Orders'
 import Profile from './components/Profile/Profile'
 import CheckoutForm from './components/CheckoutForm/CheckoutForm'
-import OrdersReceived from './components/OrdersReceived/OrdersReceived'
 
 function App() {
   const [client, setClient]= useState('user') //client is either 'user' or 'provider'
@@ -59,17 +58,14 @@ function App() {
           setClient('user')
           setAppState({services: services?.data?.providers, user:appUser, isAuthenticated:true, cart:{}, prevOrders: prevOrders? prevOrders?.data?.listOrders : []})
         } else if (appUser?.client==='provider' && (appUser.exp * 1000 > Date.now()) ){
-            const menu= await apiClient.fetchMenuItems(appUser?.id)
-            const providerObject = await apiClient.fetchProviderByEmail(appUser?.email)
-            const ordersRecieved= await apiClient.fetchOrdersReceived()
-
+            const menu= await apiClient.fetchMenuItems(appUser.id)
             setClient('provider')
-            setAppState({menuItems: menu?.data?.menuItems, provider:appUser, providerObject: providerObject?.data?.provider, isAuthenticated:true, ordersRecieved: ordersRecieved?.data?.providerOrders })
+            setAppState({menuItems: menu?.data?.menuItems, provider:appUser, isAuthenticated:true})
           
           
         } else{
           await apiClient.logoutUser()
-          setAppState({isAuthenticated:false})
+          setAppState({...appState, isAuthenticated:false})
 
         }
     }
@@ -102,7 +98,7 @@ function App() {
         (client==='user'&&
         <>
         <Route path='/' element={<Shop services={appState?.services}  menus={menus}/>}/>
-        <Route path='menu/:id' element={<Menu setMenus={setMenus} services={appState?.services}/>}/>
+        <Route path='menu/:id' element={<Menu setMenus={setMenus}/>}/>
         <Route path='food/:id' element={<FoodDetail cart={appState.cart} addToCart={setAppState}/>}/>
         <Route path='/orders' element={<Orders services={appState?.services} orders={appState?.prevOrders}/>}/>
 
@@ -112,11 +108,7 @@ function App() {
         
 
         (client==='provider'&&
-        <>
-          <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-          <Route path='/orders' element={<OrdersReceived ordersRecieved={appState?.ordersRecieved}/>}/>
-        </>
-        
+        <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
         )
           : 
           <Route path='/' element={

@@ -22,7 +22,8 @@ img.tile-img:hover {
 
 }
 
-.tile-img{
+
+img{
     border: solid;
     border-color: orange;
 }

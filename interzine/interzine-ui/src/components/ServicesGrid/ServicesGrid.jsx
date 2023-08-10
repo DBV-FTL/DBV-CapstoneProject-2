@@ -11,6 +11,7 @@ function ServicesGrid({ services }) {
 
   return (
     <div>
+      <ServiceHero />
       <SubNavbar services={servicesShown} setServices={setServicesShown} />
       <div className="services-container">
         <div className="service-grid">

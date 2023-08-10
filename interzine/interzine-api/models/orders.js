@@ -53,6 +53,7 @@ class Orders {
                 WHERE name = $1 AND service_provider_id = $2`,
               [item.product_name, item.service_provider_id]
             );
+            // console.log()
             const item_id = result.rows[0].id;
             const item_cost= result.rows[0].cost;
             const item_image_url= result.rows[0].image_url
@@ -67,8 +68,11 @@ class Orders {
 
             orderDetails = [...orderDetails, r.rows[0]];
         })
-        ) 
-          console.log("ordered", orderDetails, new Date())
+        ) //.then(() => {
+        //     console.log("ordered", orderDetails, new Date())
+        //   return orderDetails;
+        // });
+            console.log("ordered", orderDetails, new Date())
 
           return orderDetails;
 

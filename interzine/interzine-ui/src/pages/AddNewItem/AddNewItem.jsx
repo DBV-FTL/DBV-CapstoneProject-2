@@ -5,7 +5,7 @@ import apiClient from "../../services/apiClient"
 
 
 function AddNewItem({appState, updateMenu, setAddNewItem}) { 
-    const [formInput, setFormInput] = useState({name:'', cost:''})
+    const [formInput, setFormInput] = useState({name:'', cost:'', rating:''})
     const navigate = useNavigate()
 
     function handleChange(e) {
@@ -19,13 +19,9 @@ function AddNewItem({appState, updateMenu, setAddNewItem}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const newMenuItem   = await apiClient.addNewItem(formInput)
-
-        console.log('newMenuItem', newMenuItem.data.newMenuItem.image_url)
-        formInput.image_url = newMenuItem.data.newMenuItem.image_url
-        console.log("formInput Image", formInput.image_url)
+        await apiClient.addNewItem(formInput)
         updateMenu({...appState, menuItems:[...appState.menuItems, formInput]})
-        setFormInput({name:'', cost:''})
+        setFormInput({name:'', cost:'', rating:''})
         setAddNewItem(false)
         navigate('/')
     }
@@ -58,7 +54,7 @@ function AddNewItem({appState, updateMenu, setAddNewItem}) {
                 <label> Name </label>
                 <input className= 'new-input' value={formInput.name} onChange={(e) => handleChange(e)} name='name' placeholder='name' required/>
                 <label> Image </label>
-                <input className='file-selector' name="image" type="file" accept='image/png, image/jpg, image/jpeg' onChange={handleFileChange}/>
+                <input className='file-selector' name="image" type="file" onChange={handleFileChange}/>
                 <label> Cost </label>
                 <input  className= 'new-input' value={formInput.cost} type='number' onChange={(e) => handleChange(e)} min='0' name='cost' placeholder='cost' required/>
                 

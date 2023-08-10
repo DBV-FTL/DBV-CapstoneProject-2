@@ -11,7 +11,7 @@ function OrderCard({provider, order_id, items}) {
             <div className='card-header'>
                 <img className='service-hero' src={'https://bloximages.newyork1.vip.townnews.com/sandiegomagazine.com/content/tncms/assets/v3/editorial/d/8c/d8c6d926-72fb-11eb-a628-efc4e9abab37/6030319469eb5.image.jpg?resize=1200%2C900'}/>
                 <div className='order-caption'>
-                    <h1> {provider?.name} </h1>
+                    <h1> {provider.name} </h1>
                     <p> Ordered {items[0].date} </p>
                 </div>
             </div>
