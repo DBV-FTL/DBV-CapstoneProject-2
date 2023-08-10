@@ -61,10 +61,10 @@ function App() {
         } else if (appUser?.client==='provider' && (appUser.exp * 1000 > Date.now()) ){
             const menu= await apiClient.fetchMenuItems(appUser?.id)
             const providerObject = await apiClient.fetchProviderByEmail(appUser?.email)
-            const ordersRecieved= await apiClient.fetchOrdersReceived()
-
+            const ordersReceived= await apiClient.fetchOrdersReceived()
+            // console.log('oc??',ordersRecieved)
             setClient('provider')
-            setAppState({menuItems: menu?.data?.menuItems, provider:appUser, providerObject: providerObject?.data?.provider, isAuthenticated:true, ordersRecieved: ordersRecieved?.data?.providerOrders })
+            setAppState({menuItems: menu?.data?.menuItems, provider:appUser, providerObject: providerObject?.data?.provider, isAuthenticated:true, ordersReceived: ordersReceived?.data?.listOrders })
           
           
         } else{
@@ -114,7 +114,7 @@ function App() {
         (client==='provider'&&
         <>
           <Route path='/' element={<Store appState={appState} updateMenu={setAppState}/>}/>
-          <Route path='/orders' element={<OrdersReceived ordersRecieved={appState?.ordersRecieved}/>}/>
+          <Route path='/orders' element={<OrdersReceived ordersReceived={appState?.ordersReceived}/>}/>
         </>
         
         )

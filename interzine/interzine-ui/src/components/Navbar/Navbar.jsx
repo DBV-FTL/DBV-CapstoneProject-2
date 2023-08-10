@@ -63,10 +63,13 @@ function Navbar({appState, logout, setViewProfile, setIsOpen}) {
                 appState.isAuthenticated ?
                 <div className='authenticated-buttons'>
                     <button className="button-log" onClick={routeToLogout} > Log Out</button>
+                    {/* <div className='account-container'> */}
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
                     <span onMouseOver={handleMouseOver} onMouseLeave={()=>console.log('left')} onMouseOut={handleMouseOut} class="material-symbols-outlined account">
                         account_circle
                     </span> 
+                    {/* </div> */}
+                    
                     {/* {
                         appState?.user &&
                         <>

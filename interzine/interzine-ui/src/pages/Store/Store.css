@@ -28,3 +28,7 @@
 .store{
     display: block
 }
+
+.inactive-store-items{
+    display:none
+}

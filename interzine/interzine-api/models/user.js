@@ -88,7 +88,7 @@ class User {
   }
 
   static async fetchUserById(id) {
-    const result = await db.query(`SELECT * FROM users WHERE id = $1`, [
+    const result = await db.query(`SELECT id, first_name, last_name, username, email, zip_code FROM users WHERE id = $1`, [
       id
     ]);
 

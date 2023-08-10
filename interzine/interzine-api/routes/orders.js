@@ -51,7 +51,7 @@ router.get("/previous", security.extractUserFromJWT, async (req, res, next) => {
   try {
     const { user } = res.locals;
     const listOrders = await Orders.listOrders({ user });
-    for (const listOrder in listOrders){
+    for (const listOrder of listOrders){
           listOrder.image_url = await getImageUrl(listOrder)
     }
     return res.status(201).json({ listOrders });
@@ -63,8 +63,11 @@ router.get("/previous", security.extractUserFromJWT, async (req, res, next) => {
 
 router.get("/provider-previous", security.extractUserFromJWT, async (req, res, next) => {
   try {
-    const { provider } = res.locals;
-    const listOrders = await Orders.listProviderOrders({ provider });
+    const { user } = res.locals;
+    const listOrders = await Orders.listProviderOrders({ user });
+    for (const listOrder of listOrders){
+      listOrder.image_url = await getImageUrl(listOrder)
+}
     return res.status(201).json({ listOrders });
   } catch (err) {
     next(err);

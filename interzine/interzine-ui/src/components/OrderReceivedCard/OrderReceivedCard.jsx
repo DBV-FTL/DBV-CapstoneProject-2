@@ -2,22 +2,30 @@ import React,{useState, useEffect} from 'react'
 import apiClient from '../../services/apiClient'
 import './OrderReceivedCard.css'
 
-function OrderReceivedCard({userId, items}) {
+function OrderReceivedCard({orderId, items}) {
 
     const [showDetails, setShowDetails] = useState(false)
-    let user
-
+    const [user, setUser] = useState()
     useEffect(()=>{
-        apiClient.fetchUserById(userId).then((res)=> user=res)
+        const getUser = async () => {
+            if (items){
+                const item= items[0]
+                const user= await apiClient.fetchUserById(item.user_id)
+                console.log('in use effect', user.data.user)
+                setUser(user?.data?.user)
+            }
+        }
+        getUser()
     }, [])
-
 
     return (
         <div className='order-received-card'>
             <div className='card-header'>
-                <img className='service-hero' src={'https://bloximages.newyork1.vip.townnews.com/sandiegomagazine.com/content/tncms/assets/v3/editorial/d/8c/d8c6d926-72fb-11eb-a628-efc4e9abab37/6030319469eb5.image.jpg?resize=1200%2C900'}/>
+            <img className='user-hero' src={'https://www.pngitem.com/pimgs/m/146-1468843_profile-icon-orange-png-transparent-png.png'}/>
+
+                {/* <img className='service-hero' src={'https://bloximages.newyork1.vip.townnews.com/sandiegomagazine.com/content/tncms/assets/v3/editorial/d/8c/d8c6d926-72fb-11eb-a628-efc4e9abab37/6030319469eb5.image.jpg?resize=1200%2C900'}/> */}
                 <div className='order-caption'>
-                    <h1> {user.name} </h1>
+                    <h1> {`${user?.first_name} ${user?.last_name}`}  </h1>
                     <p> Ordered {items[0].date} </p>
                 </div>
             </div>
