@@ -14,7 +14,7 @@ function Navbar({appState, logout, setViewProfile, setIsOpen}) {
 
     async function routeToLogout() {
         await apiClient.logoutUser()
-        logout({...appState, isAuthenticated: false})
+        logout({ isAuthenticated: false})
         navigate('/')
     }
 
@@ -62,8 +62,12 @@ function Navbar({appState, logout, setViewProfile, setIsOpen}) {
             {
                 appState.isAuthenticated ?
                 <div className='authenticated-buttons'>
-                    <button className="button-log" onClick={routeToLogout} > Log Out</button> 
-                    {
+                    <button className="button-log" onClick={routeToLogout} > Log Out</button>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+                    <span onMouseOver={handleMouseOver} onMouseLeave={()=>console.log('left')} onMouseOut={handleMouseOut} class="material-symbols-outlined account">
+                        account_circle
+                    </span> 
+                    {/* {
                         appState?.user &&
                         <>
                             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -72,7 +76,7 @@ function Navbar({appState, logout, setViewProfile, setIsOpen}) {
                             </span>
                         </>
                     
-                    }
+                    } */}
                     
                 </div> 
                 
