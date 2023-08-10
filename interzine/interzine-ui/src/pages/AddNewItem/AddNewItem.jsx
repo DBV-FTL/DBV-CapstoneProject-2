@@ -46,7 +46,7 @@ function AddNewItem({appState, updateMenu, setAddNewItem}) {
     fontSize: '14pt',
     borderRadius: '10px',
     marginTop: '1%'
-    // padding: '0 2rem'
+    // padding: '0 2rem'sss
 
 
     }
