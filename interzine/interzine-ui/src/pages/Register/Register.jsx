@@ -122,6 +122,7 @@ function Register({client, setClient, register, appState}) {
                         {/* <input onChange={handleFileChange} name="image" className='provider-hero' type="file" id="myFile" />
                         <input onChange={(e) => handleFormInput(e)} name='provider_blurb' placeholder='Description' required/> */}
 
+
                     </form>
                     <button onClick={async (e) => await handleRegister(e)}> Sign up! </button>
                     <button className='optional2' onClick={() => changeClient(client)}> {optionMessage} </button>

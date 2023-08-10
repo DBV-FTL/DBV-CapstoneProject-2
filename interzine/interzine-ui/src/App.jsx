@@ -146,7 +146,7 @@ function App() {
         {/* </Routes>
         
       </BrowserRouter>    */}
-      <div className='chat'>
+      {/* <div className='chat'>
              <div className='image-container'>
              {showChatBot ? <Bot /> : null} 
               <img
@@ -155,10 +155,10 @@ function App() {
                   className='bot-img'
                   onClick={handleToggleChatBot}
                 />
-          </div>
+          </div> */}
           
           
-          </div>
+          {/* </div> */}
       {/* <Bot/> */}
 
       {/* yoooooooo */}

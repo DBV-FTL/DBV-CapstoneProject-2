@@ -16,12 +16,12 @@ class ApiClient {
     console.log('in request')
     console.log('headers', headers)
     console.log('data', data)
+    
     const url = `${this.remoteHostUrl}/${endpoint}`;
     if (this.token) {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
     try {
-      console.log("headers", )
       console.log('res incoming')
       const result = await axios({ url, method, data, headers });
       console.log('res', result)
@@ -167,6 +167,6 @@ class ApiClient {
     })
   }
 
-  
+
 }
 export default new ApiClient("http://localhost:3000");

@@ -31,3 +31,53 @@
     height: 790px;
 }
 
+@media (max-width: 700px) {
+    .statehd{
+        font-size: 20px;
+        margin-left: 170px;
+    }
+    
+}
+
+@media (max-width: 800px) {
+    .statehd{
+        font-size: 30px;
+        margin-left: 170px;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .statehd{
+        font-size: 20px;
+        margin-left: 140px;
+    }
+
+    .state{
+        font-size: 40px;
+        color: black;
+        font-weight: didot,serif;
+    }
+
+    
+}
+
+@media (max-width: 500px) {
+    p.statehd{
+        font-size: 20px;
+        margin-left: 140px;
+    }
+
+    p.state{
+        font-size: 40px;
+        color: black;
+        font-weight: didot,serif;
+    }
+
+    .map-container {
+        width: 400px;
+        height: 20vh;
+    }
+    
+}
+

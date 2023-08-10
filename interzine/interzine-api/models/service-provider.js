@@ -85,6 +85,17 @@ class ServiceProvider {
     return provider;
   }
 
+  static async updateHeroAndDescription({ provider, photo, blurb }) {
+    const result = await db.query(`
+    UPDATE service_providers
+    SET service_provider_hero = $1, service_provider_blurb = $2
+    WHERE id = $3
+    RETURNING id, name, cuisine, email, profile_picture, service_provider_hero, service_provider_blurb, zip_code, address`, [photo, blurb])
+
+    console.log("results", result.rows[0])
+    return result
+
+  }
   static async fetchProviderByEmail(email) {
     const result = await db.query(
       `SELECT * FROM service_providers WHERE email = $1`,
@@ -110,6 +121,7 @@ class ServiceProvider {
     const providers = result.rows;
     return providers;
   }
+
 }
 
 module.exports = ServiceProvider;

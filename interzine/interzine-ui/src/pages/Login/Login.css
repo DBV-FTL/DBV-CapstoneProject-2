@@ -53,3 +53,27 @@
     border-width: 2px;
 }
 
+@media (max-width: 500px) {
+    .login{
+        margin-top: 60%;
+        margin-left: 15%;
+        margin-right: 5%;
+        width: 300px;
+        height: 240px;
+        border:solid;
+        border-color: orange;
+        text-align: center;   
+    }
+    form.logbtn{
+        width: 250px;
+        margin-left: 30px;
+    }
+
+    .login p{
+        font-size: 13px;
+    }
+    
+    .login input{
+        font-size: 12px;
+    }
+}

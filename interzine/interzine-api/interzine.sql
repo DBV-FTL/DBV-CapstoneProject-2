@@ -5,6 +5,7 @@ DROP DATABASE interzine;
 CREATE DATABASE interzine;
 \connect interzine;
 
+
 \i interzine-schema.sql
 
 -- \echo 'Delete and recreate interzine db?'
